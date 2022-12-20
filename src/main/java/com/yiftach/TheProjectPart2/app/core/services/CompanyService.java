@@ -6,25 +6,27 @@ import com.yiftach.TheProjectPart2.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
 import com.yiftach.TheProjectPart2.app.core.repositories.CompanyRepo;
 import com.yiftach.TheProjectPart2.app.core.repositories.CouponRepo;
-import com.yiftach.TheProjectPart2.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class CompanyService extends ClientService {
 
-    private int companyID;
-    private Company company;
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
     private CouponRepo couponRepo;
+    private int companyID;
+    private Company company;
 
     @Override
     public boolean login(String email, String password) throws CouponSystemException {
@@ -59,15 +61,19 @@ public class CompanyService extends ClientService {
             if (coupons != null) {
                 for (Coupon check : coupons) {
 
-                    if (check.getTitle().equals(coupon.getTitle()) || check.getId() == coupon.getId()) {
+                    if (check.getTitle().equals(coupon.getTitle())
+                            || check.getId() == coupon.getId()) {
                         throw new CouponSystemException("Can't add coupon, coupon with the same name or ID already exists in company");
+                    } else if (coupon.getEndDate().isBefore(LocalDate.now())) {
+                        throw new CouponSystemException("The coupon you're trying to add is expired");
                     }
 
                 }
             }
 
-            company.addCoupon(coupon);
-            return couponRepo.save(coupon);
+            coupon.setCompany(this.company);
+            coupon = couponRepo.save(coupon);
+            return company.addCoupon(coupon);
 
         } catch (Exception e) {
             throw new CouponSystemException(e);
@@ -87,6 +93,7 @@ public class CompanyService extends ClientService {
 
                 if (check.getId() == coupon.getId()) {
                     company.updateCoupon(coupon);
+                    this.company = companyRepo.save(company);
                     return couponRepo.save(coupon);
                 }
             }
@@ -107,9 +114,16 @@ public class CompanyService extends ClientService {
 
                 if (optional.isPresent()) {
                     Coupon coupon = optional.get();
-                    company.removeCoupon(coupon);
-                    companyRepo.save(company);
-                    couponRepo.delete(coupon);
+
+                    if (coupon.getCompany().equals(company)) {
+                        company.removeCoupon(couponID);
+
+                        companyRepo.save(company);
+                        couponRepo.delete(coupon);
+
+                    } else {
+                        throw new CouponSystemException("Coupon with ID " + couponID + " is not in this company");
+                    }
                 }
 
         } catch (Exception e) {

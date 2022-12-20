@@ -7,6 +7,7 @@ import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
 import com.yiftach.TheProjectPart2.app.core.repositories.CouponRepo;
 import com.yiftach.TheProjectPart2.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ import java.util.List;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class CustomerService extends ClientService {
 
     @Autowired
@@ -59,9 +61,11 @@ public class CustomerService extends ClientService {
                 throw new CouponSystemException("This coupon is expired");
             }
 
-            for (Coupon check : getCustomerCoupons()) {
-                if (coupon.getId() == check.getId()) {
-                    throw new CouponSystemException("This customer already has a coupon with the same ID");
+            if (getCustomerCoupons().size() > 0) {
+                for (Coupon check : getCustomerCoupons()) {
+                    if (coupon.getId() == check.getId()) {
+                        throw new CouponSystemException("This customer already has a coupon with the same ID");
+                    }
                 }
             }
 

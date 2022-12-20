@@ -45,7 +45,6 @@ public class CouponExpirationDailyJob implements Runnable {
     }
 
     public void stop() {
-        quit = true;
         thread.interrupt();
     }
 

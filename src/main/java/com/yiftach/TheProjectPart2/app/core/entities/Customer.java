@@ -10,7 +10,7 @@ import java.util.List;
 @Entity
 public class Customer {
 
-    @Id
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     @Column(name = "first_name")
@@ -22,7 +22,7 @@ public class Customer {
     private String email;
     @NotNull
     private String password;
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "coupon_id"))
     private List<Coupon> coupons;

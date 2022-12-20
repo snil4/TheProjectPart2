@@ -2,9 +2,9 @@ package com.yiftach.TheProjectPart2.app.core.entities;
 
 import com.sun.istack.NotNull;
 import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
-import javax.print.attribute.standard.MediaSize;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -12,7 +12,8 @@ import java.util.Objects;
 @Entity
 public class Company {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     private String name;
@@ -20,7 +21,7 @@ public class Company {
     private String email;
     @NotNull
     private String password;
-    @OneToMany(mappedBy = "id",cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Coupon> coupons;
 
     public Company() {
@@ -40,7 +41,6 @@ public class Company {
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", coupons=" + coupons +
                 '}';
     }
 
@@ -80,7 +80,7 @@ public class Company {
         return coupons;
     }
 
-    public void addCoupon(Coupon coupon) {
+    public Coupon addCoupon(Coupon coupon) {
         if (coupons == null) {
             coupons = new ArrayList<>();
         }
@@ -88,29 +88,32 @@ public class Company {
         coupon.setCompany(this);
         coupons.add(coupon);
 
+        return coupon;
     }
 
     public void updateCoupon(Coupon coupon) throws CouponSystemException {
 
-        for (Coupon check:this.getCoupons()) {
-            if (check.getId() == coupon.getId()) {
-                coupons.remove(check);
-                coupons.add(coupon);
-            }
+        Coupon check = coupons.get(coupons.indexOf(coupon));
+        if (check.getId() == coupon.getId()) {
+            coupons.remove(check);
+            coupons.add(coupon);
+            return;
         }
 
         throw new CouponSystemException("Can't find coupon with ID " + coupon.getId() + " in the company");
     }
 
-    public void removeCoupon(Coupon coupon) throws CouponSystemException {
+    public void removeCoupon(int couponId) throws CouponSystemException {
 
-        for (Coupon check:this.getCoupons()) {
-            if (check.getId() == coupon.getId()) {
-                coupons.remove(coupon);
+        //Coupon check = coupons.get(coupons.indexOf(coupon));
+        for (Coupon check:coupons) {
+            if (check.getId() == couponId) {
+                coupons.remove(check);
+                return;
             }
         }
 
-        throw new CouponSystemException("Can't find coupon with ID " + coupon.getId() + " in the company");
+        throw new CouponSystemException("Can't find coupon with ID " + couponId + " in the company");
     }
 
     @Override

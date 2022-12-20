@@ -8,6 +8,7 @@ import com.yiftach.TheProjectPart2.app.core.repositories.CompanyRepo;
 import com.yiftach.TheProjectPart2.app.core.repositories.CouponRepo;
 import com.yiftach.TheProjectPart2.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -16,6 +17,7 @@ import java.util.Optional;
 
 @Service
 @Transactional
+@Scope("prototype")
 public class AdminService extends ClientService {
 
     private final String EMAIL = "admin@admin.com";
@@ -33,7 +35,6 @@ public class AdminService extends ClientService {
         return email.equals(this.EMAIL) && (password.equals(this.PASSWORD));
 
     }
-
 
     /**
      * Adds a new company to the database
@@ -65,11 +66,13 @@ public class AdminService extends ClientService {
      * Update an existing company in the database
      * @param company The company to update in the database
      */
-    public void updateCompany(Company company) throws CouponSystemException {
+    public Company updateCompany(Company company) throws CouponSystemException {
 
         try {
             Optional<Company> optional = companyRepo.findById(company.getId());
 
+            // The name of the company can't be changed,
+            // this sets the name from the company in the database to the arg company.
             if (optional.isPresent()) {
                 Company new_company = optional.get();
                 company.setName(new_company.getName());
@@ -78,7 +81,7 @@ public class AdminService extends ClientService {
                 throw new CouponSystemException("Company with ID " + company.getId() + "Doesn't exist.");
             }
 
-            companyRepo.save(company);
+            return companyRepo.save(company);
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't update company",e);
@@ -152,7 +155,7 @@ public class AdminService extends ClientService {
     /** Adds a customer to the database
      * @param customer The customer to add to the database
      */
-    public void addCustomer(Customer customer) throws CouponSystemException{
+    public Customer addCustomer(Customer customer) throws CouponSystemException{
         try {
 
             for (Customer check: customerRepo.findAll()) {
@@ -163,7 +166,7 @@ public class AdminService extends ClientService {
                 }
             }
 
-            customerRepo.save(customer);
+            return customerRepo.save(customer);
 
         } catch (Exception e){
             throw new CouponSystemException("Can't add customer " + customer.getId(),e);
@@ -173,9 +176,9 @@ public class AdminService extends ClientService {
     /** Update an existing customer in the database
      * @param customer The customer to update in the database
      */
-    public void updateCustomer(Customer customer) throws CouponSystemException {
+    public Customer updateCustomer(Customer customer) throws CouponSystemException {
         try {
-            customerRepo.save(customer);
+            return customerRepo.save(customer);
         } catch (Exception e) {
             throw new CouponSystemException("Can't update customer " + customer.getId(),e);
         }
