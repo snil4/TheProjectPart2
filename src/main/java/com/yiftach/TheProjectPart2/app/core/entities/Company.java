@@ -2,7 +2,6 @@ package com.yiftach.TheProjectPart2.app.core.entities;
 
 import com.sun.istack.NotNull;
 import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
-import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;

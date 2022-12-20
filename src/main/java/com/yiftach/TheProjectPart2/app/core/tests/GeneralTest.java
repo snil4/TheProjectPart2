@@ -4,7 +4,6 @@ import com.yiftach.TheProjectPart2.app.core.data.Category;
 import com.yiftach.TheProjectPart2.app.core.entities.Company;
 import com.yiftach.TheProjectPart2.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart2.app.core.entities.Customer;
-import com.yiftach.TheProjectPart2.app.core.repositories.CustomerRepo;
 import com.yiftach.TheProjectPart2.app.core.services.AdminService;
 import com.yiftach.TheProjectPart2.app.core.services.CompanyService;
 import com.yiftach.TheProjectPart2.app.core.services.CustomerService;

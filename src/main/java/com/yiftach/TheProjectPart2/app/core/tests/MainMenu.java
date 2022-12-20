@@ -1,9 +1,7 @@
 package com.yiftach.TheProjectPart2.app.core.tests;
 
-import com.yiftach.TheProjectPart2.app.core.tasks.LoginManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.stereotype.Component;
 
 import java.util.Scanner;
 

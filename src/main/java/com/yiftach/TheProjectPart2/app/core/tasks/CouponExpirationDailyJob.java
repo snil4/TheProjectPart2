@@ -3,13 +3,9 @@ package com.yiftach.TheProjectPart2.app.core.tasks;
 import com.yiftach.TheProjectPart2.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart2.app.core.repositories.CouponRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
 @Component
