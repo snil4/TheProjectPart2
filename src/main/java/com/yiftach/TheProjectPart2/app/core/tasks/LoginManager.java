@@ -6,6 +6,7 @@ import com.yiftach.TheProjectPart2.app.core.services.ClientService;
 import com.yiftach.TheProjectPart2.app.core.services.CompanyService;
 import com.yiftach.TheProjectPart2.app.core.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
 // Singleton class that manages logins and returns a user object base on input
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Component;
 public class LoginManager {
 
     @Autowired
-    Config config;
+    AnnotationConfigApplicationContext context;
 
 
     /**
@@ -25,21 +26,21 @@ public class LoginManager {
     public ClientService login(String email, String password, ClientType clientType) throws CouponSystemException {
 
         if (clientType == ClientType.ADMINISTRATOR) {
-            AdminService ADMIN_SERVICE = config.getAdminService();
+            AdminService ADMIN_SERVICE = context.getBean(AdminService.class);
 
             if (ADMIN_SERVICE.login(email, password)) {
                 return ADMIN_SERVICE;
             }
 
         } else if (clientType == ClientType.COMPANY) {
-            CompanyService COMPANY_SERVICE = config.getCompanyService();
+            CompanyService COMPANY_SERVICE = context.getBean(CompanyService.class);
 
             if (COMPANY_SERVICE.login(email, password)) {
                 return COMPANY_SERVICE;
             }
 
         } else if (clientType == ClientType.CUSTOMER) {
-            CustomerService CUSTOMER_SERVICE = config.getCustomerService();
+            CustomerService CUSTOMER_SERVICE = context.getBean(CustomerService.class);
 
             if (CUSTOMER_SERVICE.login(email, password)) {
                 return CUSTOMER_SERVICE;
