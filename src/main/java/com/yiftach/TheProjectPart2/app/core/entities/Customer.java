@@ -1,6 +1,5 @@
 package com.yiftach.TheProjectPart2.app.core.entities;
 
-import com.sun.istack.NotNull;
 import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
 
 import javax.persistence.*;
@@ -12,17 +11,13 @@ public class Customer {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
     @Column(name = "first_name")
     private String firstName;
-    @NotNull
     @Column(name = "last_name")
     private String lastName;
-    @NotNull
     private String email;
-    @NotNull
     private String password;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "coupon_id"))
     private List<Coupon> coupons;

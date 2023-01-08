@@ -1,6 +1,5 @@
 package com.yiftach.TheProjectPart2.app.core.entities;
 
-import com.sun.istack.NotNull;
 import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
 
 import javax.persistence.*;
@@ -14,11 +13,8 @@ public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @NotNull
     private String name;
-    @NotNull
     private String email;
-    @NotNull
     private String password;
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Coupon> coupons;

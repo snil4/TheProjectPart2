@@ -1,6 +1,4 @@
 package com.yiftach.TheProjectPart2.app.core.entities;
-
-import com.sun.istack.NotNull;
 import com.yiftach.TheProjectPart2.app.core.data.Category;
 import org.hibernate.annotations.Check;
 
@@ -17,23 +15,16 @@ public class Coupon {
     private int id;
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @NotNull
     private Company company;
     @Enumerated(EnumType.STRING)
-    @NotNull
     private Category category;
-    @NotNull
     private String title;
     private String description;
     @Column(name = "start_date")
-    @NotNull
     private LocalDate startDate;
     @Column(name = "end_date")
-    @NotNull
     private LocalDate endDate;
-    @NotNull
     private int amount;
-    @NotNull
     private double price;
     private String image;
     @ManyToMany

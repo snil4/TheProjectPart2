@@ -56,7 +56,7 @@ public class CustomerService extends ClientService {
         try {
 
             if (coupon.getAmount() <= 0) {
-                throw new CouponSystemException("This coupon's amount is 0 ");
+                throw new CouponSystemException("This coupon's amount is empty ");
             } else if (coupon.getEndDate().isBefore(LocalDate.now())) {
                 throw new CouponSystemException("This coupon is expired");
             }
@@ -71,7 +71,7 @@ public class CustomerService extends ClientService {
 
             coupon.setAmount(coupon.getAmount() - 1);
             customer.addCoupon(coupon);
-            couponRepo.save(coupon);
+            customerRepo.save(customer);
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't purchase coupon: ",e);
