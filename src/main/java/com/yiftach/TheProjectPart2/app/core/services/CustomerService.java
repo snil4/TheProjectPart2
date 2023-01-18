@@ -48,7 +48,6 @@ public class CustomerService extends ClientService {
         }
     }
 
-    // TODO - Test to see if this function works as it should
     /**
      * @param coupon Coupon to add to the customer
      */

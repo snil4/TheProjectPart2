@@ -90,7 +90,6 @@ public class AdminService extends ClientService {
     }
 
 
-    // TODO - Test if coupons also get deleted
     /**
      * Deletes a company from the database
      * @param companyID The ID of the company to delete from the database
@@ -184,7 +183,6 @@ public class AdminService extends ClientService {
         }
     }
 
-    // TODO - Test if coupons get also deleted
     /** Delete a customer from the database
      * @param customerID The ID of the customer to delete
      */

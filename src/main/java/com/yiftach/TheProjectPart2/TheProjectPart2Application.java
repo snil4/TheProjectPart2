@@ -20,7 +20,7 @@ public class TheProjectPart2Application {
 	}
 
 	public static void stop() {
-		CouponExpirationDailyJob.stop();
+		context.stop();
 	}
 
 }

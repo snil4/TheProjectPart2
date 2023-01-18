@@ -13,15 +13,15 @@ import org.springframework.stereotype.Component;
 @Component
 public class LoginManager {
 
+    // In order to get a unique object of the service we need to get an instance of ConfigApplicationContext.
     @Autowired
     AnnotationConfigApplicationContext context;
-
 
     /**
      * @param email      Client's email
      * @param password   Client's password
      * @param clientType The client's type
-     * @return Object of the client based on input
+     * @return Unique object of the client based on input
      */
     public ClientService login(String email, String password, ClientType clientType) throws CouponSystemException {
 

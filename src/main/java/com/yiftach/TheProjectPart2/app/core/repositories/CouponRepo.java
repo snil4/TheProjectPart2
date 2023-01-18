@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface CouponRepo extends JpaRepository<Coupon,Integer>{
@@ -14,7 +15,8 @@ public interface CouponRepo extends JpaRepository<Coupon,Integer>{
 
     List<Coupon> findByCategory(Category category);
 
-    @Query(value = "select * from coupon where price <= :maxprice",nativeQuery = true)
-    List<Coupon> findByMaxPrice(@Param("maxprice") int maxPrice);
+    @Query(value = "select * from coupon where price <= :maxPrice",nativeQuery = true)
+    List<Coupon> findByMaxPrice(@Param("maxPrice") int maxPrice);
 
+    List<Coupon> findByEndDate(LocalDate endDate);
 }

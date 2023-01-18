@@ -80,7 +80,6 @@ public class CompanyService extends ClientService {
         }
     }
 
-    // TODO - check if this works correctly both for the coupon and the company
     /** Update an existing coupon in the database
      * @param coupon Coupon to update
      */

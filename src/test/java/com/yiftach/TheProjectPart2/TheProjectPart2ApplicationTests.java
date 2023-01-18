@@ -21,6 +21,7 @@ class TheProjectPart2ApplicationTests {
 
 	@Autowired
 	private LoginManager loginManager;
+	private static boolean firstPassed = false;
 
 	@Test
 	@Order(1)
@@ -64,11 +65,24 @@ class TheProjectPart2ApplicationTests {
 		System.out.println();
 		adminService.getAllCoupons().forEach(System.out::println);
 		System.out.println();
+		firstPassed = true;
 	}
 
 	@Test
 	@Order(2)
 	public void companyCustomerTest() throws Exception {
+		if (!firstPassed) {
+			AdminService adminService = (AdminService) loginManager.login("admin@admin.com"
+					, "admin", LoginManager.ClientType.ADMINISTRATOR);
+			adminService.addCompany(new Company(0, "Tnuva"
+					, "tnuva@tnuva", "tnuva"));
+			adminService.addCompany(new Company(0, "Tara", "tara@tara", "SomethingCool"));
+
+			adminService.addCustomer(new Customer(0, "Aviv", "Tal",
+					"avivt@gmail.com", "avivt"));
+			adminService.addCustomer(new Customer(0, "Yosi", "park",
+					"yosip@gmail.com", "secretPa$$word"));
+		}
 		// Test for company service
 		System.out.println("=======COMPANY SERVICE TEST========");
 		CompanyService companyService1 = (CompanyService) loginManager.login("tnuva@tnuva"
