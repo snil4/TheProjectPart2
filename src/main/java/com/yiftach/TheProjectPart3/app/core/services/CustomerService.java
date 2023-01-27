@@ -9,7 +9,6 @@ import com.yiftach.TheProjectPart3.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
@@ -18,7 +17,6 @@ import java.util.List;
 
 @Component
 @Transactional
-@Scope("prototype")
 public class CustomerService extends ClientService {
 
     @Autowired
@@ -27,21 +25,6 @@ public class CustomerService extends ClientService {
     private CouponRepo couponRepo;
     private Customer customer;
 
-    public boolean login(String email, String password) throws CouponSystemException {
-
-        try {
-            if (customerRepo.existsByEmailAndPassword(email, password)) {
-                customer = customerRepo.findByEmail(email).orElseThrow();
-                return true;
-            }
-
-            return false;
-
-
-        } catch (Exception e) {
-            throw new CouponSystemException("Can't login to customer " + email,e);
-        }
-    }
 
     /**
      * @param coupon Coupon to add to the customer

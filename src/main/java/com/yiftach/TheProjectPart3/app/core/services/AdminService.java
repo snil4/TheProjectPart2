@@ -10,7 +10,6 @@ import com.yiftach.TheProjectPart3.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -18,7 +17,6 @@ import java.util.Optional;
 
 @Component
 @Transactional
-@Scope("prototype")
 public class AdminService extends ClientService {
 
     private final String EMAIL = "admin@admin.com";
@@ -31,11 +29,6 @@ public class AdminService extends ClientService {
     @Autowired
     private CouponRepo couponRepo;
 
-    
-    public boolean login(String email, String password) {
-        return email.equals(this.EMAIL) && (password.equals(this.PASSWORD));
-
-    }
 
     /**
      * Adds a new company to the database
