@@ -1,4 +1,4 @@
-package com.yiftach.TheProjectPart2.app.core.exceptions;
+package com.yiftach.TheProjectPart3.app.core.exceptions;
 
 public class CouponSystemException extends Exception{
     public CouponSystemException() {

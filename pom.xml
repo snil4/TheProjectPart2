@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yiftach</groupId>
-	<artifactId>TheProjectPart2</artifactId>
+	<artifactId>TheProjectPart3</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>TheProjectPart2</name>
-	<description>The 2nd part of the coupon system project</description>
+	<name>TheProjectPart3</name>
+	<description>The 3rd part of the coupon system project</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
@@ -37,7 +37,35 @@
 			<artifactId>mysql-connector-java</artifactId>
 			<version>8.0.30</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>springdoc-openapi-ui</artifactId>
+			<version>1.6.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springdoc</groupId>
+			<artifactId>spring-boot-springdoc</artifactId>
+			<version>3.1.2</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-api</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-impl</artifactId>
+			<version>0.11.5</version>
+		</dependency>
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt-jackson</artifactId>
+			<version>0.11.5</version>
+		</dependency>
 
 	</dependencies>
 

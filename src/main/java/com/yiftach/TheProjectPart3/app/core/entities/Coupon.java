@@ -1,5 +1,5 @@
-package com.yiftach.TheProjectPart2.app.core.entities;
-import com.yiftach.TheProjectPart2.app.core.data.Category;
+package com.yiftach.TheProjectPart3.app.core.entities;
+import com.yiftach.TheProjectPart3.app.core.data.Category;
 import org.hibernate.annotations.Check;
 
 import javax.persistence.*;
@@ -18,6 +18,7 @@ public class Coupon {
     private Company company;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(unique = true)
     private String title;
     private String description;
     @Column(name = "start_date")

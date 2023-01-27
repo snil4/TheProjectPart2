@@ -1,6 +1,6 @@
-package com.yiftach.TheProjectPart2.app.core.entities;
+package com.yiftach.TheProjectPart3.app.core.entities;
 
-import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
+import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -15,6 +15,7 @@ public class Customer {
     private String firstName;
     @Column(name = "last_name")
     private String lastName;
+    @Column(unique = true)
     private String email;
     private String password;
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)

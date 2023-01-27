@@ -1,21 +1,22 @@
-package com.yiftach.TheProjectPart2.app.core.services;
+package com.yiftach.TheProjectPart3.app.core.services;
 
-import com.yiftach.TheProjectPart2.app.core.entities.Company;
-import com.yiftach.TheProjectPart2.app.core.entities.Coupon;
-import com.yiftach.TheProjectPart2.app.core.entities.Customer;
-import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
-import com.yiftach.TheProjectPart2.app.core.repositories.CompanyRepo;
-import com.yiftach.TheProjectPart2.app.core.repositories.CouponRepo;
-import com.yiftach.TheProjectPart2.app.core.repositories.CustomerRepo;
+import com.yiftach.TheProjectPart3.app.core.entities.Company;
+import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
+import com.yiftach.TheProjectPart3.app.core.entities.Customer;
+import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
+import com.yiftach.TheProjectPart3.app.core.repositories.CompanyRepo;
+import com.yiftach.TheProjectPart3.app.core.repositories.CouponRepo;
+import com.yiftach.TheProjectPart3.app.core.repositories.CustomerRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+@Component
 @Transactional
 @Scope("prototype")
 public class AdminService extends ClientService {
@@ -30,7 +31,7 @@ public class AdminService extends ClientService {
     @Autowired
     private CouponRepo couponRepo;
 
-    @Override
+    
     public boolean login(String email, String password) {
         return email.equals(this.EMAIL) && (password.equals(this.PASSWORD));
 
@@ -43,14 +44,10 @@ public class AdminService extends ClientService {
     public Company addCompany(Company company) throws CouponSystemException {
 
         try {
-            for (Company check : companyRepo.findAll()) {
-
-                if (check.getName().equals(company.getName())) {
-                    throw new CouponSystemException("A company with the same name already exists.");
-
-                } else if (check.getEmail().equals(company.getEmail())) {
-                    throw new CouponSystemException("A company with the same email already exists.");
-                }
+            if (companyRepo.existsByName(company.getName())) {
+                throw new CouponSystemException("A company with the same name already exists.");
+            } else if (companyRepo.existsByEmail(company.getEmail())) {
+                throw new CouponSystemException("A company with the same email already exists.");
             }
 
             return companyRepo.save(company);
@@ -100,14 +97,9 @@ public class AdminService extends ClientService {
 
             if (optional.isPresent()) {
                 Company company = optional.get();
-
                 if (company.getCoupons() != null) {
-                    for (Coupon coupon : company.getCoupons()) {
-                        couponRepo.delete(coupon);
-
-                    }
+                    couponRepo.deleteByCompanyId(companyID);
                 }
-
                 companyRepo.delete(company);
 
             } else {
@@ -156,17 +148,10 @@ public class AdminService extends ClientService {
      */
     public Customer addCustomer(Customer customer) throws CouponSystemException{
         try {
-
-            for (Customer check: customerRepo.findAll()) {
-
-                if (customer.getEmail().equals(check.getEmail())) {
-                    throw new CouponSystemException("Customer with the same email already exists");
-
-                }
+            if (customerRepo.existsByEmail(customer.getEmail())) {
+                throw new CouponSystemException("Customer with the same email already exists");
             }
-
             return customerRepo.save(customer);
-
         } catch (Exception e){
             throw new CouponSystemException("Can't add customer " + customer.getId(),e);
         }

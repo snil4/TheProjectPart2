@@ -1,11 +1,12 @@
-package com.yiftach.TheProjectPart2.app.core.tasks;
+package com.yiftach.TheProjectPart3.app.core.tasks;
 
-import com.yiftach.TheProjectPart2.app.core.exceptions.CouponSystemException;
-import com.yiftach.TheProjectPart2.app.core.services.AdminService;
-import com.yiftach.TheProjectPart2.app.core.services.ClientService;
-import com.yiftach.TheProjectPart2.app.core.services.CompanyService;
-import com.yiftach.TheProjectPart2.app.core.services.CustomerService;
+import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
+import com.yiftach.TheProjectPart3.app.core.services.AdminService;
+import com.yiftach.TheProjectPart3.app.core.services.ClientService;
+import com.yiftach.TheProjectPart3.app.core.services.CompanyService;
+import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -15,7 +16,7 @@ public class LoginManager {
 
     // In order to get a unique object of the service we need to get an instance of ConfigApplicationContext.
     @Autowired
-    AnnotationConfigApplicationContext context;
+    ConfigurableApplicationContext context;
 
     /**
      * @param email      Client's email

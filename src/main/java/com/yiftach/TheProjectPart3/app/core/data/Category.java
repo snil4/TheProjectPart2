@@ -1,4 +1,4 @@
-package com.yiftach.TheProjectPart2.app.core.data;
+package com.yiftach.TheProjectPart3.app.core.data;
 
 // Enum for the coupon's category
 public enum Category {

@@ -1,22 +1,20 @@
-package com.yiftach.TheProjectPart2;
+package com.yiftach.TheProjectPart3;
 
-import com.yiftach.TheProjectPart2.app.core.tasks.CouponExpirationDailyJob;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
-
-import java.util.concurrent.TimeUnit;
 
 @SpringBootApplication
 @EnableScheduling
-public class TheProjectPart2Application {
+public class TheProjectPart3Application {
 
 	private static ConfigurableApplicationContext context;
 
 	public static void main(String[] args) throws InterruptedException {
-		context = SpringApplication.run(TheProjectPart2Application.class, args);
-		stop();
+		context = SpringApplication.run(TheProjectPart3Application.class, args);
 	}
 
 	public static void stop() {
