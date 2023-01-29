@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 @Transactional
-public class CustomerService extends ClientService {
+public class CustomerService extends AbstractService {
 
     @Autowired
     private CustomerRepo customerRepo;

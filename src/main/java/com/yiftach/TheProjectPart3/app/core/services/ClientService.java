@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Component
 @Transactional
-public abstract class ClientService {
+public class ClientService extends AbstractService {
 
     @Autowired
     private ClientRepo clientRepo;
@@ -30,6 +30,7 @@ public abstract class ClientService {
     private CompanyRepo companyRepo;
     @Autowired
     private CustomerRepo customerRepo;
+    @Autowired
     private JwtUtil jwtUtil;
 
     /**
@@ -80,5 +81,9 @@ public abstract class ClientService {
         } catch (Exception e) {
             throw new CouponSystemException("Can't register new client");
         }
+    }
+
+    public Client getOneClient(int clientId) throws CouponSystemException {
+        return clientRepo.findById(clientId).orElseThrow(() -> new CouponSystemException("Can't find client with id " + clientId));
     }
 }

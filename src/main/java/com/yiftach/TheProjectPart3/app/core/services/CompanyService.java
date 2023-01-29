@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @Transactional
-public class CompanyService extends ClientService {
+public class CompanyService extends AbstractService {
 
     @Autowired
     private CompanyRepo companyRepo;

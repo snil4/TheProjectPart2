@@ -17,7 +17,7 @@ import java.util.Optional;
 
 @Component
 @Transactional
-public class AdminService extends ClientService {
+public class AdminService extends AbstractService {
 
     private final String EMAIL = "admin@admin.com";
     private final String PASSWORD = "admin";
