@@ -5,6 +5,7 @@ import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
 import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
-    @PostMapping("/coupon")
+    @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> purchaseCoupon(Coupon coupon){
         try {
             return ResponseEntity.ok().body(customerService.purchaseCoupon(coupon));
@@ -31,7 +32,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("/coupon/all")
+    @GetMapping(path = "/coupon/all", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Coupon>> getCustomerCoupons(double maxPrice, Category category){
         try {
             if (maxPrice > 0) {
@@ -48,7 +49,7 @@ public class CustomerController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping(path = "", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Customer> getCustomerDetails() {
         try {
             return ResponseEntity.ok().body(customerService.getCustomerDetails());

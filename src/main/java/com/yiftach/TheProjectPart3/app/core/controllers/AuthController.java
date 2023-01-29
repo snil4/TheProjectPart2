@@ -18,7 +18,6 @@ public class AuthController {
     @Autowired
     private ClientService clientService;
 
-    // TODO - Make this thing happen
     @GetMapping("/register")
     public ResponseEntity<String> register(String name, String lastName, String email, String password, Role role){
         try {

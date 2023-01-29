@@ -1,5 +1,6 @@
 package com.yiftach.TheProjectPart3.app.core.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Customer {
     @ManyToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "customer_id"),
             inverseJoinColumns = @JoinColumn(name = "coupon_id"))
+    @JsonIgnore
     private List<Coupon> coupons;
 
     public Customer() {

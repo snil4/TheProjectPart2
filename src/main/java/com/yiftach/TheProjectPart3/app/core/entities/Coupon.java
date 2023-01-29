@@ -1,4 +1,5 @@
 package com.yiftach.TheProjectPart3.app.core.entities;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yiftach.TheProjectPart3.app.core.data.Category;
 import org.hibernate.annotations.Check;
 
@@ -15,6 +16,7 @@ public class Coupon {
     private int id;
     @ManyToOne
     @JoinColumn(name = "company_id")
+    @JsonIgnore
     private Company company;
     @Enumerated(EnumType.STRING)
     private Category category;

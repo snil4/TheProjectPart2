@@ -1,5 +1,6 @@
 package com.yiftach.TheProjectPart3.app.core.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Company {
     private String email;
     private String password;
     @OneToMany(mappedBy = "id", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<Coupon> coupons;
 
     public Company() {

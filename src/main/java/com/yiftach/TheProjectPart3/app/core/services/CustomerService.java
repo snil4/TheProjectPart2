@@ -15,6 +15,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO - make this work with the new authentication/authorization system
 @Component
 @Transactional
 public class CustomerService extends AbstractService {

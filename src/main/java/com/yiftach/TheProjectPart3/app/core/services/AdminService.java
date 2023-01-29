@@ -15,6 +15,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
+// TODO - make this work with the new authentication/authorization system
 @Component
 @Transactional
 public class AdminService extends AbstractService {

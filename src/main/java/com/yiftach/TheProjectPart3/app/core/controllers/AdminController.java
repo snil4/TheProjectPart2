@@ -4,6 +4,7 @@ import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
 import com.yiftach.TheProjectPart3.app.core.services.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,7 +19,7 @@ public class AdminController {
     @Autowired
     private AdminService adminService;
 
-    @PostMapping("/company")
+    @PostMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Company> addCompany(Company company){
         try {
             return ResponseEntity.ok().body(adminService.addCompany(company));
@@ -27,7 +28,7 @@ public class AdminController {
         }
     }
 
-    @PutMapping("/company")
+    @PutMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Company> updateCompany(Company company) {
         try {
             return ResponseEntity.ok().body(adminService.updateCompany(company));
@@ -36,7 +37,7 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping("/company")
+    @DeleteMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<String> deleteCompany(int companyId) {
         try {
             adminService.deleteCompany(companyId);
@@ -46,7 +47,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/company/all")
+    @GetMapping(path = "/company/all", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Company>> getAllCompanies() {
         try {
             return ResponseEntity.ok().body(adminService.getAllCompanies());
@@ -55,7 +56,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/company")
+    @GetMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Company> getOneCompany(int companyId) {
         try {
             return ResponseEntity.ok().body(adminService.getOneCompany(companyId));
@@ -64,7 +65,7 @@ public class AdminController {
         }
     }
 
-    @PostMapping("/customer")
+    @PostMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Customer> addCustomer(Customer customer) {
         try {
             return ResponseEntity.ok().body(adminService.addCustomer(customer));
@@ -73,7 +74,7 @@ public class AdminController {
         }
     }
 
-    @PutMapping("/customer")
+    @PutMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Customer> updateCustomer(Customer customer) {
         try {
             return ResponseEntity.ok().body(adminService.updateCustomer(customer));
@@ -82,7 +83,7 @@ public class AdminController {
         }
     }
 
-    @DeleteMapping("/customer")
+    @DeleteMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<String> deleteCustomer(int customerId) {
         try {
             adminService.deleteCustomer(customerId);
@@ -92,7 +93,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/customer/all")
+    @GetMapping(path = "/customer/all", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Customer>> getAllCustomers() {
         try {
             return ResponseEntity.ok().body(adminService.getAllCustomers());
@@ -101,7 +102,7 @@ public class AdminController {
         }
     }
 
-    @GetMapping("/customer")
+    @GetMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Customer> getOneCustomer(int customerId) {
         try {
             return ResponseEntity.ok().body(adminService.getOneCustomer(customerId));

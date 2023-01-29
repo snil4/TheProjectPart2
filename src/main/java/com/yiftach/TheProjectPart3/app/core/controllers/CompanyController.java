@@ -5,6 +5,7 @@ import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.services.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +20,7 @@ public class CompanyController {
     @Autowired
     private CompanyService companyService;
 
-    @PostMapping("/coupon")
+    @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> addCoupon(Coupon coupon) {
         try {
             return ResponseEntity.ok().body(companyService.addCoupon(coupon));
@@ -28,7 +29,7 @@ public class CompanyController {
         }
     }
 
-    @PutMapping("/coupon")
+    @PutMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> updateCoupon(Coupon coupon) {
         try {
             return ResponseEntity.ok().body(companyService.updateCoupon(coupon));
@@ -37,7 +38,7 @@ public class CompanyController {
         }
     }
 
-    @DeleteMapping("/coupon")
+    @DeleteMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<String> deleteCoupon(int couponId) {
         try {
             companyService.deleteCoupon(couponId);
@@ -47,7 +48,7 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("/coupon")
+    @GetMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Coupon>> getCompanyCoupons(Category category,double maxPrice) {
         try {
             if (maxPrice > 0) {
@@ -64,7 +65,7 @@ public class CompanyController {
         }
     }
 
-    @GetMapping("")
+    @GetMapping(path = "", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Company> getCompanyDetails() {
         try {
             return ResponseEntity.ok().body(companyService.getCompanyDetails());
@@ -72,5 +73,4 @@ public class CompanyController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
 }
