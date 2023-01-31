@@ -7,7 +7,6 @@ import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 import com.yiftach.TheProjectPart3.app.core.repositories.CompanyRepo;
 import com.yiftach.TheProjectPart3.app.core.repositories.CouponRepo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
@@ -24,15 +23,15 @@ public class CompanyService extends AbstractService {
     private CompanyRepo companyRepo;
     @Autowired
     private CouponRepo couponRepo;
-    private Company company;
-
 
     /** Add a new coupon to the company and the database
      * @param coupon Coupon to add
      */
-    public Coupon addCoupon(Coupon coupon) throws CouponSystemException {
+    public Coupon addCoupon(Coupon coupon, int companyId) throws CouponSystemException {
         try {
-            List<Coupon> coupons = company.getCoupons();
+            Company company = companyRepo.findById(companyId).orElseThrow(
+                    () -> new CouponSystemException("Company with id " + companyId + "doesn't exist"));
+            List<Coupon> coupons = couponRepo.findByCompanyId(companyId);
 
             if (coupons != null) {
                 if (coupon.getEndDate().isBefore(LocalDate.now())) {
@@ -40,9 +39,11 @@ public class CompanyService extends AbstractService {
                 }
             }
 
-            coupon.setCompany(this.company);
+            coupon.setCompany(company);
             coupon = couponRepo.save(coupon);
-            return company.addCoupon(coupon);
+            company.addCoupon(coupon);
+            companyRepo.save(company);
+            return coupon;
 
         } catch (Exception e) {
             throw new CouponSystemException(e);
@@ -52,11 +53,13 @@ public class CompanyService extends AbstractService {
     /** Update an existing coupon in the database
      * @param coupon Coupon to update
      */
-    public Coupon updateCoupon(Coupon coupon) throws CouponSystemException {
+    public Coupon updateCoupon(Coupon coupon, int companyId) throws CouponSystemException {
         try {
+            Company company = companyRepo.findById(companyId).orElseThrow(
+                    () -> new CouponSystemException("Can't find company with id " + companyId));
                 if (couponRepo.existsById(coupon.getId())) {
                     company.updateCoupon(coupon);
-                    this.company = companyRepo.save(company);
+                    company = companyRepo.save(company);
                     return couponRepo.save(coupon);
                 }
 
@@ -70,8 +73,10 @@ public class CompanyService extends AbstractService {
     /** Delete a coupon from the database based on ID
      * @param couponID The ID of the coupon to delete
      */
-    public void deleteCoupon(int couponID) throws CouponSystemException {
+    public void deleteCoupon(int couponID, int companyId) throws CouponSystemException {
         try {
+            Company company = companyRepo.findById(companyId).orElseThrow(
+                    () -> new CouponSystemException("Can't find coupon with id " + companyId));
             Optional<Coupon> optional = couponRepo.findById(couponID);
 
                 if (optional.isPresent()) {
@@ -96,9 +101,11 @@ public class CompanyService extends AbstractService {
     /**
      * @return A list of coupons of this company in the database
      */
-    public List<Coupon> getCompanyCoupons() throws CouponSystemException {
+    public List<Coupon> getCompanyCoupons(int companyId) throws CouponSystemException {
 
         try {
+            Company company = companyRepo.findById(companyId).orElseThrow(
+                    () -> new CouponSystemException("Can't find company with id " + companyId));
             return company.getCoupons();
 
         } catch (Exception e) {
@@ -111,10 +118,10 @@ public class CompanyService extends AbstractService {
      * @return A list of coupons from this company filtered by category
      *
      */
-    public List<Coupon> getCompanyCoupons(Category category) throws CouponSystemException {
+    public List<Coupon> getCompanyCoupons(Category category, int companyId) throws CouponSystemException {
 
         try {
-            return couponRepo.findByCategoryAndCompanyId(category, company.getId());
+            return couponRepo.findByCategoryAndCompanyId(category, companyId);
         } catch (Exception e) {
             throw new CouponSystemException("Can't get all company coupons by category " + category.name(),e);
         }
@@ -124,20 +131,20 @@ public class CompanyService extends AbstractService {
      * @param maxPrice The maximum price of the coupons
      * @return A list of coupons from this company that do not exceed the maximum price
      */
-    public List<Coupon> getCompanyCoupons(double maxPrice) throws CouponSystemException {
+    public List<Coupon> getCompanyCoupons(double maxPrice, int companyId) throws CouponSystemException {
 
         try {
-            return couponRepo.findByPriceLessThanEqualAndCompanyId(maxPrice, company.getId());
+            return couponRepo.findByPriceLessThanEqualAndCompanyId(maxPrice, companyId);
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't get company coupons ",e);
         }
     }
 
-    public List<Coupon> getCompanyCoupons(Category category, double maxPrice) throws CouponSystemException {
+    public List<Coupon> getCompanyCoupons(Category category, double maxPrice, int companyId) throws CouponSystemException {
 
         try {
-            return couponRepo.findByCategoryAndPriceLessThanEqualAndCompanyId(category, maxPrice, company.getId());
+            return couponRepo.findByCategoryAndPriceLessThanEqualAndCompanyId(category, maxPrice, companyId);
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't get company coupons ",e);
@@ -147,9 +154,10 @@ public class CompanyService extends AbstractService {
     /**
      * @return The object of the company
      */
-    public Company getCompanyDetails() throws CouponSystemException {
+    public Company getCompanyDetails(int companyId) throws CouponSystemException {
         try {
-            return company;
+            return companyRepo.findById(companyId).orElseThrow(
+                    () -> new CouponSystemException("Can't find company with id " + companyId));
         } catch (Exception e) {
             throw new CouponSystemException("Can't get company details",e);
         }

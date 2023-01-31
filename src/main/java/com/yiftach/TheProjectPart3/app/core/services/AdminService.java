@@ -15,10 +15,10 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
-// TODO - make this work with the new authentication/authorization system
 @Component
 @Transactional
-public class AdminService extends AbstractService {
+@Scope("prototype")
+public class AdminService extends ClientService {
 
     private final String EMAIL = "admin@admin.com";
     private final String PASSWORD = "admin";
@@ -29,7 +29,6 @@ public class AdminService extends AbstractService {
     private CustomerRepo customerRepo;
     @Autowired
     private CouponRepo couponRepo;
-
 
     /**
      * Adds a new company to the database

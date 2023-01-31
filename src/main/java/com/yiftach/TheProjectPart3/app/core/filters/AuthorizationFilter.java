@@ -2,7 +2,6 @@ package com.yiftach.TheProjectPart3.app.core.filters;
 
 import com.yiftach.TheProjectPart3.app.core.data.Role;
 import com.yiftach.TheProjectPart3.app.core.entities.Client;
-import com.yiftach.TheProjectPart3.app.core.util.JwtUtil;
 import org.springframework.http.HttpStatus;
 
 import javax.servlet.*;

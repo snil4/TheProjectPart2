@@ -1,7 +1,6 @@
 package com.yiftach.TheProjectPart3.app.core.controllers;
 
 import com.yiftach.TheProjectPart3.app.core.data.Role;
-import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

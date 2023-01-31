@@ -12,7 +12,6 @@ import com.yiftach.TheProjectPart3.app.core.repositories.CompanyRepo;
 import com.yiftach.TheProjectPart3.app.core.repositories.CustomerRepo;
 import com.yiftach.TheProjectPart3.app.core.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
 import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;

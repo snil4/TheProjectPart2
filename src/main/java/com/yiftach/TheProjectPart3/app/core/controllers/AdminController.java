@@ -110,5 +110,4 @@ public class AdminController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
     }
-
 }

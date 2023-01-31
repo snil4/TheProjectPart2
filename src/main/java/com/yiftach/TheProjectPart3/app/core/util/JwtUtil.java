@@ -3,11 +3,7 @@ package com.yiftach.TheProjectPart3.app.core.util;
 import com.yiftach.TheProjectPart3.app.core.data.Role;
 import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
-import com.yiftach.TheProjectPart3.app.core.repositories.ClientRepo;
-import com.yiftach.TheProjectPart3.app.core.services.ClientService;
 import io.jsonwebtoken.Claims;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.stereotype.Component;
 
 import java.util.HashMap;

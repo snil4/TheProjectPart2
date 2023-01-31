@@ -1,10 +1,7 @@
 package com.yiftach.TheProjectPart3.app.core.tasks;
 
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
-import com.yiftach.TheProjectPart3.app.core.services.AdminService;
 import com.yiftach.TheProjectPart3.app.core.services.ClientService;
-import com.yiftach.TheProjectPart3.app.core.services.CompanyService;
-import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
