@@ -4,9 +4,6 @@ import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 import com.yiftach.TheProjectPart3.app.core.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
-import javax.transaction.Transactional;
 
 public abstract class ClientService {
 

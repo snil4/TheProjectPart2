@@ -2,8 +2,6 @@ package com.yiftach.TheProjectPart3.app.core.entities;
 
 import com.yiftach.TheProjectPart3.app.core.data.Role;
 
-import javax.persistence.*;
-
 public class Client {
 
     private int id;
