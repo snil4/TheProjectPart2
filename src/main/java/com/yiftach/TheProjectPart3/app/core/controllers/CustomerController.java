@@ -20,16 +20,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/customer")
-public class CustomerController {
+public class CustomerController extends ClientController {
 
     @Autowired
     private CustomerService customerService;
+
+    @Override
+    public ResponseEntity<String> login(String email, String password) {
+        try {
+            return ResponseEntity.ok().body(customerService.login(email, password));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> purchaseCoupon(Coupon coupon, HttpServletRequest request){
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(customerService.purchaseCoupon(coupon, client.getClientId()));
+            return ResponseEntity.ok().body(customerService.purchaseCoupon(coupon, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -41,13 +50,13 @@ public class CustomerController {
             Client client = (Client) request.getAttribute("client");
             if (maxPrice > 0) {
                 if (category != null) {
-                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(category,maxPrice, client.getClientId()));
+                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(category,maxPrice, client.getId()));
                 }
-                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice, client.getClientId()));
+                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice, client.getId()));
             } else if (category != null) {
-                return ResponseEntity.ok().body(customerService.getCustomerCoupons(category, client.getClientId()));
+                return ResponseEntity.ok().body(customerService.getCustomerCoupons(category, client.getId()));
             }
-            return ResponseEntity.ok().body(customerService.getCustomerCoupons(client.getClientId()));
+            return ResponseEntity.ok().body(customerService.getCustomerCoupons(client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -57,7 +66,7 @@ public class CustomerController {
     public ResponseEntity<Customer> getCustomerDetails(HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(customerService.getCustomerDetails(client.getClientId()));
+            return ResponseEntity.ok().body(customerService.getCustomerDetails(client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

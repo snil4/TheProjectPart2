@@ -17,16 +17,24 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/company")
-public class CompanyController {
+public class CompanyController extends ClientController {
 
     @Autowired
     private CompanyService companyService;
+
+    public ResponseEntity<String> login(String email, String password) {
+        try {
+            return ResponseEntity.ok().body(companyService.login(email,password));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> addCoupon(Coupon coupon, HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(companyService.addCoupon(coupon, client.getClientId()));
+            return ResponseEntity.ok().body(companyService.addCoupon(coupon, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -36,7 +44,7 @@ public class CompanyController {
     public ResponseEntity<Coupon> updateCoupon(Coupon coupon, HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(companyService.updateCoupon(coupon, client.getClientId()));
+            return ResponseEntity.ok().body(companyService.updateCoupon(coupon, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -46,7 +54,7 @@ public class CompanyController {
     public ResponseEntity<String> deleteCoupon(int couponId, HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            companyService.deleteCoupon(couponId, client.getClientId());
+            companyService.deleteCoupon(couponId, client.getId());
             return ResponseEntity.ok().body(String.format("Coupon %s deleted",couponId));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
@@ -59,13 +67,13 @@ public class CompanyController {
             Client client = (Client) request.getAttribute("client");
             if (maxPrice > 0) {
                 if (category != null) {
-                    return ResponseEntity.ok().body(companyService.getCompanyCoupons(category, maxPrice, client.getClientId()));
+                    return ResponseEntity.ok().body(companyService.getCompanyCoupons(category, maxPrice, client.getId()));
                 }
-                return ResponseEntity.ok().body(companyService.getCompanyCoupons(maxPrice, client.getClientId()));
+                return ResponseEntity.ok().body(companyService.getCompanyCoupons(maxPrice, client.getId()));
             } else if (category != null) {
-                return ResponseEntity.ok().body(companyService.getCompanyCoupons(category, client.getClientId()));
+                return ResponseEntity.ok().body(companyService.getCompanyCoupons(category, client.getId()));
             }
-            return ResponseEntity.ok().body(companyService.getCompanyCoupons(client.getClientId()));
+            return ResponseEntity.ok().body(companyService.getCompanyCoupons(client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
@@ -75,7 +83,7 @@ public class CompanyController {
     public ResponseEntity<Company> getCompanyDetails(HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(companyService.getCompanyDetails(client.getClientId()));
+            return ResponseEntity.ok().body(companyService.getCompanyDetails(client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

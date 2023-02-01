@@ -1,6 +1,8 @@
 package com.yiftach.TheProjectPart3.app.core.services;
 
 import com.yiftach.TheProjectPart3.app.core.data.Category;
+import com.yiftach.TheProjectPart3.app.core.data.Role;
+import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
@@ -17,12 +19,22 @@ import java.util.Optional;
 // TODO - make this work with the new authentication/authorization system
 @Component
 @Transactional
-public class CompanyService extends AbstractService {
+public class CompanyService extends ClientService {
 
     @Autowired
     private CompanyRepo companyRepo;
     @Autowired
     private CouponRepo couponRepo;
+
+    public String login(String email, String password) throws CouponSystemException {
+        Optional<Company> optional = companyRepo.findByEmailAndPassword(email, password);
+        if (optional.isPresent()) {
+            Company company = optional.get();
+            return this.getToken(new Client(company.getId(), company.getName(), company.getEmail(), Role.COMPANY));
+        } else {
+            return null;
+        }
+    }
 
     /** Add a new coupon to the company and the database
      * @param coupon Coupon to add

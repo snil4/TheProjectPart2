@@ -14,10 +14,19 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
-public class AdminController {
+public class AdminController extends ClientController {
 
     @Autowired
     private AdminService adminService;
+
+    @Override
+    public ResponseEntity<String> login(String email, String password) {
+        try {
+            return ResponseEntity.ok().body(adminService.login(email, password));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
 
     @PostMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Company> addCompany(Company company){

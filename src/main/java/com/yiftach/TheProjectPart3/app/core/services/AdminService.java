@@ -1,5 +1,7 @@
 package com.yiftach.TheProjectPart3.app.core.services;
 
+import com.yiftach.TheProjectPart3.app.core.data.Role;
+import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
@@ -7,6 +9,7 @@ import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 import com.yiftach.TheProjectPart3.app.core.repositories.CompanyRepo;
 import com.yiftach.TheProjectPart3.app.core.repositories.CouponRepo;
 import com.yiftach.TheProjectPart3.app.core.repositories.CustomerRepo;
+import com.yiftach.TheProjectPart3.app.core.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -29,6 +32,20 @@ public class AdminService extends ClientService {
     private CustomerRepo customerRepo;
     @Autowired
     private CouponRepo couponRepo;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    public String login(String email, String password) throws CouponSystemException {
+        try {
+            if (email.equals(EMAIL) && password.equals(PASSWORD)) {
+                return jwtUtil.generateToken(new Client(0, "admin", email, password, Role.ADMIN));
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
+            throw new CouponSystemException("Can't login as admin");
+        }
+    }
 
     /**
      * Adds a new company to the database
@@ -37,14 +54,13 @@ public class AdminService extends ClientService {
     public Company addCompany(Company company) throws CouponSystemException {
 
         try {
-            if (companyRepo.existsByName(company.getName())) {
+            if (companyRepo.findByName(company.getName()).isPresent()) {
                 throw new CouponSystemException("A company with the same name already exists.");
-            } else if (companyRepo.existsByEmail(company.getEmail())) {
+            } else if (companyRepo.findByEmail(company.getEmail()).isPresent()) {
                 throw new CouponSystemException("A company with the same email already exists.");
             }
 
             return companyRepo.save(company);
-
         } catch (Exception e) {
             throw new CouponSystemException("Can't add company " + company.getId(),e);
         }
@@ -141,7 +157,7 @@ public class AdminService extends ClientService {
      */
     public Customer addCustomer(Customer customer) throws CouponSystemException{
         try {
-            if (customerRepo.existsByEmail(customer.getEmail())) {
+            if (customerRepo.findByEmail(customer.getEmail()).isPresent()) {
                 throw new CouponSystemException("Customer with the same email already exists");
             }
             return customerRepo.save(customer);

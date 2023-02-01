@@ -4,36 +4,27 @@ import com.yiftach.TheProjectPart3.app.core.data.Role;
 
 import javax.persistence.*;
 
-@Entity
 public class Client {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @Column(name = "client_id")
-    private int clientId;
     private String name;
-    @Column(unique = true)
     private String email;
     private String password;
-    @Enumerated(EnumType.STRING)
     private Role role;
 
     public Client() {
     }
 
-    public Client(int id, int clientId, String name, String email, String password, Role role) {
+    public Client(int id, String name, String email, String password, Role role) {
         this.id = id;
-        this.clientId = clientId;
         this.name = name;
         this.email = email;
         this.password = password;
         this.role = role;
     }
 
-    public Client(int id, int clientId, String name, String email, Role role) {
+    public Client(int id, String name, String email, Role role) {
         this.id = id;
-        this.clientId = clientId;
         this.name = name;
         this.email = email;
         this.role = role;
@@ -45,14 +36,6 @@ public class Client {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getClientId() {
-        return clientId;
-    }
-
-    public void setClientId(int clientId) {
-        this.clientId = clientId;
     }
 
     public String getName() {
@@ -91,7 +74,6 @@ public class Client {
     public String toString() {
         return "Client{" +
                 "id=" + id +
-                ", clientId=" + clientId +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +

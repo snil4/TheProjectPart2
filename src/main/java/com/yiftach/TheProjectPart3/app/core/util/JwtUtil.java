@@ -16,7 +16,6 @@ public class JwtUtil extends JwtUtilAbstract<Client, Integer>{
     public String generateToken(Client client) throws CouponSystemException {
         Map<String,Object> claims = new HashMap<>();
         claims.put("name",client.getName());
-        claims.put("client_id",client.getClientId());
         claims.put("email",client.getEmail());
         claims.put("role",client.getRole().name());
         return this.createToken(claims, client.getId());
@@ -25,7 +24,7 @@ public class JwtUtil extends JwtUtilAbstract<Client, Integer>{
     @Override
     public Client extractClient(String token) throws CouponSystemException {
         Claims claims = this.extractAllClaims(token);
-        return new Client(Integer.parseInt(claims.getSubject()), claims.get("client_id", Integer.class),
+        return new Client(Integer.parseInt(claims.getSubject()),
                 claims.get("name",String.class), claims.get("email", String.class),
                 Role.valueOf(claims.get("role", String.class)));
     }

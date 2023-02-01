@@ -1,6 +1,8 @@
 package com.yiftach.TheProjectPart3.app.core.services;
 
 import com.yiftach.TheProjectPart3.app.core.data.Category;
+import com.yiftach.TheProjectPart3.app.core.data.Role;
+import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
 import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
@@ -13,17 +15,27 @@ import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-// TODO - make this work with the new authentication/authorization system
 @Component
 @Transactional
-public class CustomerService extends AbstractService {
+public class CustomerService extends ClientService {
 
     @Autowired
     private CustomerRepo customerRepo;
     @Autowired
     private CouponRepo couponRepo;
 
+    @Override
+    public String login(String email, String password) throws CouponSystemException {
+        Optional<Customer> optional = customerRepo.findByEmailAndPassword(email, password);
+        if (optional.isPresent()) {
+            Customer customer = optional.get();
+            return this.getToken(new Client(customer.getId(), customer.getFirstName() + " " + customer.getLastName(), customer.getEmail(), Role.CUSTOMER));
+        } else {
+            return null;
+        }
+    }
 
     /**
      * @param coupon Coupon to add to the customer
