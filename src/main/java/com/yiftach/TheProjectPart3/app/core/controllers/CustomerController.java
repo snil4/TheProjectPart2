@@ -26,6 +26,7 @@ public class CustomerController extends ClientController {
     private CustomerService customerService;
 
     @Override
+    @GetMapping("/login")
     public ResponseEntity<String> login(String email, String password) {
         try {
             return ResponseEntity.ok().body(customerService.login(email, password));

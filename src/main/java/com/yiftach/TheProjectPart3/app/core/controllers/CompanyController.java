@@ -22,6 +22,8 @@ public class CompanyController extends ClientController {
     @Autowired
     private CompanyService companyService;
 
+    @Override
+    @GetMapping("/login")
     public ResponseEntity<String> login(String email, String password) {
         try {
             return ResponseEntity.ok().body(companyService.login(email,password));

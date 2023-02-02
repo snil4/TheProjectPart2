@@ -20,6 +20,7 @@ public class AdminController extends ClientController {
     private AdminService adminService;
 
     @Override
+    @GetMapping("/login")
     public ResponseEntity<String> login(String email, String password) {
         try {
             return ResponseEntity.ok().body(adminService.login(email, password));
