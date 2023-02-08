@@ -25,26 +25,17 @@ public class CompanyService extends ClientService {
     private CompanyRepo companyRepo;
     @Autowired
     private CouponRepo couponRepo;
-    private int companyID;
     private Company company;
 
     @Override
     public boolean login(String email, String password) throws CouponSystemException {
 
         try {
-            List<Company> companies = companyRepo.findAll();
-
-            for (Company company:companies) {
-
-                if (company.getEmail().equals(email) && company.getPassword().equals(password)) {
-                    this.companyID = company.getId();
-                    this.company = companyRepo.findById(companyID).
-                            orElseThrow(() -> new CouponSystemException("Can't find company"));
-                    return true;
-
-                }
+            if (companyRepo.existsByEmailAndPassword(email,password)) {
+                company = companyRepo.findByEmail(email).orElseThrow();
+                return true;
             }
-                return false;
+            return false;
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't login",e);
@@ -59,15 +50,8 @@ public class CompanyService extends ClientService {
             List<Coupon> coupons = company.getCoupons();
 
             if (coupons != null) {
-                for (Coupon check : coupons) {
-
-                    if (check.getTitle().equals(coupon.getTitle())
-                            || check.getId() == coupon.getId()) {
-                        throw new CouponSystemException("Can't add coupon, coupon with the same name or ID already exists in company");
-                    } else if (coupon.getEndDate().isBefore(LocalDate.now())) {
-                        throw new CouponSystemException("The coupon you're trying to add is expired");
-                    }
-
+                if (coupon.getEndDate().isBefore(LocalDate.now())) {
+                    throw new CouponSystemException("The coupon you're trying to add is expired");
                 }
             }
 
@@ -85,17 +69,11 @@ public class CompanyService extends ClientService {
      */
     public Coupon updateCoupon(Coupon coupon) throws CouponSystemException {
         try {
-
-            List<Coupon> coupons = getCompanyCoupons();
-
-            for (Coupon check : coupons) {
-
-                if (check.getId() == coupon.getId()) {
+                if (couponRepo.existsById(coupon.getId())) {
                     company.updateCoupon(coupon);
                     this.company = companyRepo.save(company);
                     return couponRepo.save(coupon);
                 }
-            }
 
             throw new CouponSystemException("No coupon with ID " + coupon.getId() + " found in the company");
 
@@ -151,17 +129,7 @@ public class CompanyService extends ClientService {
     public List<Coupon> getCompanyCoupons(Category category) throws CouponSystemException {
 
         try {
-            List<Coupon> coupons = getCompanyCoupons();
-            List<Coupon> new_coupons = new ArrayList<>();
-
-            for (Coupon coupon:coupons) {
-                if (coupon.getCategory().equals(category)) {
-                    new_coupons.add(coupon);
-
-                }
-            }
-
-            return new_coupons;
+            return couponRepo.findByCategoryAndCompanyId(category, company.getId());
         } catch (Exception e) {
             throw new CouponSystemException("Can't get all company coupons by category " + category.name(),e);
         }
@@ -174,17 +142,7 @@ public class CompanyService extends ClientService {
     public List<Coupon> getCompanyCoupons(double maxPrice) throws CouponSystemException {
 
         try {
-            List<Coupon> coupons = getCompanyCoupons();
-            List<Coupon> new_coupons = new ArrayList<>();
-
-            for (Coupon coupon:coupons) {
-                if (coupon.getPrice() <= maxPrice) {
-                    new_coupons.add(coupon);
-
-                }
-            }
-
-            return new_coupons;
+            return couponRepo.findByPriceLessThanEqualAndCompanyId(maxPrice, company.getId());
 
         } catch (Exception e) {
             throw new CouponSystemException("Can't get company coupons ",e);

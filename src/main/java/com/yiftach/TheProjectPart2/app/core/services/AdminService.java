@@ -43,14 +43,10 @@ public class AdminService extends ClientService {
     public Company addCompany(Company company) throws CouponSystemException {
 
         try {
-            for (Company check : companyRepo.findAll()) {
-
-                if (check.getName().equals(company.getName())) {
-                    throw new CouponSystemException("A company with the same name already exists.");
-
-                } else if (check.getEmail().equals(company.getEmail())) {
-                    throw new CouponSystemException("A company with the same email already exists.");
-                }
+            if (companyRepo.existsByName(company.getName())) {
+                throw new CouponSystemException("A company with the same name already exists.");
+            } else if (companyRepo.existsByEmail(company.getEmail())) {
+                throw new CouponSystemException("A company with the same email already exists.");
             }
 
             return companyRepo.save(company);
@@ -100,14 +96,9 @@ public class AdminService extends ClientService {
 
             if (optional.isPresent()) {
                 Company company = optional.get();
-
                 if (company.getCoupons() != null) {
-                    for (Coupon coupon : company.getCoupons()) {
-                        couponRepo.delete(coupon);
-
-                    }
+                    couponRepo.deleteByCompanyId(companyID);
                 }
-
                 companyRepo.delete(company);
 
             } else {
@@ -156,17 +147,10 @@ public class AdminService extends ClientService {
      */
     public Customer addCustomer(Customer customer) throws CouponSystemException{
         try {
-
-            for (Customer check: customerRepo.findAll()) {
-
-                if (customer.getEmail().equals(check.getEmail())) {
-                    throw new CouponSystemException("Customer with the same email already exists");
-
-                }
+            if (customerRepo.existsByEmail(customer.getEmail())) {
+                throw new CouponSystemException("Customer with the same email already exists");
             }
-
             return customerRepo.save(customer);
-
         } catch (Exception e){
             throw new CouponSystemException("Can't add customer " + customer.getId(),e);
         }

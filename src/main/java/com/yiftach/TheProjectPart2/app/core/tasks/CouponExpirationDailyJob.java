@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.concurrent.TimeUnit;
 
 @Component
+@Transactional
 public class CouponExpirationDailyJob {
 
     private final long WAIT_TIME = TimeUnit.DAYS.toMillis(1);
@@ -20,12 +22,8 @@ public class CouponExpirationDailyJob {
     public void run() {
         System.out.println("Coupon expiration job is working");
 
-        for (Coupon coupon : couponRepo.findAll()) {
-            if (coupon.getEndDate().isBefore(LocalDate.now())) {
-                couponRepo.delete(coupon);
-            }
-        }
-
+        long deleteCount = couponRepo.deleteByEndDateBefore(LocalDate.now());
+        System.out.println("Coupons deleted: " + deleteCount);
     }
 
 }

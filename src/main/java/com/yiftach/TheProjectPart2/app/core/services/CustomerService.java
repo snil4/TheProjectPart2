@@ -24,20 +24,15 @@ public class CustomerService extends ClientService {
     private CustomerRepo customerRepo;
     @Autowired
     private CouponRepo couponRepo;
-    private int customerID;
     private Customer customer;
 
     @Override
     public boolean login(String email, String password) throws CouponSystemException {
 
         try {
-            for (Customer customer: customerRepo.findAll()) {
-
-                    if (customer.getEmail().equals(email) && customer.getPassword().equals(password)) {
-                        customerID = customer.getId();
-                        this.customer = customerRepo.findById(customerID).orElseThrow(() -> new CouponSystemException("Can't find customer with ID " + customerID));
-                        return true;
-                    }
+            if (customerRepo.existsByEmailAndPassword(email, password)) {
+                customer = customerRepo.findByEmail(email).orElseThrow();
+                return true;
             }
 
             return false;
@@ -61,10 +56,8 @@ public class CustomerService extends ClientService {
             }
 
             if (getCustomerCoupons().size() > 0) {
-                for (Coupon check : getCustomerCoupons()) {
-                    if (coupon.getId() == check.getId()) {
-                        throw new CouponSystemException("This customer already has a coupon with the same ID");
-                    }
+                if (couponRepo.findByIdInCustomer(coupon.getId(),customer.getId()).isPresent()){
+                    throw new CouponSystemException("This customer already has a coupon with the same ID");
                 }
             }
 
@@ -94,21 +87,11 @@ public class CustomerService extends ClientService {
      * @return A list of all the coupons the customer bought
      */
     public List<Coupon> getCustomerCoupons(Category category) throws CouponSystemException{
-        List<Coupon> coupons = new ArrayList<>();
-
         try {
-
-            for (Coupon coupon: getCustomerCoupons()) {
-                if (coupon.getCategory().equals(category)) {
-                    coupons.add(coupon);
-                }
-            }
-
-            return coupons;
+            return couponRepo.findByCategoryAndCustomerId(category.name(), customer.getId());
         } catch (Exception e) {
             throw new CouponSystemException("Can't get customer coupons",e);
         }
-
     }
 
     /**
@@ -119,14 +102,7 @@ public class CustomerService extends ClientService {
         List<Coupon> coupons = new ArrayList<>();
 
         try {
-
-            for (Coupon coupon: getCustomerCoupons()) {
-                if (coupon.getPrice() <= maxPrice) {
-                    coupons.add(coupon);
-                }
-            }
-
-            return coupons;
+            return couponRepo.findByMaxPriceAndCustomerId(maxPrice,customer.getId());
         } catch (Exception e) {
             throw new CouponSystemException("Can't get customer coupons",e);
         }

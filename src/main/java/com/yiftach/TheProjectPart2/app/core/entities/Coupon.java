@@ -18,6 +18,7 @@ public class Coupon {
     private Company company;
     @Enumerated(EnumType.STRING)
     private Category category;
+    @Column(unique = true)
     private String title;
     private String description;
     @Column(name = "start_date")
