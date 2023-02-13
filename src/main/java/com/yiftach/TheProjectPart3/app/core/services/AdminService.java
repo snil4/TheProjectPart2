@@ -40,7 +40,7 @@ public class AdminService extends ClientService {
             if (email.equals(EMAIL) && password.equals(PASSWORD)) {
                 return jwtUtil.generateToken(new Client(0, "admin", email, password, Role.ADMIN));
             } else {
-                return null;
+                return "failed";
             }
         } catch (Exception e) {
             throw new CouponSystemException("Can't login as admin");
@@ -106,9 +106,7 @@ public class AdminService extends ClientService {
 
             if (optional.isPresent()) {
                 Company company = optional.get();
-                if (company.getCoupons() != null) {
-                    couponRepo.deleteByCompanyId(companyID);
-                }
+                couponRepo.deleteByCompanyId(companyID);
                 companyRepo.delete(company);
 
             } else {

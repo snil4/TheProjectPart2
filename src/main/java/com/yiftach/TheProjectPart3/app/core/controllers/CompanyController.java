@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/company")
+@CrossOrigin
 public class CompanyController extends ClientController {
 
     @Autowired

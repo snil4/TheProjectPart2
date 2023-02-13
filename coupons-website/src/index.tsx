@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Login from './Components/Login/Login';
+import { BrowserRouter } from 'react-router-dom';
+import Routing from './Components/LayoutArea/Routing/Routing';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -10,7 +11,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <Login/>
+    <BrowserRouter>
+      <Routing/>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

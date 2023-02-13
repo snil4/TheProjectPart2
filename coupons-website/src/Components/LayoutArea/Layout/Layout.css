@@ -1,0 +1,39 @@
+.Layout{
+padding: 0px;
+margin: 0px;
+height: 100%;
+width: 100%;
+text-align: center;
+}
+
+a {
+color: blue;
+}
+
+.active{
+color: green;
+font-weight: bold;
+font-family: Arial, Helvetica, sans-serif;
+}
+  
+
+.Layout {
+	height: 100vh;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-rows: 15% 80% 5%;
+    grid-template-columns: repeat(6, 1fr); /*6 equal columns*/
+}
+
+.Layout > header, .Layout > footer {
+    grid-column: span 6;
+}
+
+.Layout > main {
+    grid-column: span 5;
+    overflow: auto;
+}
+
+.Layout, .Layout > * {
+    border: 1px solid black;
+}
