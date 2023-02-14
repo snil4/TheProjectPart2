@@ -7,6 +7,10 @@ class UserModel{
     public password: string;
     public iat: number;
     public exp: number;
+
+    public getRole(): string {
+        return this.role;
+    }
 }
 
 export default UserModel;

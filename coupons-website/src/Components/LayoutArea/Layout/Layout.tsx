@@ -1,7 +1,7 @@
 import authService from "../../../Services/Auth";
 import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
-import Main from "../Main/Main";
+import MainRouting from "../MainRouting/MainRouting";
 import Menu from "../Menu/Menu";
 import "./Layout.css";
 
@@ -16,7 +16,7 @@ function Layout(props: LayoutProps): JSX.Element {
         <div className="Layout">
 			<header><Header name={client.name}/></header>
             <aside><Menu/></aside>
-            <main><Main/></main>
+            <main><MainRouting/></main>
             <footer><Footer id={client.sub}/></footer>
         </div>
     );

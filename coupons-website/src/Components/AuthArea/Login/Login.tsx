@@ -18,11 +18,16 @@ function Login(props: LoginProps): JSX.Element {
     .then(key=>{
         if (key !== "failed") {
             sessionStorage.setItem("token", key);
-            const client = authService.parseJwt(key);
-            if (client.email == user.email) {
-                navigate("/main");
-            } else {
-                alert("Login failed: please try again later.")
+            try {
+                const client = authService.parseJwt(key);
+                if (client.email == user.email) {
+                    navigate("/main");
+                } else {
+                    alert("Login error: please try again later.")
+                }
+            } catch (error) {
+                
+                alert(error + ", please try again");
             }
         } else {
             alert("Login failed: please check that your email and password are correct.")
