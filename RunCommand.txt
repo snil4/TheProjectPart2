@@ -1,0 +1,1 @@
+mvn exec:java -Dexec.mainClass=com.yiftach.TheProjectPart3.TheProjectPart3Application

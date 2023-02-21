@@ -8,9 +8,10 @@ interface MenuProps {
 function Menu(props: MenuProps): JSX.Element {
     return (
         <div className="Menu">
-			<NavLink to="/main">Start Page</NavLink><br/>
-            <NavLink to="/activities">Managment Activities</NavLink><br/>
-            <NavLink to="/coupon">Coupons List</NavLink><br/>
+			<NavLink to="/main">Start Page</NavLink>
+            <NavLink to="/activities">Managment Activities</NavLink>
+            <NavLink to="/coupon">Coupons List</NavLink>
+            <NavLink to="/info">User info</NavLink>
         </div>
     );
 }

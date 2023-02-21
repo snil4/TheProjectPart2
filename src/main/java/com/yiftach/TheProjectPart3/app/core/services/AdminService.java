@@ -40,7 +40,7 @@ public class AdminService extends ClientService {
             if (email.equals(EMAIL) && password.equals(PASSWORD)) {
                 return jwtUtil.generateToken(new Client(0, "admin", email, password, Role.ADMIN));
             } else {
-                return "failed";
+                return null;
             }
         } catch (Exception e) {
             throw new CouponSystemException("Can't login as admin");

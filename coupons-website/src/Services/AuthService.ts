@@ -1,15 +1,20 @@
 import axios from "axios";
-import { error } from "console";
 import jwtDecode from "jwt-decode";
+import LoginModel from "../Models/LoginModel";
 import UserModel from "../Models/UserModel";
 
 class AuthService {
 
-    public async login(role:string, email: string, password: string):Promise<string>{
-        const url = `http://localhost:8080/api/${role}/login?email=${email}&password=${password}`;
-        const response = await axios.get<string>(url);
+    public async login(userModel: UserModel):Promise<string>{
+        const url = `http://localhost:8080/api/${userModel.role}/login`;
+        const loginModel = new LoginModel(userModel.email, userModel.password);
+        const response = await axios.post(url, loginModel);
         const promise = response.data;
         return promise;
+    }
+
+    public getClient(): UserModel{
+        return(this.parseJwt(sessionStorage.getItem("token")));
     }
 
     public parseJwt(token: string){
@@ -31,5 +36,6 @@ class AuthService {
         return this.checkClientExpiration(client);
     }
 }
+
 const authService = new AuthService();
 export default authService;

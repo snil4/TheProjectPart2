@@ -2,6 +2,7 @@
     font-family: Arial, sans-serif;
     background-color: #f2f2f2;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: 100vh;
@@ -10,7 +11,7 @@
 .Form {
     flex-direction: column;
     align-items: center;
-    margin-top: 100px;
+    margin-top: 50px;
     border: 1px solid #ccc;
     border-radius: 10px;
     width: 350px;
@@ -33,7 +34,7 @@
 }
 
 .Form > input {
-    width: 100%;
+    width: 93%;
     font-size: 16px;
     height: 40px;
     margin-bottom: 20px;

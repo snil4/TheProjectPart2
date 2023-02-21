@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { StringLiteral } from "typescript";
 import "./Header.css";
 
@@ -6,9 +7,17 @@ interface HeaderProps {
 }
 
 function Header(props: HeaderProps): JSX.Element {
+    const navigate = useNavigate();
+
+    function logOut(){
+        sessionStorage.removeItem("token");
+        navigate("/");
+    }
+
     return (
         <div className="Header">
 			Hello {props.name}
+            <a onClick={logOut}>Log out</a>
         </div>
     );
 }

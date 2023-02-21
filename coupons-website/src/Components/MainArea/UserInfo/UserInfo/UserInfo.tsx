@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import UserModel from "../../../Models/UserModel";
-import authService from "../../../Services/Auth";
+import UserModel from "../../../../Models/UserModel";
+import authService from "../../../../Services/AuthService";
 import "./UserInfo.css";
 
 interface UserInfoProps {
@@ -17,7 +17,7 @@ function UserInfo(props: UserInfoProps): JSX.Element {
 
     return (
         <div className="UserInfo">
-            
+            User Info
         </div>
     );
 }

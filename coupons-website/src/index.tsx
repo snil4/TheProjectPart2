@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
-import AuthRouting from './Components/AuthArea/Routing/Routing';
+import Routing from './Components/Routing/Routing';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 
@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthRouting/>
+      <Routing/>
     </BrowserRouter>
   </React.StrictMode>
 );

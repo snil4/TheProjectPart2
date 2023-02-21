@@ -1,8 +1,9 @@
 import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useForm } from "react-hook-form";
-import authService from "../../../Services/Auth";
+import authService from "../../../Services/AuthService";
 import UserModel from "../../../Models/UserModel";
+import LoginModel from "../../../Models/LoginModel";
 
 interface LoginProps {
 
@@ -13,31 +14,22 @@ function Login(props: LoginProps): JSX.Element {
 
     const {register, handleSubmit} = useForm<UserModel>();
 
-    const send = (user: UserModel ) => {
-    authService.login(user.role, user.email, user.password)
-    .then(key=>{
-        if (key !== "failed") {
-            sessionStorage.setItem("token", key);
-            try {
-                const client = authService.parseJwt(key);
-                if (client.email == user.email) {
-                    navigate("/main");
-                } else {
-                    alert("Login error: please try again later.")
-                }
-            } catch (error) {
-                
-                alert(error + ", please try again");
+    async function send(user: UserModel ) {
+        try {
+            const key = await authService.login(user);
+            if (key == "") {
+                throw new Error("Email or password are incorrect");
             }
-        } else {
-            alert("Login failed: please check that your email and password are correct.")
+            sessionStorage.setItem("token", key);
+            navigate("/main");
+        } catch (error) {
+            alert(error + ", please try again");
         }
-    })
-    .catch(err => alert(err.message + ", please try again later."))
     }
 
     return (
         <div className="Login">
+            <NavLink to="/">Back to Home Page</NavLink>
             <form className="Form" onSubmit={handleSubmit(send)}>
                 <label htmlFor="role">Role: </label>
                 <select {...register("role")}>

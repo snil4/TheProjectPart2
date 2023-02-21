@@ -4,13 +4,9 @@ class UserModel{
     public name: string;
     public email: string;
     public role: string;
-    public password: string;
     public iat: number;
     public exp: number;
-
-    public getRole(): string {
-        return this.role;
-    }
+    public password: string;
 }
 
 export default UserModel;

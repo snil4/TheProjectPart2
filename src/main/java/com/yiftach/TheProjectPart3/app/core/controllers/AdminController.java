@@ -1,13 +1,17 @@
 package com.yiftach.TheProjectPart3.app.core.controllers;
 
+import com.yiftach.TheProjectPart3.app.core.data.Login;
 import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
 import com.yiftach.TheProjectPart3.app.core.services.AdminService;
+import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
@@ -21,10 +25,10 @@ public class AdminController extends ClientController {
     private AdminService adminService;
 
     @Override
-    @GetMapping("/login")
-    public ResponseEntity<String> login(String email, String password) {
+    @PostMapping(path = "/login")
+    public ResponseEntity<String> login(@RequestBody Login login) {
         try {
-            return ResponseEntity.ok().body(adminService.login(email, password));
+            return ResponseEntity.ok().body(adminService.login(login.getEmail(), login.getPassword()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

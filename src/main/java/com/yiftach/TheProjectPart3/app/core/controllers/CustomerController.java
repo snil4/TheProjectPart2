@@ -1,6 +1,7 @@
 package com.yiftach.TheProjectPart3.app.core.controllers;
 
 import com.yiftach.TheProjectPart3.app.core.data.Category;
+import com.yiftach.TheProjectPart3.app.core.data.Login;
 import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
@@ -24,10 +25,10 @@ public class CustomerController extends ClientController {
     private CustomerService customerService;
 
     @Override
-    @GetMapping("/login")
-    public ResponseEntity<String> login(String email, String password) {
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody Login login) {
         try {
-            return ResponseEntity.ok().body(customerService.login(email, password));
+            return ResponseEntity.ok().body(customerService.login(login.getEmail(), login.getPassword()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }
