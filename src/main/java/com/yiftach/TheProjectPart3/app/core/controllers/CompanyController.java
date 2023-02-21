@@ -54,8 +54,8 @@ public class CompanyController extends ClientController {
         }
     }
 
-    @DeleteMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<String> deleteCoupon(int couponId, HttpServletRequest request) {
+    @DeleteMapping(path = "/coupon/{couponId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<String> deleteCoupon(@PathVariable int couponId, HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
             companyService.deleteCoupon(couponId, client.getId());
@@ -78,6 +78,15 @@ public class CompanyController extends ClientController {
                 return ResponseEntity.ok().body(companyService.getCompanyCoupons(category, client.getId()));
             }
             return ResponseEntity.ok().body(companyService.getCompanyCoupons(client.getId()));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(path = "/coupon/{couponId}", headers = {HttpHeaders.AUTHORIZATION})
+    public ResponseEntity<Coupon> getOneCoupon(@PathVariable int couponId, HttpServletRequest request) {
+        try {
+            return ResponseEntity.ok().body();
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
         }

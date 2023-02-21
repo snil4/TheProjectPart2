@@ -11,3 +11,8 @@
     align-self: flex-start;
     margin-left: 20%;
 }
+
+.Clock {
+    font-size: small;
+    align-self: flex-end;
+}

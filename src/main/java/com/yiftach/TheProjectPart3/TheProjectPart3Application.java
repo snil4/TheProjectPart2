@@ -16,15 +16,16 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import java.util.Collections;
 
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaRepositories("com.yiftach.TheProjectPart3.app.core")
+@CrossOrigin
 public class TheProjectPart3Application {
 
 	private static ConfigurableApplicationContext context;
@@ -42,7 +43,7 @@ public class TheProjectPart3Application {
 		AuthenticationFilter authenticationFilter = new AuthenticationFilter(jwtUtil);
 		FilterRegistrationBean<AuthenticationFilter> registrationBean = new FilterRegistrationBean<>();
 		registrationBean.setFilter(authenticationFilter);
-		registrationBean.setUrlPatterns(Collections.singleton("/api/*"));
+		registrationBean.addUrlPatterns("/api/admin/*", "/api/company/*", "/api/customer/*");
 		registrationBean.setOrder(1);
 		return registrationBean;
 	}
@@ -51,7 +52,7 @@ public class TheProjectPart3Application {
 	FilterRegistrationBean<AuthorizationFilter> authorizationFiler(){
 		AuthorizationFilter authorizationFilter = new AuthorizationFilter();
 		FilterRegistrationBean<AuthorizationFilter> registrationBean = new FilterRegistrationBean<>();
-		registrationBean.setFilter((authorizationFilter));
+		registrationBean.setFilter(authorizationFilter);
 		registrationBean.addUrlPatterns("/api/admin/*", "/api/company/*", "/api/customer/*");
 		registrationBean.setOrder(2);
 		return registrationBean;
@@ -70,9 +71,23 @@ public class TheProjectPart3Application {
 		return new WebMvcConfigurer() {
 			@Override
 			public void addCorsMappings(CorsRegistry registry) {
-				registry.addMapping("/api/**");
+				registry.addMapping("/api/*")
+						.allowedOrigins(CorsConfiguration.ALL)
+						.allowedMethods(CorsConfiguration.ALL)
+						.allowedHeaders(CorsConfiguration.ALL)
+						.allowCredentials(true)
+						.allowedOrigins("http://localhost:3000/*");
 			}
 		};
+	}
+
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins(CorsConfiguration.ALL)
+				.allowedMethods(CorsConfiguration.ALL)
+				.allowedHeaders(CorsConfiguration.ALL)
+				.exposedHeaders("Location")
+				.allowCredentials(true);
 	}
 
 }

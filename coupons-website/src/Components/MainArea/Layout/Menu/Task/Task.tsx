@@ -1,14 +1,14 @@
+import { NavLink } from "react-router-dom";
 import "./Task.css";
 
 interface TaskProps {
-	
+	path: string;
+    name: string;
 }
 
 function Task(props: TaskProps): JSX.Element {
     return (
-        <div className="Task">
-			
-        </div>
+        <NavLink to={props.path}>{props.name}</NavLink>
     );
 }
 

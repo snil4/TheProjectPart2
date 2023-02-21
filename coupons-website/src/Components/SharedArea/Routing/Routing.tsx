@@ -1,12 +1,13 @@
 import { Route, Routes } from "react-router-dom";
-import Login from "../AuthArea/Login/Login";
+import Login from "../../AuthArea/Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
-import authService from "../../Services/AuthService";
-import StartPage from "../MainArea/StartPage/Layout/Layout";
-import ManagmentActivities from "../MainArea/ManagmentActivities/Layout/Layout";
-import CouponsList from "../MainArea/CouponsList/Layout/Layout";
-import UserInfo from "../MainArea/UserInfo/Layout/Layout";
-import Home from "../HomeArea/Home/Layout";
+import authService from "../../../Services/AuthService";
+import StartPage from "../../MainArea/StartPage/Layout/Layout";
+import ManagmentActivities from "../../MainArea/ManagmentActivities/Layout/Layout";
+import CouponsList from "../../MainArea/CouponsList/Layout/Layout";
+import UserInfo from "../../MainArea/UserInfo/Layout/Layout";
+import Home from "../../HomeArea/Home/Layout";
+import CompanyList from "../../MainArea/CompanyList/Layout/Layout";
 
 interface RoutingProps {
 	
@@ -25,6 +26,7 @@ function Routing(props: RoutingProps): JSX.Element {
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/main" element={<StartPage/>}/>
                 <Route path="/activities" element={<ManagmentActivities/>}/>
+                <Route path="/company" element={<CompanyList/>}/>
                 <Route path="/coupon" element={<CouponsList/>}/>
                 <Route path="/info" element={<UserInfo/>}/>
                 <Route path="/*" element={<PageNotFound/>}/>

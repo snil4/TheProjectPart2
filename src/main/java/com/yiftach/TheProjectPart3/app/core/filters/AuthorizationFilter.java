@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000/")
 public class AuthorizationFilter implements Filter {
 
     @Override
@@ -19,7 +19,7 @@ public class AuthorizationFilter implements Filter {
         HttpServletResponse httpServletResponse = (HttpServletResponse) servletResponse;
         String requestUri = httpServletRequest.getRequestURI();
 
-        if (httpServletRequest.getMethod().equals("options")
+        if (httpServletRequest.getMethod().equalsIgnoreCase("options")
                 || requestUri.toLowerCase().contains("/login") || requestUri.toLowerCase().contains("/register")) {
             filterChain.doFilter(servletRequest, servletResponse);
         } else {

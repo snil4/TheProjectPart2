@@ -1,19 +1,29 @@
 import { NavLink } from "react-router-dom";
+import authService from "../../../../Services/AuthService";
 import "./Menu.css";
+import Task from "./Task/Task";
 
 interface MenuProps {
 	
 }
 
 function Menu(props: MenuProps): JSX.Element {
-    return (
-        <div className="Menu">
-			<NavLink to="/main">Start Page</NavLink>
-            <NavLink to="/activities">Managment Activities</NavLink>
-            <NavLink to="/coupon">Coupons List</NavLink>
-            <NavLink to="/info">User info</NavLink>
-        </div>
-    );
+    const role = authService.getClient().role.toLowerCase();
+
+    if (role === "admin") {
+        return (
+            <div className="Menu">
+                <Task path="/main" name="Start Page"/>
+                <Task path="/company" name="Companies List"/>
+                <Task path="/coupon" name="Coupons List"/>
+                <Task path="/info" name="User Info"/>
+            </div>
+        );
+    } else if (role === "company") {
+        return;
+    } else if (role === "customer") {
+        return;
+    }
 }
 
 export default Menu;

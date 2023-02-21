@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { StringLiteral } from "typescript";
+import Clock from "./Clock/Clock";
 import "./Header.css";
 
 interface HeaderProps {
@@ -18,6 +19,7 @@ function Header(props: HeaderProps): JSX.Element {
         <div className="Header">
 			Hello {props.name}
             <a onClick={logOut}>Log out</a>
+            <Clock/>
         </div>
     );
 }

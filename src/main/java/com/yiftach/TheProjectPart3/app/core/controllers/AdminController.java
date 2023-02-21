@@ -4,16 +4,14 @@ import com.yiftach.TheProjectPart3.app.core.data.Login;
 import com.yiftach.TheProjectPart3.app.core.entities.Company;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
 import com.yiftach.TheProjectPart3.app.core.services.AdminService;
-import jdk.jfr.ContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.websocket.server.PathParam;
 import java.util.List;
 
 @RestController
@@ -52,8 +50,8 @@ public class AdminController extends ClientController {
         }
     }
 
-    @DeleteMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<String> deleteCompany(int companyId) {
+    @DeleteMapping(path = "/company/{companyId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<String> deleteCompany(@PathVariable int companyId) {
         try {
             adminService.deleteCompany(companyId);
             return ResponseEntity.ok().body(String.format("Company %s deleted",companyId));
@@ -62,7 +60,7 @@ public class AdminController extends ClientController {
         }
     }
 
-    @GetMapping(path = "/company/all", headers = { HttpHeaders.AUTHORIZATION })
+    @GetMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Company>> getAllCompanies() {
         try {
             return ResponseEntity.ok().body(adminService.getAllCompanies());
@@ -71,8 +69,8 @@ public class AdminController extends ClientController {
         }
     }
 
-    @GetMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Company> getOneCompany(int companyId) {
+    @GetMapping(path = "/company/{companyId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<Company> getOneCompany(@PathVariable int companyId) {
         try {
             return ResponseEntity.ok().body(adminService.getOneCompany(companyId));
         } catch (Exception e) {

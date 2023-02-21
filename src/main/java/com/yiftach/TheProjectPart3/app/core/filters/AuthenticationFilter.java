@@ -9,9 +9,11 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.Iterator;
 import java.util.StringTokenizer;
 
-@CrossOrigin
+@CrossOrigin(origins = "http://localhost:3000/")
 public class AuthenticationFilter implements Filter {
 
     private JwtUtil jwtUtil;
@@ -31,10 +33,16 @@ public class AuthenticationFilter implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
             try {
+
                 String authorization = httpServletRequest.getHeader("Authorization");
+                Iterator<String> headers = httpServletRequest.getHeaderNames().asIterator();
+                while (headers.hasNext()) {
+                    System.out.println(headers.next());
+                }
                 StringTokenizer tokenizer = new StringTokenizer(authorization);
                 String scheme = tokenizer.nextToken();
                 String token = tokenizer.nextToken();
+                System.out.println("Got token");
                 Client client = jwtUtil.extractClient(token);
                 System.out.println(client);
                 httpServletRequest.setAttribute("client", client);

@@ -1,12 +1,19 @@
 import axios from "axios";
 import jwtDecode from "jwt-decode";
+import config from "../Utils/Config";
 import LoginModel from "../Models/LoginModel";
 import UserModel from "../Models/UserModel";
 
 class AuthService {
 
+    public setAuthHeader() {
+        return { Authorization: `bearer ${sessionStorage.getItem("token")}`};
+    }
+
     public async login(userModel: UserModel):Promise<string>{
-        const url = `http://localhost:8080/api/${userModel.role}/login`;
+        console.log("Logging in");
+        
+        const url = `${config.baseUrl}${userModel.role}/login`;
         const loginModel = new LoginModel(userModel.email, userModel.password);
         const response = await axios.post(url, loginModel);
         const promise = response.data;

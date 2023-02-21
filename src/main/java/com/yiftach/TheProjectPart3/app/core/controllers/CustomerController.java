@@ -44,7 +44,7 @@ public class CustomerController extends ClientController {
         }
     }
 
-    @GetMapping(path = "/coupon/all", headers = { HttpHeaders.AUTHORIZATION })
+    @GetMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Coupon>> getCustomerCoupons(double maxPrice, Category category, HttpServletRequest request){
         try {
             Client client = (Client) request.getAttribute("client");
