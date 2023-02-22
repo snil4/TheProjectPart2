@@ -30,7 +30,7 @@ public class CompanyController extends ClientController {
         try {
             return ResponseEntity.ok().body(companyService.login(login.getEmail(), login.getPassword()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class CompanyController extends ClientController {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(companyService.addCoupon(coupon, client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -50,7 +50,7 @@ public class CompanyController extends ClientController {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(companyService.updateCoupon(coupon, client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -61,7 +61,7 @@ public class CompanyController extends ClientController {
             companyService.deleteCoupon(couponId, client.getId());
             return ResponseEntity.ok().body(String.format("Coupon %s deleted",couponId));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -79,16 +79,17 @@ public class CompanyController extends ClientController {
             }
             return ResponseEntity.ok().body(companyService.getCompanyCoupons(client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @GetMapping(path = "/coupon/{couponId}", headers = {HttpHeaders.AUTHORIZATION})
     public ResponseEntity<Coupon> getOneCoupon(@PathVariable int couponId, HttpServletRequest request) {
         try {
-            return ResponseEntity.ok().body();
+            Client client = (Client) request.getAttribute("client");
+            return ResponseEntity.ok().body(companyService.getOneCoupon(couponId, client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -98,7 +99,7 @@ public class CompanyController extends ClientController {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(companyService.getCompanyDetails(client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 }

@@ -28,7 +28,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.login(login.getEmail(), login.getPassword()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -37,7 +37,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.addCompany(company));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -46,7 +46,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.updateCompany(company));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -56,7 +56,7 @@ public class AdminController extends ClientController {
             adminService.deleteCompany(companyId);
             return ResponseEntity.ok().body(String.format("Company %s deleted",companyId));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -65,7 +65,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.getAllCompanies());
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.getOneCompany(companyId));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -83,7 +83,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.addCustomer(customer));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -92,7 +92,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.updateCustomer(customer));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -102,7 +102,7 @@ public class AdminController extends ClientController {
             adminService.deleteCustomer(customerId);
             return ResponseEntity.ok().body(String.format("Customer %s deleted", customerId));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -111,7 +111,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.getAllCustomers());
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -120,7 +120,7 @@ public class AdminController extends ClientController {
         try {
             return ResponseEntity.ok().body(adminService.getOneCustomer(customerId));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 }

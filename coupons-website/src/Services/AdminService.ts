@@ -21,14 +21,12 @@ class AdminService {
 
     public async addCompany(company: CompanyModel): Promise<void>{
         const header = authService.setAuthHeader();
-        const response = axios.post(`${config.baseUrl}admin/company`,company, {headers: header});
-        return;
+        await axios.post<CompanyModel>(`${config.baseUrl}admin/company`,company, {headers: header});
     }
 
     public async updateCompany(company: CompanyModel) {
         const header = authService.setAuthHeader();
-        const response = axios.put(`${config.baseUrl}admin/company`,company,{headers: header});
-        return;
+        await axios.put<CompanyModel>(`${config.baseUrl}admin/company`,company,{headers: header});
     }
 
     public async deleteCompany(id: number){

@@ -30,7 +30,7 @@ public class CustomerController extends ClientController {
         try {
             return ResponseEntity.ok().body(customerService.login(login.getEmail(), login.getPassword()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -40,7 +40,7 @@ public class CustomerController extends ClientController {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(customerService.purchaseCoupon(coupon, client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -58,7 +58,7 @@ public class CustomerController extends ClientController {
             }
             return ResponseEntity.ok().body(customerService.getCustomerCoupons(client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
@@ -68,7 +68,7 @@ public class CustomerController extends ClientController {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(customerService.getCustomerDetails(client.getId()));
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST);
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 }

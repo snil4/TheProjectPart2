@@ -8,6 +8,7 @@ import CouponsList from "../../MainArea/CouponsList/Layout/Layout";
 import UserInfo from "../../MainArea/UserInfo/Layout/Layout";
 import Home from "../../HomeArea/Home/Layout";
 import CompanyList from "../../MainArea/CompanyList/Layout/Layout";
+import AddCompany from "../../MainArea/CompanyList/AddCompany/Layout/Layout";
 
 interface RoutingProps {
 	
@@ -30,6 +31,7 @@ function Routing(props: RoutingProps): JSX.Element {
                 <Route path="/coupon" element={<CouponsList/>}/>
                 <Route path="/info" element={<UserInfo/>}/>
                 <Route path="/*" element={<PageNotFound/>}/>
+                <Route path="/company/add" element={<AddCompany/>}/>
             </Routes>
         </div>
     );

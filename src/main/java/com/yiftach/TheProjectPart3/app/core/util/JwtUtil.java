@@ -6,6 +6,7 @@ import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 

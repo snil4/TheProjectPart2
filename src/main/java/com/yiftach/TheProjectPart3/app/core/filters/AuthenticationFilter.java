@@ -33,16 +33,11 @@ public class AuthenticationFilter implements Filter {
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
             try {
-
                 String authorization = httpServletRequest.getHeader("Authorization");
                 Iterator<String> headers = httpServletRequest.getHeaderNames().asIterator();
-                while (headers.hasNext()) {
-                    System.out.println(headers.next());
-                }
                 StringTokenizer tokenizer = new StringTokenizer(authorization);
                 String scheme = tokenizer.nextToken();
                 String token = tokenizer.nextToken();
-                System.out.println("Got token");
                 Client client = jwtUtil.extractClient(token);
                 System.out.println(client);
                 httpServletRequest.setAttribute("client", client);

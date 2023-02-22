@@ -1,21 +1,20 @@
-//package com.yiftach.TheProjectPart3;
-//
-//import com.yiftach.TheProjectPart3.app.core.data.Category;
-//import com.yiftach.TheProjectPart3.app.core.data.Role;
-//import com.yiftach.TheProjectPart3.app.core.entities.Company;
-//import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
-//import com.yiftach.TheProjectPart3.app.core.entities.Customer;
-//import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
-//import com.yiftach.TheProjectPart3.app.core.services.AdminService;
-//import com.yiftach.TheProjectPart3.app.core.services.CompanyService;
-//import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
-//import com.yiftach.TheProjectPart3.app.core.tasks.LoginManager;
-//import org.junit.jupiter.api.*;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.boot.test.context.SpringBootTest;
-//
-//import java.time.LocalDate;
-//
+package com.yiftach.TheProjectPart3;
+
+import com.yiftach.TheProjectPart3.app.core.data.Category;
+import com.yiftach.TheProjectPart3.app.core.data.Role;
+import com.yiftach.TheProjectPart3.app.core.entities.Company;
+import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
+import com.yiftach.TheProjectPart3.app.core.entities.Customer;
+import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
+import com.yiftach.TheProjectPart3.app.core.services.AdminService;
+import com.yiftach.TheProjectPart3.app.core.services.CompanyService;
+import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
+
+import org.junit.jupiter.api.*;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import java.time.LocalDate;
+
 //@SpringBootTest
 //@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 //class TheProjectPart2ApplicationTests {

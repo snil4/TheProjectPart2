@@ -163,6 +163,15 @@ public class CompanyService extends ClientService {
         }
     }
 
+    public Coupon getOneCoupon(int id, int companyId) throws CouponSystemException{
+        try {
+            return couponRepo.findByIdAndCompanyId(id,companyId).orElseThrow(() ->
+                    new CouponSystemException("Can't find coupon with id " + id + " in company with id " + companyId));
+        } catch (Exception e) {
+            throw new CouponSystemException("Can't get coupon ", e);
+        }
+    }
+
     /**
      * @return The object of the company
      */

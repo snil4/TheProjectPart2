@@ -54,6 +54,7 @@ public class AdminService extends ClientService {
     public Company addCompany(Company company) throws CouponSystemException {
 
         try {
+            System.out.println(company);
             if (companyRepo.findByName(company.getName()).isPresent()) {
                 throw new CouponSystemException("A company with the same name already exists.");
             } else if (companyRepo.findByEmail(company.getEmail()).isPresent()) {
@@ -125,7 +126,6 @@ public class AdminService extends ClientService {
      */
     public List<Company> getAllCompanies() throws CouponSystemException {
         try {
-            System.out.println("Getting all companies");
             return companyRepo.findAll();
         } catch (Exception e) {
             throw new CouponSystemException(e);
