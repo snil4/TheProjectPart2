@@ -3,7 +3,6 @@ import Login from "../../AuthArea/Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import authService from "../../../Services/AuthService";
 import StartPage from "../../MainArea/StartPage/Layout/Layout";
-import ManagmentActivities from "../../MainArea/ManagmentActivities/Layout/Layout";
 import CouponsList from "../../MainArea/CouponsList/Layout/Layout";
 import UserInfo from "../../MainArea/UserInfo/Layout/Layout";
 import Home from "../../HomeArea/Home/Layout";
@@ -27,7 +26,6 @@ function Routing(props: RoutingProps): JSX.Element {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/main" element={<StartPage/>}/>
-                <Route path="/activities" element={<ManagmentActivities/>}/>
                 <Route path="/company" element={<CompanyList/>}/>
                 <Route path="/customer" element={<CustomerList/>}/>
                 <Route path="/coupon" element={<CouponsList/>}/>

@@ -1,13 +1,21 @@
+import authService from "../../../../Services/AuthService";
 import "./StartPage.css";
+import UserModel from "../../../../Models/UserModel";
+import { useState, useEffect } from "react";
 
-interface StartPageProps {
-	
-}
+function StartPage(): JSX.Element {
 
-function StartPage(props: StartPageProps): JSX.Element {
+    const [user, setUser] = useState<UserModel>();
+    
+    useEffect(() => {
+        setUser(authService.parseJwt(sessionStorage.getItem("token")));
+    },[]);
+
     return (
         <div className="StartPage">
-			Start Page
+            <div>Welcome {user.name}!</div>
+
+            <div>Please choose your action in the menu to the right.</div>
         </div>
     );
 }

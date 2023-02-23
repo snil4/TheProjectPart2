@@ -1,4 +1,4 @@
-import CompanyModel from "../../../../Models/CompanyModel";
+import CompanyModel from "../../../../../Models/CompanyModel";
 import "./CompanyCard.css";
 
 interface CompanyCardProps {

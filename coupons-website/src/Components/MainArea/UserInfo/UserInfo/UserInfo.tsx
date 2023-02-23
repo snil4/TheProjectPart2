@@ -13,11 +13,14 @@ function UserInfo(props: UserInfoProps): JSX.Element {
     
     useEffect(() => {
         setUser(authService.parseJwt(sessionStorage.getItem("token")));
-    },[])
+    },[]);
 
     return (
         <div className="UserInfo">
-            User Info
+            <p>Name: {user.name}</p>
+            <p>Role: {user.role}</p>
+            <p>Email: {user.email}</p>
+            <p>ID: {user.id}</p>
         </div>
     );
 }

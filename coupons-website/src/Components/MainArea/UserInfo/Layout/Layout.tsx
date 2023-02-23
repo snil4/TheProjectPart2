@@ -7,14 +7,10 @@ import Menu from "../../Layout/Menu/Menu";
 import UserInfo from "../UserInfo/UserInfo";
 import "../../Layout/Layout.css";
 
-interface LayoutProps {
-    
-}
-
-function Layout(props: LayoutProps): JSX.Element {
+function Layout(): JSX.Element {
 
     const navigate = useNavigate();
-    const client = authService.parseJwt(sessionStorage.getItem("token"));
+    const client = authService.getClient();
 
     return (
         <div className="Layout">

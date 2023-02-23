@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
-import CompanyModel from "../../../Models/CompanyModel";
-import adminService from "../../../Services/AdminService";
-import notificationService from "../../../Services/NotificationService";
+import CompanyModel from "../../../../Models/CompanyModel";
+import adminService from "../../../../Services/AdminService";
+import notificationService from "../../../../Services/NotificationService";
 import CompanyCard from "./CompanyCard/CompanyCard";
 import "./CompanyList.css";
 

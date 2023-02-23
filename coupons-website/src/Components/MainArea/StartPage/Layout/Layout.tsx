@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import authService from "../../../../Services/AuthService";
 import Footer from "../../Layout/Footer/Footer";
@@ -7,11 +6,7 @@ import Menu from "../../Layout/Menu/Menu";
 import StartPage from "../StartPage/StartPage";
 import "../../Layout/Layout.css";
 
-interface LayoutProps {
-    
-}
-
-function Layout(props: LayoutProps): JSX.Element {
+function Layout(): JSX.Element {
 
     const navigate = useNavigate();
     const client = authService.parseJwt(sessionStorage.getItem("token"));
