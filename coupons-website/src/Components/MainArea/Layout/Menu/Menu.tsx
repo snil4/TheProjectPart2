@@ -15,7 +15,7 @@ function Menu(props: MenuProps): JSX.Element {
             <div className="Menu">
                 <Task path="/main" name="Start Page"/>
                 <Task path="/company" name="Companies List"/>
-                <Task path="/coupon" name="Coupons List"/>
+                <Task path="/customer" name="Customers List"/>
                 <Task path="/info" name="User Info"/>
             </div>
         );

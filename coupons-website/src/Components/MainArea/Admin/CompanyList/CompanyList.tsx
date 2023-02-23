@@ -19,7 +19,7 @@ function CompanyList(): JSX.Element {
                 notificationService.error("Error: Can't get companies: " + error);
             }
         })();
-    },[])
+    },[]);
 
     return (
         <div className="CompanyList">

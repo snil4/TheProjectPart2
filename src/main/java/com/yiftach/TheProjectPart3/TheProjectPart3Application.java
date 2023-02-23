@@ -81,13 +81,4 @@ public class TheProjectPart3Application {
 		};
 	}
 
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				.allowedOrigins(CorsConfiguration.ALL)
-				.allowedMethods(CorsConfiguration.ALL)
-				.allowedHeaders(CorsConfiguration.ALL)
-				.exposedHeaders("Location")
-				.allowCredentials(true);
-	}
-
 }
