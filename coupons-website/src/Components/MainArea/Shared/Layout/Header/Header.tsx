@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom";
-import { StringLiteral } from "typescript";
 import Clock from "./Clock/Clock";
 import "./Header.css";
 

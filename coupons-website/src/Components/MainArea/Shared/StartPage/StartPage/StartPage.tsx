@@ -1,6 +1,6 @@
-import authService from "../../../../Services/AuthService";
+import authService from "../../../../../Services/AuthService";
 import "./StartPage.css";
-import UserModel from "../../../../Models/UserModel";
+import UserModel from "../../../../../Models/UserModel";
 import { useState, useEffect } from "react";
 
 function StartPage(): JSX.Element {

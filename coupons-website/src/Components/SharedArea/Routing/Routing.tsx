@@ -4,7 +4,7 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import authService from "../../../Services/AuthService";
 import StartPage from "../../MainArea/StartPage/Layout/Layout";
 import CouponsList from "../../MainArea/CouponsList/Layout/Layout";
-import UserInfo from "../../MainArea/UserInfo/Layout/Layout";
+import UserInfo from "../../MainArea/Shared/UserInfo/Layout/Layout";
 import Home from "../../HomeArea/Home/Layout";
 import CompanyList from "../../MainArea/Admin/CompanyList/Layout/Layout";
 import AddCompany from "../../MainArea/Admin/CompanyList/AddCompany/Layout/Layout";
