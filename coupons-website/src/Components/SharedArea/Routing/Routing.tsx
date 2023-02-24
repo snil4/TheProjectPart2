@@ -2,13 +2,13 @@ import { Route, Routes } from "react-router-dom";
 import Login from "../../AuthArea/Login/Login";
 import PageNotFound from "../PageNotFound/PageNotFound";
 import authService from "../../../Services/AuthService";
-import StartPage from "../../MainArea/StartPage/Layout/Layout";
-import CouponsList from "../../MainArea/CouponsList/Layout/Layout";
-import UserInfo from "../../MainArea/Shared/UserInfo/Layout/Layout";
-import Home from "../../HomeArea/Home/Layout";
-import CompanyList from "../../MainArea/Admin/CompanyList/Layout/Layout";
-import AddCompany from "../../MainArea/Admin/CompanyList/AddCompany/Layout/Layout";
-import CustomerList from "../../MainArea/Admin/CustomerList/Layout/Layout";
+import StartPage from "../../MainArea/Shared/StartPage/StartPage";
+import CompanyCouponsList from "../../MainArea/Company/CouponsList/CouponsList";
+import UserInfo from "../../MainArea/Shared/UserInfo/UserInfo";
+import Home from "../../HomeArea/Home/Home";
+import CompanyList from "../../MainArea/Admin/CompanyList/CompanyList";
+import AddCompany from "../../MainArea/Admin/CompanyList/AddCompany/AddCompany";
+import CustomerList from "../../MainArea/Admin/CustomerList/CustomerList";
 
 interface RoutingProps {
 	
@@ -26,9 +26,9 @@ function Routing(props: RoutingProps): JSX.Element {
                 <Route path="/" element={<Home/>}/>
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/main" element={<StartPage/>}/>
-                <Route path="/company" element={<CompanyList/>}/>
-                <Route path="/customer" element={<CustomerList/>}/>
-                <Route path="/coupon" element={<CouponsList/>}/>
+                <Route path="/admin/company" element={<CompanyList/>}/>
+                <Route path="/admin/customer" element={<CustomerList/>}/>
+                <Route path="/company/coupon" element={<CompanyCouponsList/>}/>
                 <Route path="/info" element={<UserInfo/>}/>
                 <Route path="/*" element={<PageNotFound/>}/>
                 <Route path="/company/add" element={<AddCompany/>}/>

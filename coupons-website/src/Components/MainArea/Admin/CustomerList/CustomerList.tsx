@@ -5,6 +5,7 @@ import notificationService from "../../../../Services/NotificationService";
 import CustomerCard from "./CustomerCard/CustomerCard";
 import "./CustomerList.css";
 import {useState, useEffect} from "react";
+import Layout from "../../Shared/Layout/Layout";
 
 function CustomerList(): JSX.Element {
 
@@ -21,11 +22,13 @@ function CustomerList(): JSX.Element {
         })();
     },[]);
 
-    return (
+    const element = (
         <div className="CustomerList">
 			{customers.map((c) => <CustomerCard key={c.id} customer={c}/>)}
             <NavLink className="Add" to="/customer/add">Add Customer</NavLink>        </div>
     );
+
+    return (<Layout component={element}/>);
 }
 
 export default CustomerList;

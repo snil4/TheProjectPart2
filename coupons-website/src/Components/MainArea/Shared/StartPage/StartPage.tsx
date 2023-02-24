@@ -1,23 +1,22 @@
-import authService from "../../../../../Services/AuthService";
+import authService from "../../../../Services/AuthService";
 import "./StartPage.css";
-import UserModel from "../../../../../Models/UserModel";
+import UserModel from "../../../../Models/UserModel";
 import { useState, useEffect } from "react";
+import Layout from "../Layout/Layout";
 
 function StartPage(): JSX.Element {
 
-    const [user, setUser] = useState<UserModel>();
-    
-    useEffect(() => {
-        setUser(authService.parseJwt(sessionStorage.getItem("token")));
-    },[]);
+    const user = authService.getClient();
 
-    return (
+    const element = (
         <div className="StartPage">
             <div>Welcome {user.name}!</div>
 
             <div>Please choose your action in the menu to the right.</div>
         </div>
     );
+
+    return (<Layout component={element}/>);
 }
 
 export default StartPage;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import UserModel from "../../../../../Models/UserModel";
-import authService from "../../../../../Services/AuthService";
+import UserModel from "../../../../Models/UserModel";
+import authService from "../../../../Services/AuthService";
+import Layout from "../Layout/Layout";
 import "./UserInfo.css";
 
 interface UserInfoProps {
@@ -9,13 +10,9 @@ interface UserInfoProps {
 
 function UserInfo(props: UserInfoProps): JSX.Element {
 
-    const [user, setUser] = useState<UserModel>();
-    
-    useEffect(() => {
-        setUser(authService.parseJwt(sessionStorage.getItem("token")));
-    },[]);
+    const user = authService.getClient();
 
-    return (
+    const element = (
         <div className="UserInfo">
             <p>Name: {user.name}</p>
             <p>Role: {user.role}</p>
@@ -23,6 +20,8 @@ function UserInfo(props: UserInfoProps): JSX.Element {
             <p>ID: {user.id}</p>
         </div>
     );
+
+    return (<Layout component={element}/>);
 }
 
 export default UserInfo;

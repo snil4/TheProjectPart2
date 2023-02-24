@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import "./Layout.css";
+import "./Home.css";
 import CouponAnim from "../../../Assets/CouponAnim.webp";
 
 function Home(): JSX.Element {

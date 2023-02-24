@@ -1,9 +1,10 @@
 import "./AddCompany.css";
 import { useForm } from "react-hook-form";
-import CompanyModel from "../../../../Models/CompanyModel";
-import notificationService from "../../../../Services/NotificationService";
-import adminService from "../../../../Services/AdminService";
+import CompanyModel from "../../../../../Models/CompanyModel";
+import notificationService from "../../../../../Services/NotificationService";
+import adminService from "../../../../../Services/AdminService";
 import { useNavigate } from "react-router-dom";
+import Layout from "../../../Shared/Layout/Layout";
 
 function AddCompany(): JSX.Element {
 
@@ -21,9 +22,8 @@ function AddCompany(): JSX.Element {
         }
     }
 
-    return (
-        <div className="AddCompany">
-			<form onSubmit={handleSubmit(send)}>
+    const element = (        <div className="AddCompany">
+            <form onSubmit={handleSubmit(send)}>
                 <label htmlFor="name">Name:</label>
                 <input placeholder="name" {...register("name")}/>
                 <label htmlFor="name">Email:</label>
@@ -32,8 +32,9 @@ function AddCompany(): JSX.Element {
                 <input placeholder="password" {...register("password")}/>
                 <button>Add Company</button>
             </form>
-        </div>
-    );
+        </div>)
+
+    return (<Layout component={element}/>);
 }
 
 export default AddCompany;
