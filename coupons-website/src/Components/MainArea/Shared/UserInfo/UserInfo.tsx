@@ -1,5 +1,4 @@
 import authService from "../../../../Services/AuthService";
-import Layout from "../Layout/Layout";
 import "./UserInfo.css";
 
 interface UserInfoProps {

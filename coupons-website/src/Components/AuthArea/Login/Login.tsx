@@ -20,7 +20,7 @@ function Login(props: LoginProps): JSX.Element {
                 throw new Error("Email or password are incorrect");
             }
             sessionStorage.setItem("token", key);
-            navigate("/main");
+            navigate("/main/start");
         } catch (error) {
             alert(error + ", please try again");
         }

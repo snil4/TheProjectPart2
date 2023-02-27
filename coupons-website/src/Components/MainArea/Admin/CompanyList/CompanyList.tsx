@@ -13,8 +13,8 @@ function CompanyList(): JSX.Element {
     useEffect(() => {
         (async () => {
             try {
-                const companies = await adminService.getAllCompanies();
-                setCompanies(companies);
+                const list = await adminService.getAllCompanies();
+                setCompanies(list);
             } catch (error) {
                 notificationService.error("Error: Can't get companies: " + error);
             }
@@ -23,7 +23,7 @@ function CompanyList(): JSX.Element {
 
     return (<div className="CompanyList">
     {companies.map((c) => <CompanyCard key={c.id} company={c}/>)}
-    <NavLink className="Add" to="/admin/company/add">+</NavLink>
+    <NavLink className="Add" to="/main/admin/company/add">+</NavLink>
 </div>);
 }
 

@@ -3,7 +3,7 @@ import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Menu from "./Menu/Menu";
 import "./Layout.css";
-import MainRouting from "../MainRouting/MainRouting";
+import MainRouting from "./MainRouting/MainRouting";
 
 interface LayoutProps {
     

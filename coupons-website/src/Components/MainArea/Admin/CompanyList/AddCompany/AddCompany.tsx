@@ -11,11 +11,12 @@ function AddCompany(): JSX.Element {
     const navigate = useNavigate();
 
     async function send(company: CompanyModel) {
+        company.id = 0;
         console.log(company);
         try {
             await adminService.addCompany(company);
             notificationService.success("Company added");
-            navigate("/company");
+            navigate("/main/admin/company");
         } catch (err: any) {
             notificationService.error(err);
         }

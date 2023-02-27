@@ -156,6 +156,7 @@ public class AdminService extends ClientService {
      */
     public Customer addCustomer(Customer customer) throws CouponSystemException{
         try {
+            System.out.println(customer);
             if (customerRepo.findByEmail(customer.getEmail()).isPresent()) {
                 throw new CouponSystemException("Customer with the same email already exists");
             }

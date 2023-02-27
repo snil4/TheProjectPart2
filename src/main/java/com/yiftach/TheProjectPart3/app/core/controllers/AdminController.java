@@ -33,7 +33,7 @@ public class AdminController extends ClientController {
     }
 
     @PostMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Company> addCompany(Company company){
+    public ResponseEntity<Company> addCompany(@RequestBody Company company){
         try {
             return ResponseEntity.ok().body(adminService.addCompany(company));
         } catch (Exception e) {
@@ -42,7 +42,7 @@ public class AdminController extends ClientController {
     }
 
     @PutMapping(path = "/company", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Company> updateCompany(Company company) {
+    public ResponseEntity<Company> updateCompany(@RequestBody Company company) {
         try {
             return ResponseEntity.ok().body(adminService.updateCompany(company));
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class AdminController extends ClientController {
     }
 
     @PostMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Customer> addCustomer(Customer customer) {
+    public ResponseEntity<Customer> addCustomer(@RequestBody Customer customer) {
         try {
             return ResponseEntity.ok().body(adminService.addCustomer(customer));
         } catch (Exception e) {
@@ -88,7 +88,7 @@ public class AdminController extends ClientController {
     }
 
     @PutMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Customer> updateCustomer(Customer customer) {
+    public ResponseEntity<Customer> updateCustomer(@RequestBody Customer customer) {
         try {
             return ResponseEntity.ok().body(adminService.updateCustomer(customer));
         } catch (Exception e) {
@@ -96,8 +96,8 @@ public class AdminController extends ClientController {
         }
     }
 
-    @DeleteMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<String> deleteCustomer(int customerId) {
+    @DeleteMapping(path = "/customer/{customerId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<String> deleteCustomer(@PathVariable int customerId) {
         try {
             adminService.deleteCustomer(customerId);
             return ResponseEntity.ok().body(String.format("Customer %s deleted", customerId));
@@ -106,7 +106,7 @@ public class AdminController extends ClientController {
         }
     }
 
-    @GetMapping(path = "/customer/all", headers = { HttpHeaders.AUTHORIZATION })
+    @GetMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Customer>> getAllCustomers() {
         try {
             return ResponseEntity.ok().body(adminService.getAllCustomers());
@@ -115,8 +115,8 @@ public class AdminController extends ClientController {
         }
     }
 
-    @GetMapping(path = "/customer", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Customer> getOneCustomer(int customerId) {
+    @GetMapping(path = "/customer/{customerId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<Customer> getOneCustomer(@PathVariable int customerId) {
         try {
             return ResponseEntity.ok().body(adminService.getOneCustomer(customerId));
         } catch (Exception e) {

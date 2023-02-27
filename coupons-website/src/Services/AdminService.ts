@@ -31,37 +31,36 @@ class AdminService {
 
     public async deleteCompany(id: number){
         const header = authService.setAuthHeader();
-        const response = axios.delete(`${config.baseUrl}admin/company/${id}`,{headers: header});
+        await axios.delete(`${config.baseUrl}admin/company/${id}`,{headers: header});
     }
 
     public async getAllCustomers(): Promise<CustomerModel[]> {
         const header = authService.setAuthHeader();
-        const response = axios.get<CustomerModel[]>(`${config.baseUrl}admin/customer`,{headers: header });
-        const customers = (await response).data;
+        const response = await axios.get<CustomerModel[]>(`${config.baseUrl}admin/customer`,{headers: header });
+        const customers = response.data;
         return customers;
     }
 
     public async getOneCustomer(id: number): Promise<CustomerModel> {
-        const response = axios.get<CustomerModel>(`${config.baseUrl}customer/${id}`,{headers: {Authorization: `bearer ${sessionStorage.getItem("token")}`}});
-        const customer = (await response).data;
+        const header = authService.setAuthHeader();
+        const response = await axios.get<CustomerModel>(`${config.baseUrl}admin/customer/${id}`,{headers: header});
+        const customer = response.data;
         return customer;
     }
 
-    public async addCustomer(customer: CustomerModel): Promise<void>{
+    public async addCustomer(customer: CustomerModel){
         const header = authService.setAuthHeader();
-        const response = axios.post(`${config.baseUrl}customer`,customer, {headers: header});
-        return;
+        await axios.post(`${config.baseUrl}admin/customer`,customer, {headers: header});
     }
 
     public async updateCustomer(customer: CustomerModel) {
         const header = authService.setAuthHeader();
-        const response = axios.put(`${config.baseUrl}customer`,customer,{headers: header});
-        return;
+        await axios.put(`${config.baseUrl}admin/customer`,customer,{headers: header});
     }
 
     public async deleteCustomer(id: number){
         const header = authService.setAuthHeader();
-        const response = axios.delete(`${config.baseUrl}customer/${id}`,{headers: header});
+        await axios.delete(`${config.baseUrl}admin/customer/${id}`,{headers: header});
     }
 }
 

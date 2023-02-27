@@ -39,7 +39,6 @@ public class AuthenticationFilter implements Filter {
                 String scheme = tokenizer.nextToken();
                 String token = tokenizer.nextToken();
                 Client client = jwtUtil.extractClient(token);
-                System.out.println(client);
                 httpServletRequest.setAttribute("client", client);
                 filterChain.doFilter(servletRequest, servletResponse);
             } catch (Exception e) {
