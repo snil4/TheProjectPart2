@@ -8,7 +8,9 @@ interface CompanyCardProps {
 function CompanyCard(props: CompanyCardProps): JSX.Element {
     return (
         <div className="CompanyCard">
-			{props.company.name}
+			<p>ID: {props.company.id}</p>
+			<p>Name: {props.company.name}</p>
+			<p>Email: {props.company.email}</p>
         </div>
     );
 }

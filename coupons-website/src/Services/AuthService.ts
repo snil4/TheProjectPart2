@@ -3,6 +3,7 @@ import jwtDecode from "jwt-decode";
 import config from "../Utils/Config";
 import LoginModel from "../Models/LoginModel";
 import UserModel from "../Models/UserModel";
+import crypto from "crypto";
 
 class AuthService {
     // service to handle all authorization type function
@@ -42,6 +43,10 @@ class AuthService {
     public checkTokenExpiration(token: string) {
         const client = jwtDecode(token) as UserModel;
         return this.checkClientExpiration(client);
+    }
+
+    public hashPassword(password: string) {
+        return crypto.createHmac("sha256", config.secretKey).update(password).digest();
     }
 }
 

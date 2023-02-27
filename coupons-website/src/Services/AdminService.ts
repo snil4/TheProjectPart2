@@ -3,6 +3,7 @@ import CompanyModel from "../Models/CompanyModel";
 import CustomerModel from "../Models/CustomerModel";
 import config from "../Utils/Config";
 import authService from "./AuthService";
+import crypto from "crypto";
 
 class AdminService {
     // Method for each function on server-side to handle responses from the back-end

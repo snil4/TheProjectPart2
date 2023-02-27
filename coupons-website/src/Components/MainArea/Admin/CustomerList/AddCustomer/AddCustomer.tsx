@@ -30,9 +30,9 @@ function AddCustomer(): JSX.Element {
             <label htmlFor="LastName" >Last Name:</label>
 			<input placeholder="Last Name" {...register("lastName")}/>
             <label htmlFor="Email" >Email:</label>
-			<input placeholder="Email" {...register("email")}/>
+			<input type="email" placeholder="Email" {...register("email")}/>
             <label htmlFor="Password" >Password:</label>
-			<input placeholder="Password" {...register("password")}/>
+			<input type="password" placeholder="Password" {...register("password")}/>
             <button>Add</button>
         </form>
     </div>);

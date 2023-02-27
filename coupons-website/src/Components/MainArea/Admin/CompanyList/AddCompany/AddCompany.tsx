@@ -27,9 +27,9 @@ function AddCompany(): JSX.Element {
         <label htmlFor="name">Name:</label>
         <input placeholder="name" {...register("name")}/>
         <label htmlFor="name">Email:</label>
-        <input placeholder="email" {...register("email")}/>
+        <input type="email" placeholder="email" {...register("email")}/>
         <label htmlFor="name">Password:</label>
-        <input placeholder="password" {...register("password")}/>
+        <input type="password" placeholder="password" {...register("password")}/>
         <button>Add Company</button>
     </form>
 </div>);

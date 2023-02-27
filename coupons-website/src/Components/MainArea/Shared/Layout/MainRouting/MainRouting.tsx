@@ -7,6 +7,7 @@ import CustomerList from "../../../Admin/CustomerList/CustomerList";
 import AddCoupon from "../../../Company/CouponsList/AddCoupon/AddCoupon";
 import CompanyCouponsList from "../../../Company/CouponsList/CouponsList";
 import CustomerCouponsList from "../../../Customer/CouponsList/CouponsList";
+import PurchaseCoupon from "../../../Customer/CouponsList/PurchaseCoupon/PurchaseCoupon";
 import StartPage from "../../StartPage/StartPage";
 import UserInfo from "../../UserInfo/UserInfo";
 
@@ -20,6 +21,7 @@ function MainRouting(): JSX.Element {
                 <Route path="/*" element={<PageNotFound/>}/>
                 {/* Admin paths */}
                 <Route path="/admin/company" element={<CompanyList/>}/>
+                <Route path="/admin/company/:companyId" element={<CompanyList/>}/>
                 <Route path="/admin/company/add" element={<AddCompany/>}/>
                 <Route path="/admin/customer" element={<CustomerList/>}/>
                 <Route path="/admin/customer/add" element={<AddCustomer/>}/>
@@ -28,6 +30,7 @@ function MainRouting(): JSX.Element {
                 <Route path="/company/coupon/add" element={<AddCoupon/>}/>
                 {/* Customer paths */}
                 <Route path="/customer/coupon" element={<CustomerCouponsList/>}/>
+                <Route path="/customer/coupon/purchase" element={<PurchaseCoupon/>}/>
             </Routes>
         </div>
     );
