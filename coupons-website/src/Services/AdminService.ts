@@ -5,62 +5,66 @@ import config from "../Utils/Config";
 import authService from "./AuthService";
 
 class AdminService {
+    // Method for each function on server-side to handle responses from the back-end
 
     public async getAllCompanies(): Promise<CompanyModel[]> {
         const header = authService.setAuthHeader();
         const response = await axios.get<CompanyModel[]>(`${config.baseUrl}admin/company`,{headers: header });
-        const companies = response.data;
-        return companies;
+        return response.data;
     }
 
     public async getOneCompany(id: number): Promise<CompanyModel> {
-        const response = await axios.get<CompanyModel>(`${config.baseUrl}admin/company/${id}`,{headers: {Authorization: `bearer ${sessionStorage.getItem("token")}`}});
-        const company = response.data;
-        return company;
+        const header = authService.setAuthHeader();
+        const response = await axios.get<CompanyModel>(`${config.baseUrl}admin/company/${id}`,{headers: header});
+        return response.data;
     }
 
-    public async addCompany(company: CompanyModel): Promise<void>{
+    public async addCompany(company: CompanyModel){
         const header = authService.setAuthHeader();
-        await axios.post<CompanyModel>(`${config.baseUrl}admin/company`,company, {headers: header});
+        const response = await axios.post<CompanyModel>(`${config.baseUrl}admin/company`,company, {headers: header});
+        return response.data;
     }
 
     public async updateCompany(company: CompanyModel) {
         const header = authService.setAuthHeader();
-        await axios.put<CompanyModel>(`${config.baseUrl}admin/company`,company,{headers: header});
+        const response = await axios.put<CompanyModel>(`${config.baseUrl}admin/company`,company,{headers: header});
+        return response.data;
     }
 
     public async deleteCompany(id: number){
         const header = authService.setAuthHeader();
-        await axios.delete(`${config.baseUrl}admin/company/${id}`,{headers: header});
+        const resposne = await axios.delete(`${config.baseUrl}admin/company/${id}`,{headers: header});
+        return resposne.data;
     }
 
     public async getAllCustomers(): Promise<CustomerModel[]> {
         const header = authService.setAuthHeader();
         const response = await axios.get<CustomerModel[]>(`${config.baseUrl}admin/customer`,{headers: header });
-        const customers = response.data;
-        return customers;
+        return response.data;
     }
 
     public async getOneCustomer(id: number): Promise<CustomerModel> {
         const header = authService.setAuthHeader();
         const response = await axios.get<CustomerModel>(`${config.baseUrl}admin/customer/${id}`,{headers: header});
-        const customer = response.data;
-        return customer;
+        return response.data;
     }
 
     public async addCustomer(customer: CustomerModel){
         const header = authService.setAuthHeader();
-        await axios.post(`${config.baseUrl}admin/customer`,customer, {headers: header});
+        const response = await axios.post(`${config.baseUrl}admin/customer`,customer, {headers: header});
+        return response.data;
     }
 
     public async updateCustomer(customer: CustomerModel) {
         const header = authService.setAuthHeader();
-        await axios.put(`${config.baseUrl}admin/customer`,customer,{headers: header});
+        const response = await axios.put(`${config.baseUrl}admin/customer`,customer,{headers: header});
+        return response.data;
     }
 
     public async deleteCustomer(id: number){
         const header = authService.setAuthHeader();
-        await axios.delete(`${config.baseUrl}admin/customer/${id}`,{headers: header});
+        const response = await axios.delete(`${config.baseUrl}admin/customer/${id}`,{headers: header});
+        return response.data;
     }
 }
 

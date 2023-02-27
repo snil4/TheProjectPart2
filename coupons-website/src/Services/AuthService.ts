@@ -5,6 +5,7 @@ import LoginModel from "../Models/LoginModel";
 import UserModel from "../Models/UserModel";
 
 class AuthService {
+    // service to handle all authorization type function
 
     public setAuthHeader() {
         return { Authorization: `bearer ${sessionStorage.getItem("token")}`};

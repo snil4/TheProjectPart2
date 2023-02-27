@@ -5,6 +5,7 @@ import config from "../Utils/Config";
 import authService from "./AuthService";
 
 class CustomerService {
+    // Method for each function on server-side to handle responses from the back-end
 
     public async getCustomerDetails(): Promise<CustomerModel>{
         const header = authService.setAuthHeader();

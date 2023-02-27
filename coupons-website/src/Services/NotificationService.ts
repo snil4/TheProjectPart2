@@ -1,6 +1,8 @@
 import { Notyf } from "notyf";
 
 class NotificationService{
+    // Service to handle more beautiful notifications using Notyf
+
     private notify = new Notyf({duration:4000, position:{x: "center", y: "top"}});
 
     public success(message: string){

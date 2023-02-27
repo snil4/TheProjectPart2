@@ -4,7 +4,6 @@ import CouponCard from "./CouponCard/CouponCard";
 import "./CouponsList.css";
 import { NavLink } from "react-router-dom";
 import notificationService from "../../../../Services/NotificationService";
-import adminService from "../../../../Services/AdminService";
 import companyService from "../../../../Services/CompanyService";
 
 interface CouponsListProps {

@@ -19,9 +19,21 @@ function Menu(props: MenuProps): JSX.Element {
             </div>
         );
     } else if (role === "company") {
-        return;
+        return(
+            <div className="Menu">
+                <Task path="/main/start" name="Start Page"/>
+                <Task path="/main/company/coupon" name="Coupons List"/>
+                <Task path="/main/info" name="User Info"/>
+            </div>
+        );
     } else if (role === "customer") {
-        return;
+        return(
+            <div className="Menu">
+                <Task path="/main/start" name="Start Page"/>
+                <Task path="/main/customer/coupon" name="Coupons List"/>
+                <Task path="/main/info" name="User Info"/>
+            </div>
+        );
     }
 }
 

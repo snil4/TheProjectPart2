@@ -16,3 +16,13 @@
     font-size: small;
     align-self: flex-end;
 }
+
+.Header > button {
+    align-self: flex-start;
+    margin-left: 100px;
+    color: blue;
+    text-decoration: underline;
+    width: 100px;
+    background: none;
+    border: none;
+}
