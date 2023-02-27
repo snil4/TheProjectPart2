@@ -22,13 +22,9 @@ function CustomerList(): JSX.Element {
         })();
     },[]);
 
-    const element = (
-        <div className="CustomerList">
-			{customers.map((c) => <CustomerCard key={c.id} customer={c}/>)}
-            <NavLink className="Add" to="/customer/add">Add Customer</NavLink>        </div>
-    );
-
-    return (<Layout component={element}/>);
+    return (        <div className="CustomerList">
+    {customers.map((c) => <CustomerCard key={c.id} customer={c}/>)}
+    <NavLink className="Add" to="/admin/customer/add">+</NavLink>        </div>);
 }
 
 export default CustomerList;

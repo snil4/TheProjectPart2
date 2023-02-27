@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import authService from "../../../../../Services/AuthService";
 import "./Menu.css";
 import Task from "./Task/Task";
@@ -13,10 +12,10 @@ function Menu(props: MenuProps): JSX.Element {
     if (role === "admin") {
         return (
             <div className="Menu">
-                <Task path="/main" name="Start Page"/>
-                <Task path="/admin/company" name="Companies List"/>
-                <Task path="/admin/customer" name="Customers List"/>
-                <Task path="/info" name="User Info"/>
+                <Task path="/main/start" name="Start Page"/>
+                <Task path="/main/admin/company" name="Companies List"/>
+                <Task path="/main/admin/customer" name="Customers List"/>
+                <Task path="/main/info" name="User Info"/>
             </div>
         );
     } else if (role === "company") {

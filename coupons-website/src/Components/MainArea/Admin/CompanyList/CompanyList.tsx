@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import CompanyModel from "../../../../Models/CompanyModel";
 import adminService from "../../../../Services/AdminService";
 import notificationService from "../../../../Services/NotificationService";
-import Layout from "../../Shared/Layout/Layout";
 import CompanyCard from "./CompanyCard/CompanyCard";
 import "./CompanyList.css";
 
@@ -22,12 +21,10 @@ function CompanyList(): JSX.Element {
         })();
     },[]);
 
-    const element = (        <div className="CompanyList">
-        {companies.map((c) => <CompanyCard key={c.id} company={c}/>)}
-        <NavLink className="Add" to="/company/add">+</NavLink>
-    </div>)
-
-    return (<Layout component={element}/>);
+    return (<div className="CompanyList">
+    {companies.map((c) => <CompanyCard key={c.id} company={c}/>)}
+    <NavLink className="Add" to="/admin/company/add">+</NavLink>
+</div>);
 }
 
 export default CompanyList;

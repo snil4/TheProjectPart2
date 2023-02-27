@@ -1,9 +1,8 @@
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Login.css";
 import { useForm } from "react-hook-form";
 import authService from "../../../Services/AuthService";
 import UserModel from "../../../Models/UserModel";
-import LoginModel from "../../../Models/LoginModel";
 
 interface LoginProps {
 
@@ -17,7 +16,7 @@ function Login(props: LoginProps): JSX.Element {
     async function send(user: UserModel ) {
         try {
             const key = await authService.login(user);
-            if (key == "") {
+            if (key === "") {
                 throw new Error("Email or password are incorrect");
             }
             sessionStorage.setItem("token", key);

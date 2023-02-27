@@ -17,7 +17,7 @@ function Header(props: HeaderProps): JSX.Element {
     return (
         <div className="Header">
 			Hello {props.name}
-            <a onClick={logOut}>Log out</a>
+            <button onClick={logOut}>Log out</button>
             <Clock/>
         </div>
     );

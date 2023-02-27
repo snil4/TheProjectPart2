@@ -4,7 +4,6 @@ import CompanyModel from "../../../../../Models/CompanyModel";
 import notificationService from "../../../../../Services/NotificationService";
 import adminService from "../../../../../Services/AdminService";
 import { useNavigate } from "react-router-dom";
-import Layout from "../../../Shared/Layout/Layout";
 
 function AddCompany(): JSX.Element {
 
@@ -22,19 +21,17 @@ function AddCompany(): JSX.Element {
         }
     }
 
-    const element = (        <div className="AddCompany">
-            <form onSubmit={handleSubmit(send)}>
-                <label htmlFor="name">Name:</label>
-                <input placeholder="name" {...register("name")}/>
-                <label htmlFor="name">Email:</label>
-                <input placeholder="email" {...register("email")}/>
-                <label htmlFor="name">Password:</label>
-                <input placeholder="password" {...register("password")}/>
-                <button>Add Company</button>
-            </form>
-        </div>)
-
-    return (<Layout component={element}/>);
+    return (<div className="AddCompany">
+    <form onSubmit={handleSubmit(send)}>
+        <label htmlFor="name">Name:</label>
+        <input placeholder="name" {...register("name")}/>
+        <label htmlFor="name">Email:</label>
+        <input placeholder="email" {...register("email")}/>
+        <label htmlFor="name">Password:</label>
+        <input placeholder="password" {...register("password")}/>
+        <button>Add Company</button>
+    </form>
+</div>);
 }
 
 export default AddCompany;
