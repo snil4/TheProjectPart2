@@ -1,17 +1,17 @@
 import { Route, Routes } from "react-router-dom";
 import PageNotFound from "../../../../SharedArea/PageNotFound/PageNotFound";
-import AddCompany from "../../../Admin/CompanyList/AddCompany/AddCompany";
+import AddCompany from "../../../Admin/CompanyAdd/CompanyAdd";
 import CompanyList from "../../../Admin/CompanyList/CompanyList";
-import AddCustomer from "../../../Admin/CustomerList/AddCustomer/AddCustomer";
+import AddCustomer from "../../../Admin/CustomerAdd/CustomerAdd";
 import CustomerList from "../../../Admin/CustomerList/CustomerList";
-import AddCoupon from "../../../Company/CouponsList/AddCoupon/AddCoupon";
+import AddCoupon from "../../../Company/CouponsList/CouponAdd/CouponAdd";
 import CompanyCouponsList from "../../../Company/CouponsList/CouponsList";
 import CustomerCouponsList from "../../../Customer/CouponsList/CouponsList";
 import PurchaseCoupon from "../../../Customer/CouponsList/PurchaseCoupon/PurchaseCoupon";
 import StartPage from "../../StartPage/StartPage";
 import UserInfo from "../../UserInfo/UserInfo";
-import CustomerDetails from "../../../Admin/CustomerList/CustomerDetails/CustomerDetails";
-import CompanyDetails from "../../../Admin/CompanyList/CompanyDetails/CompanyDetails";
+import CustomerDetails from "../../../Admin/CustomerDetails/CustomerDetails";
+import CompanyDetails from "../../../Admin/CompanyDetails/CompanyDetails";
 
 function MainRouting(): JSX.Element {
     return (

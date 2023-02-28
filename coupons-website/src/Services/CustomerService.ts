@@ -8,18 +8,27 @@ class CustomerService {
     // Method for each function on server-side to handle responses from the back-end
 
     public async getCustomerDetails(): Promise<CustomerModel>{
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
         const header = authService.setAuthHeader();
         const promise = await axios.get<CustomerModel>(`${config.baseUrl}customer`, {headers: header});
         return promise.data;
     }
 
     public async getAllCoupons(): Promise<CouponModel[]>{
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
         const header = authService.setAuthHeader();
         const response = await axios.get<CouponModel[]>(`${config.baseUrl}customer/coupon`, {headers: header});
         return response.data;
     }
 
     public async purchaseCoupon(coupon: CouponModel): Promise<CouponModel> {
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
         const header = authService.setAuthHeader();
         const response = await axios.post<CouponModel>(`${config.baseUrl}customer/coupon`, {headers: header});
         return response.data;

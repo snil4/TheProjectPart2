@@ -1,11 +1,11 @@
-import "./AddCompany.css";
+import "./CompanyAdd.css";
 import { useForm } from "react-hook-form";
-import CompanyModel from "../../../../../Models/CompanyModel";
-import notificationService from "../../../../../Services/NotificationService";
-import adminService from "../../../../../Services/AdminService";
+import CompanyModel from "../../../../Models/CompanyModel";
+import notificationService from "../../../../Services/NotificationService";
+import adminService from "../../../../Services/AdminService";
 import { useNavigate } from "react-router-dom";
 
-function AddCompany(): JSX.Element {
+function CompanyAdd(): JSX.Element {
 
     const {register, handleSubmit} = useForm<CompanyModel>();
     const navigate = useNavigate();
@@ -22,7 +22,7 @@ function AddCompany(): JSX.Element {
         }
     }
 
-    return (<div className="AddCompany">
+    return (<div className="CompanyAdd">
     <form onSubmit={handleSubmit(send)}>
         <label htmlFor="name">Name:</label>
         <input placeholder="name" {...register("name")}/>
@@ -35,4 +35,4 @@ function AddCompany(): JSX.Element {
 </div>);
 }
 
-export default AddCompany;
+export default CompanyAdd;

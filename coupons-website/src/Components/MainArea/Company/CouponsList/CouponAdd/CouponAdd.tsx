@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import CouponModel from "../../../../../Models/CouponModel";
-import "./AddCoupon.css";
+import "./CouponAdd.css";
 
-function AddCoupon(): JSX.Element {
+function CouponAdd(): JSX.Element {
 
     const { register, handleSubmit } = useForm<CouponModel>();
 
@@ -31,4 +31,4 @@ function AddCoupon(): JSX.Element {
     );
 }
 
-export default AddCoupon;
+export default CouponAdd;

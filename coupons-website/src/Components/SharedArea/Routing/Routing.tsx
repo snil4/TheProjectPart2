@@ -7,7 +7,7 @@ import Layout from "../../MainArea/Shared/Layout/Layout";
 function Routing(): JSX.Element {
     function checkLogin(): boolean {
         return sessionStorage.getItem("token") !== null 
-        && authService.checkTokenExpiration(sessionStorage.getItem("token"));
+        && authService.checkExpiration();
     }
 
     return (

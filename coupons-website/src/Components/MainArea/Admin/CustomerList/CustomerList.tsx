@@ -22,7 +22,7 @@ function CustomerList(): JSX.Element {
     },[]);
 
     return (        
-    <div className="CustomerList">
+    <div className="CustomerList List">
         {customers.map((c) => <CustomerCard key={c.id} customer={c}/>)}
         <NavLink className="Add" to="/main/admin/customer/add">+</NavLink>
     </div>);

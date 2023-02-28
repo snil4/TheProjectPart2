@@ -3,7 +3,7 @@ import jwtDecode from "jwt-decode";
 import config from "../Utils/Config";
 import LoginModel from "../Models/LoginModel";
 import UserModel from "../Models/UserModel";
-import crypto from "crypto";
+import { useNavigate } from "react-router-dom";
 
 class AuthService {
     // service to handle all authorization type function
@@ -30,19 +30,18 @@ class AuthService {
         let client = jwtDecode(token) as UserModel;
         if (!this.checkClientExpiration(client)) {
             console.log("Client expiration" + client.exp + ", date now:" + Date.now());
-            throw new Error("Token is expired");
+            throw new Error("Token Expired");
         }
         client.id = parseInt(client.sub);
         return client;
     }
 
-    public checkClientExpiration(client: UserModel): boolean{
-        return client.exp >= (Date.now() / 1000);
+    public checkExpiration(): boolean{
+        return this.getClient().exp >= (Date.now() / 1000);
     }
 
-    public checkTokenExpiration(token: string) {
-        const client = jwtDecode(token) as UserModel;
-        return this.checkClientExpiration(client);
+    public checkClientExpiration(client: UserModel): boolean{
+        return client.exp >= (Date.now() / 1000);
     }
 
     // public hashPassword(password: string) {

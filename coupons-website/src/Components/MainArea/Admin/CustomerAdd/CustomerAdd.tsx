@@ -1,11 +1,11 @@
-import CustomerModel from "../../../../../Models/CustomerModel";
+import CustomerModel from "../../../../Models/CustomerModel";
 import { useNavigate } from "react-router-dom";
-import "./AddCustomer.css";
-import adminService from "../../../../../Services/AdminService";
-import notificationService from "../../../../../Services/NotificationService";
+import "./CustomerAdd.css";
+import adminService from "../../../../Services/AdminService";
+import notificationService from "../../../../Services/NotificationService";
 import { useForm } from "react-hook-form";
 
-function AddCustomer(): JSX.Element {
+function CustomerAdd(): JSX.Element {
 
     const {register, handleSubmit} = useForm<CustomerModel>();
     const navigate = useNavigate();
@@ -23,7 +23,7 @@ function AddCustomer(): JSX.Element {
     }
 
     return (
-    <div className="AddCustomer">
+    <div className="CustomerAdd">
         <form onSubmit={handleSubmit(send)}>
             <label htmlFor="FirstName" >First Name:</label>
 			<input placeholder="First Name" {...register("firstName")}/>
@@ -38,4 +38,4 @@ function AddCustomer(): JSX.Element {
     </div>);
 }
 
-export default AddCustomer;
+export default CustomerAdd;
