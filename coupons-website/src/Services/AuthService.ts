@@ -45,9 +45,9 @@ class AuthService {
         return this.checkClientExpiration(client);
     }
 
-    public hashPassword(password: string) {
-        return crypto.createHmac("sha256", config.secretKey).update(password).digest();
-    }
+    // public hashPassword(password: string) {
+    //     return crypto.createHmac("sha256", config.secretKey).update(password).digest();
+    // }
 }
 
 const authService = new AuthService();

@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import CompanyModel from "../../../../../Models/CompanyModel";
 import "./CompanyCard.css";
 
@@ -7,10 +8,12 @@ interface CompanyCardProps {
 
 function CompanyCard(props: CompanyCardProps): JSX.Element {
     return (
-        <div className="CompanyCard">
-			<p>ID: {props.company.id}</p>
-			<p>Name: {props.company.name}</p>
-			<p>Email: {props.company.email}</p>
+        <div className="CompanyCard Card">
+            <NavLink to={`/main/admin/company/${props.company.id}`}>
+                <p>ID: {props.company.id}</p>
+                <p>Name: {props.company.name}</p>
+                <p>Email: {props.company.email}</p>
+            </NavLink>
         </div>
     );
 }

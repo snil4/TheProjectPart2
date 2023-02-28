@@ -5,11 +5,7 @@ import adminService from "../../../../../Services/AdminService";
 import notificationService from "../../../../../Services/NotificationService";
 import "./CompanyDetails.css";
 
-interface CompanyDetailsProps {
-	
-}
-
-function CompanyDetails(props: CompanyDetailsProps): JSX.Element {
+function CompanyDetails(): JSX.Element {
 
     const params = useParams();
     const companyId = +params.companyId;
@@ -25,12 +21,15 @@ function CompanyDetails(props: CompanyDetailsProps): JSX.Element {
             } catch (err: any) {
                 notificationService.error(err.message);
             }
-        })
+        })();
     },[]);
 
     return (
         <div className="CompanyDetails Details">
-			
+			<div>
+                
+                <NavLink to={`/main/admin/company/edit/${companyId}`}>Edit company</NavLink>
+            </div>
             <NavLink to="/main/admin/company">Back to companies list</NavLink>
         </div>
     );
