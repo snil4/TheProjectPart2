@@ -4,11 +4,18 @@ import CompanyModel from "../../../../Models/CompanyModel";
 import notificationService from "../../../../Services/NotificationService";
 import adminService from "../../../../Services/AdminService";
 import { useNavigate } from "react-router-dom";
+import authService from "../../../../Services/AuthService";
+import { useEffect } from "react";
 
 function CompanyAdd(): JSX.Element {
 
     const {register, handleSubmit} = useForm<CompanyModel>();
     const navigate = useNavigate();
+    
+    function returnToLogin() {
+        notificationService.error("Token expired, please login again");
+        navigate("/login");
+    }
 
     async function send(company: CompanyModel) {
         company.id = 0;
@@ -18,9 +25,19 @@ function CompanyAdd(): JSX.Element {
             notificationService.success("Company added");
             navigate("/main/admin/company");
         } catch (err: any) {
-            notificationService.error(err);
+            if (err.message === "Token Expired") {
+                returnToLogin();
+            } else {
+                notificationService.error(err);
+            }
         }
     }
+
+    // useEffect(() => {
+    //     if (!authService.checkExpiration() || authService.getClient().role !== "admin") {
+    //         returnToLogin();
+    //     }
+    // }, []);
 
     return (<div className="CompanyAdd">
     <form onSubmit={handleSubmit(send)}>

@@ -13,7 +13,7 @@ class AuthService {
     }
 
     public async login(userModel: UserModel):Promise<string>{
-        console.log("Logging in");
+        console.log(userModel);
         
         const url = `${config.baseUrl}${userModel.role}/login`;
         const loginModel = new LoginModel(userModel.email, userModel.password);

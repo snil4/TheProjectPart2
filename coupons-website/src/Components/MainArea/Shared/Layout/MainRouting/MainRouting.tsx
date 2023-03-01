@@ -12,6 +12,8 @@ import StartPage from "../../StartPage/StartPage";
 import UserInfo from "../../UserInfo/UserInfo";
 import CustomerDetails from "../../../Admin/CustomerDetails/CustomerDetails";
 import CompanyDetails from "../../../Admin/CompanyDetails/CompanyDetails";
+import CompanyEdit from "../../../Admin/CompanyEdit/CompanyEdit";
+import CustomerEdit from "../../../Admin/CustomerEdit/CustomerEdit";
 
 function MainRouting(): JSX.Element {
     return (
@@ -25,11 +27,11 @@ function MainRouting(): JSX.Element {
                 <Route path="/admin/company" element={<CompanyList/>}/>
                 <Route path="/admin/company/add" element={<AddCompany/>}/>
                 <Route path="/admin/company/:companyId" element={<CompanyDetails/>}/>
-                <Route path="/admin/company/edit/:companyId" element={<CompanyDetails/>}/>
+                <Route path="/admin/company/edit/:companyId" element={<CompanyEdit/>}/>
                 <Route path="/admin/customer" element={<CustomerList/>}/>
                 <Route path="/admin/customer/add" element={<AddCustomer/>}/>
                 <Route path="/admin/customer/:customerId" element={<CustomerDetails/>}/>
-                <Route path="/admin/customer/edit/:customerId" element={<CustomerDetails/>}/>
+                <Route path="/admin/customer/edit/:customerId" element={<CustomerEdit/>}/>
                 {/* Company paths */}
                 <Route path="/company/coupon" element={<CompanyCouponsList/>}/>
                 <Route path="/company/coupon/add" element={<AddCoupon/>}/>

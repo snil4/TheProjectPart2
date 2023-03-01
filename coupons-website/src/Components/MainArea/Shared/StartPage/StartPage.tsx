@@ -9,7 +9,7 @@ function StartPage(): JSX.Element {
     <div className="StartPage">
         <div>Welcome {user.name}!</div>
 
-        <div>Please choose your action in the menu to the right.</div>
+        <div>Please choose your action in the menu to the left.</div>
     </div>
 );
 }
