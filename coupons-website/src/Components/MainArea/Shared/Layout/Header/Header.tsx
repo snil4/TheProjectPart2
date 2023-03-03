@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import authService from "../../../../../Services/AuthService";
 import Clock from "./Clock/Clock";
 import "./Header.css";
 
@@ -10,7 +11,7 @@ function Header(props: HeaderProps): JSX.Element {
     const navigate = useNavigate();
 
     function logOut(){
-        sessionStorage.removeItem("token");
+        authService.logout();
         navigate("/");
     }
 

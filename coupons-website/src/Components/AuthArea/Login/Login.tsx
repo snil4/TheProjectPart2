@@ -15,7 +15,7 @@ function Login(props: LoginProps): JSX.Element {
 
     async function send(user: UserModel ) {
         try {
-            const key = await authService.login(user);
+            await authService.login(user);
             navigate("/main/start");
         } catch (error) {
             alert(error + ", please try again");
