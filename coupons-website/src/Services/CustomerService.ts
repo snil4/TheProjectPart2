@@ -13,7 +13,7 @@ class CustomerService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const promise = await axios.get<CustomerModel>(`${config.baseUrl}customer`, {headers: header});
+        const promise = await axios.get<CustomerModel>(config.customerUri, {headers: header});
         return promise.data;
     }
 
@@ -22,7 +22,7 @@ class CustomerService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.get<CouponModel[]>(`${config.baseUrl}customer/coupon`, {headers: header});
+        const response = await axios.get<CouponModel[]>(config.customerCouponUrl, {headers: header});
         const coupons = response.data;
         couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
         return response.data;
@@ -33,7 +33,7 @@ class CustomerService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.post<CouponModel>(`${config.baseUrl}customer/coupon`, {headers: header});
+        const response = await axios.post<CouponModel>(config.customerCouponUrl, {headers: header});
         const addedCoupon = response.data;
         couponsStore.dispatch({type: CouponActionType.DeleteCoupon, payload: addedCoupon});
         return addedCoupon;
