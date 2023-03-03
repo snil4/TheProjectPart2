@@ -1,6 +1,7 @@
 import axios from "axios";
 import CouponModel from "../Models/CouponModel";
 import CustomerModel from "../Models/CustomerModel";
+import { CouponActionType, couponsStore } from "../Redux/CouponState";
 import config from "../Utils/Config";
 import authService from "./AuthService";
 
@@ -22,6 +23,8 @@ class CustomerService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.get<CouponModel[]>(`${config.baseUrl}customer/coupon`, {headers: header});
+        const coupons = response.data;
+        couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
         return response.data;
     }
 
@@ -31,7 +34,9 @@ class CustomerService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.post<CouponModel>(`${config.baseUrl}customer/coupon`, {headers: header});
-        return response.data;
+        const addedCoupon = response.data;
+        couponsStore.dispatch({type: CouponActionType.DeleteCoupon, payload: addedCoupon});
+        return addedCoupon;
     }
 }
 

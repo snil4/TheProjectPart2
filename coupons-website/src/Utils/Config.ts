@@ -3,7 +3,7 @@ class Config{
 }
 
 class DevelopmentConfig{
-    public baseUrl="http://localhost:8080/api/";
+    public baseUrl=`http://localhost:8080/api/`;
     public secretKey = "aaaaaaaaa1aaaaaaaaa2aaaaaaaaa3aaaaaaaaa4aaaaaaaaa5"
 }
 

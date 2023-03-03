@@ -24,7 +24,7 @@ function CustomerEdit(): JSX.Element {
             if (customer.password === "") {
                 customer.password = password;
             }
-            const updatedCustomer = await adminService.updateCustomer(customer);
+            await adminService.updateCustomer(customer);
             notificationService.success("Company edited successfully");
             navigate(`/main/admin/customer/${customerId}`);
         } catch (err: any) {

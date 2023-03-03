@@ -1,6 +1,8 @@
 import axios from "axios";
 import CompanyModel from "../Models/CompanyModel";
 import CustomerModel from "../Models/CustomerModel";
+import { companiesStore, CompanyActionType } from "../Redux/CompanyState";
+import { CustomerActionType, customersStore } from "../Redux/CustomerState";
 import config from "../Utils/Config";
 import authService from "./AuthService";
 
@@ -13,7 +15,9 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.get<CompanyModel[]>(`${config.baseUrl}admin/company`,{headers: header });
-        return response.data;
+        const companies = response.data;
+        companiesStore.dispatch({type: CompanyActionType.GetCompanies, payload: companies});
+        return companies;
     }
 
     public async getOneCompany(id: number): Promise<CompanyModel> {
@@ -22,7 +26,8 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.get<CompanyModel>(`${config.baseUrl}admin/company/${id}`,{headers: header});
-        return response.data;
+        const company = response.data;
+        return company;
     }
 
     public async addCompany(company: CompanyModel){
@@ -31,7 +36,9 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.post<CompanyModel>(`${config.baseUrl}admin/company`,company, {headers: header});
-        return response.data;
+        const newCompany = response.data;
+        companiesStore.dispatch({type: CompanyActionType.AddCompany, payload: newCompany});
+        return newCompany;
     }
 
     public async updateCompany(company: CompanyModel) {
@@ -40,7 +47,9 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.put<CompanyModel>(`${config.baseUrl}admin/company`,company,{headers: header});
-        return response.data;
+        const updatedCompany = response.data;
+        companiesStore.dispatch({type: CompanyActionType.UpdateCompany, payload: updatedCompany});
+        return updatedCompany;
     }
 
     public async deleteCompany(id: number){
@@ -49,6 +58,7 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const resposne = await axios.delete(`${config.baseUrl}admin/company/${id}`,{headers: header});
+        companiesStore.dispatch({type: CompanyActionType.DeleteCompany, payload: id});
         return resposne.data;
     }
 
@@ -58,7 +68,9 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.get<CustomerModel[]>(`${config.baseUrl}admin/customer`,{headers: header });
-        return response.data;
+        const customers = response.data;
+        customersStore.dispatch({type: CustomerActionType.GetCustomers, payload: customers});
+        return customers;
     }
 
     public async getOneCustomer(id: number): Promise<CustomerModel> {
@@ -75,8 +87,10 @@ class AdminService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.post(`${config.baseUrl}admin/customer`,customer, {headers: header});
-        return response.data;
+        const response = await axios.post<CustomerModel>(`${config.baseUrl}admin/customer`,customer, {headers: header});
+        const addedCustomer = response.data;
+        customersStore.dispatch({type: CustomerActionType.AddCustomer, payload: customer});
+        return addedCustomer;
     }
 
     public async updateCustomer(customer: CustomerModel) {
@@ -84,8 +98,10 @@ class AdminService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.put(`${config.baseUrl}admin/customer`,customer,{headers: header});
-        return response.data;
+        const response = await axios.put<CustomerModel>(`${config.baseUrl}admin/customer`,customer,{headers: header});
+        const updatedCustomer = response.data;
+        customersStore.dispatch({type: CustomerActionType.UpdateCustomer, payload: updatedCustomer});
+        return updatedCustomer;
     }
 
     public async deleteCustomer(id: number){
@@ -94,6 +110,7 @@ class AdminService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.delete(`${config.baseUrl}admin/customer/${id}`,{headers: header});
+        customersStore.dispatch({type: CustomerActionType.DeleteCustomer, payload: id});
         return response.data;
     }
 }

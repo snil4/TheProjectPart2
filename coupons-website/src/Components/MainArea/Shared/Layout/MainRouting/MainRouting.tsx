@@ -4,7 +4,7 @@ import AddCompany from "../../../Admin/CompanyAdd/CompanyAdd";
 import CompanyList from "../../../Admin/CompanyList/CompanyList";
 import AddCustomer from "../../../Admin/CustomerAdd/CustomerAdd";
 import CustomerList from "../../../Admin/CustomerList/CustomerList";
-import AddCoupon from "../../../Company/CouponsList/CouponAdd/CouponAdd";
+import AddCoupon from "../../../Company/CouponAdd/CouponAdd";
 import CompanyCouponsList from "../../../Company/CouponsList/CouponsList";
 import CustomerCouponsList from "../../../Customer/CouponsList/CouponsList";
 import PurchaseCoupon from "../../../Customer/CouponsList/PurchaseCoupon/PurchaseCoupon";

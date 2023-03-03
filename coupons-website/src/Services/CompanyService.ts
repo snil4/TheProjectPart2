@@ -1,6 +1,7 @@
 import axios from "axios";
 import CompanyModel from "../Models/CompanyModel";
 import CouponModel from "../Models/CouponModel";
+import { CouponActionType, couponsStore } from "../Redux/CouponState";
 import config from "../Utils/Config";
 import authService from "./AuthService";
 
@@ -17,6 +18,17 @@ class CompanyService {
     }
 
     public async getAllCoupons(): Promise<CouponModel[]> {
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
+        const header = authService.setAuthHeader();
+        const response = await axios.get<CouponModel[]>(`${config.baseUrl}company/coupon`, {headers: header});
+        const coupons = response.data;
+        couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
+        return coupons;
+    }
+
+    public async getAllCouponsMaxPrice(maxPrice: number): Promise<CouponModel[]> {
         if (!authService.checkExpiration()) {
             throw new Error("Token Expired");
         }
@@ -39,8 +51,10 @@ class CompanyService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.post(`${config.baseUrl}company/coupon`,coupon, {headers: header});
-        return response.data;
+        const response = await axios.post<CouponModel>(`${config.baseUrl}company/coupon`,coupon, {headers: header});
+        const addedCoupon = response.data;
+        couponsStore.dispatch({type:CouponActionType.AddCoupon, payload:addedCoupon});
+        return addedCoupon;
     }
 
     public async updateCoupon(coupon: CouponModel) {
@@ -49,7 +63,9 @@ class CompanyService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.put(`${config.baseUrl}company/coupon`,coupon, {headers: header});
-        return response.data;
+        const updatedCoupon = response.data;
+        couponsStore.dispatch({type:CouponActionType.UpdateCoupon, payload:updatedCoupon});
+        return updatedCoupon;
     }
 
     public async deleteCoupon(id: number) {
@@ -58,6 +74,7 @@ class CompanyService {
         }
         const header = authService.setAuthHeader();
         const response = await axios.delete(`${config.baseUrl}company/coupon/${id}`, {headers: header});
+        couponsStore.dispatch({type: CouponActionType.DeleteCoupon, payload: id});
         return response.data;
     }
 

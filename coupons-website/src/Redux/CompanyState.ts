@@ -1,6 +1,5 @@
 import { createStore } from "redux";
 import CompanyModel from "../Models/CompanyModel";
-import ProductModel from "../Models/CompanyModel";
 
 // 1. products state - the data we need at global application level
 class CompaniesState{
@@ -9,10 +8,10 @@ class CompaniesState{
 
 // 2. Action Types
 export enum CompanyActionType{
-    FetchCompanies,
-    AddCompanies,
-    UpdateCompanies,
-    DeleteCompanies
+    GetCompanies,
+    AddCompany,
+    UpdateCompany,
+    DeleteCompany
 }
 
 // 3. Action - an interface describing a single command
@@ -23,39 +22,39 @@ export interface CompanyAction{
 
 // 4. action creators - fucntions to create action objects
 export function fetchCompanyAction(companies: CompanyModel[]): CompanyAction {
-    return {type: CompanyActionType.FetchCompanies, payload: companies};
+    return {type: CompanyActionType.GetCompanies, payload: companies};
 }
 
 export function addCompanyAction(company: CompanyModel): CompanyAction {
-    return {type: CompanyActionType.AddCompanies, payload: company};
+    return {type: CompanyActionType.AddCompany, payload: company};
 }
 
 export function updateCompanyAction(company: CompanyModel): CompanyAction {
-    return {type: CompanyActionType.UpdateCompanies, payload: company};
+    return {type: CompanyActionType.UpdateCompany, payload: company};
 }
 
 export function deleteCompanyAction(id: number): CompanyAction {
-    return {type: CompanyActionType.DeleteCompanies, payload: id};
+    return {type: CompanyActionType.DeleteCompany, payload: id};
 }
 
 // 5. reducer - a single fuction performing any of the above actions
 export function companyReduce(currentState: CompaniesState = new CompaniesState(), action: CompanyAction): CompaniesState {
     const newState = {...currentState};
     switch(action.type){
-        case CompanyActionType.FetchCompanies: // here payload is all products
+        case CompanyActionType.GetCompanies: // here payload is all products
             newState.companies = action.payload;
             break;
-        case CompanyActionType.AddCompanies: // here payload is a single product to add
+        case CompanyActionType.AddCompany: // here payload is a single product to add
             newState.companies.push(action.payload);
             break;
-        case CompanyActionType.UpdateCompanies: // here payload is a single product to update
-            const indexToUpdate = newState.companies.findIndex(p => p.id === action.payload.id);
+        case CompanyActionType.UpdateCompany: // here payload is a single product to update
+            const indexToUpdate = newState.companies.findIndex(c => c.id === action.payload.id);
             if (indexToUpdate >= 0) {
                 newState.companies[indexToUpdate] = action.payload;
             }
             break;
-        case CompanyActionType.DeleteCompanies: // here payload is an id to delete
-            const indexToDelete = newState.companies.findIndex(p => p.id === action.payload);
+        case CompanyActionType.DeleteCompany: // here payload is an id to delete
+            const indexToDelete = newState.companies.findIndex(c => c.id === action.payload);
             if (indexToDelete >= 0) {
                 newState.companies.splice(indexToDelete, 1);
             }

@@ -1,13 +1,18 @@
 import { useForm } from "react-hook-form";
-import CouponModel from "../../../../../Models/CouponModel";
+import CouponModel from "../../../../Models/CouponModel";
+import notificationService from "../../../../Services/NotificationService";
 import "./CouponAdd.css";
 
 function CouponAdd(): JSX.Element {
 
     const { register, handleSubmit } = useForm<CouponModel>();
 
-    function send(coupon: CouponModel) {
+    async function send(coupon: CouponModel) {
+        try {
 
+        } catch (err:any) {
+            notificationService.error(err);
+        }
     }
 
     return (
