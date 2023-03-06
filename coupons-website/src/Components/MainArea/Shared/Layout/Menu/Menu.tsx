@@ -7,9 +7,9 @@ interface MenuProps {
 }
 
 function Menu(props: MenuProps): JSX.Element {
-    const role = authService.getClient().role.toLowerCase();
+    const role = authService.getClient().role.toString();
 
-    if (role === "admin") {
+    if (role === "ADMIN") {
         return (
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>
@@ -18,7 +18,7 @@ function Menu(props: MenuProps): JSX.Element {
                 <Task path="/main/info" name="User Info"/>
             </div>
         );
-    } else if (role === "company") {
+    } else if (role === "COMPANY") {
         return(
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>
@@ -26,7 +26,7 @@ function Menu(props: MenuProps): JSX.Element {
                 <Task path="/main/info" name="User Info"/>
             </div>
         );
-    } else if (role === "customer") {
+    } else if (role === "CUSTOMER") {
         return(
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>

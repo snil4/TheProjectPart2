@@ -35,7 +35,7 @@ export function authReduce(currentState: AuthState = new AuthState(), action: Au
             newState.user = action.payload;
             break;
         case AuthActionType.Logout:
-            break;
+            return new AuthState();
     }
     return newState;
 }

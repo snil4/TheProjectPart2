@@ -11,7 +11,8 @@ export enum CustomerActionType{
     GetCustomers,
     AddCustomer,
     UpdateCustomer,
-    DeleteCustomer
+    DeleteCustomer,
+    RemoveState
 }
 
 // 3. Action - an interface describing a single command
@@ -37,6 +38,10 @@ export function deleteCompanyAction(id: number): CustomerAction {
     return {type: CustomerActionType.DeleteCustomer, payload: id};
 }
 
+export function removeStateAction(): CustomerAction {
+    return {type: CustomerActionType.RemoveState, payload: null};
+}
+
 // 5. reducer - a single fuction performing any of the above actions
 export function customerReduce(currentState: CustomersState = new CustomersState(), action: CustomerAction): CustomersState {
     const newState = {...currentState};
@@ -58,6 +63,9 @@ export function customerReduce(currentState: CustomersState = new CustomersState
             if (indexToDelete >= 0) {
                 newState.customers.splice(indexToDelete, 1);
             }
+            break;
+        case CustomerActionType.RemoveState:
+            return new CustomersState();
     }
     return newState;
 }

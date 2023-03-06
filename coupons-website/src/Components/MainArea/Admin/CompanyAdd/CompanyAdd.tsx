@@ -4,8 +4,6 @@ import CompanyModel from "../../../../Models/CompanyModel";
 import notificationService from "../../../../Services/NotificationService";
 import adminService from "../../../../Services/AdminService";
 import { useNavigate } from "react-router-dom";
-import authService from "../../../../Services/AuthService";
-import { useEffect } from "react";
 
 function CompanyAdd(): JSX.Element {
 

@@ -7,13 +7,16 @@ import CustomerList from "../../../Admin/CustomerList/CustomerList";
 import AddCoupon from "../../../Company/CouponAdd/CouponAdd";
 import CompanyCouponsList from "../../../Company/CouponsList/CouponsList";
 import CustomerCouponsList from "../../../Customer/CouponsList/CouponsList";
-import PurchaseCoupon from "../../../Customer/CouponsList/PurchaseCoupon/PurchaseCoupon";
+import PurchaseCoupon from "../../../Customer/PurchaseCoupon/PurchaseCoupon";
 import StartPage from "../../StartPage/StartPage";
 import UserInfo from "../../UserInfo/UserInfo";
 import CustomerDetails from "../../../Admin/CustomerDetails/CustomerDetails";
 import CompanyDetails from "../../../Admin/CompanyDetails/CompanyDetails";
 import CompanyEdit from "../../../Admin/CompanyEdit/CompanyEdit";
 import CustomerEdit from "../../../Admin/CustomerEdit/CustomerEdit";
+import CompanyCouponDetails from "../../../Company/CouponDetails/CouponDetails";
+import CompanyCouponEdit from "../../../Company/CouponEdit/CouponEdit";
+import CustomerCouponDetails from "../../../Customer/CouponDetails/CouponDetails";
 
 function MainRouting(): JSX.Element {
     return (
@@ -35,11 +38,12 @@ function MainRouting(): JSX.Element {
                 {/* Company paths */}
                 <Route path="/company/coupon" element={<CompanyCouponsList/>}/>
                 <Route path="/company/coupon/add" element={<AddCoupon/>}/>
-                <Route path="/company/coupon/:couponId" element={<CompanyCouponsList/>}/>
-                <Route path="/company/coupon/edit/:couponId" element={<CompanyCouponsList/>}/>
+                <Route path="/company/coupon/:couponId" element={<CompanyCouponDetails/>}/>
+                <Route path="/company/coupon/edit/:couponId" element={<CompanyCouponEdit/>}/>
                 {/* Customer paths */}
                 <Route path="/customer/coupon" element={<CustomerCouponsList/>}/>
                 <Route path="/customer/coupon/purchase" element={<PurchaseCoupon/>}/>
+                <Route path="/customer/coupon/:couponId" element={<CustomerCouponDetails/>}/>
             </Routes>
         </div>
     );

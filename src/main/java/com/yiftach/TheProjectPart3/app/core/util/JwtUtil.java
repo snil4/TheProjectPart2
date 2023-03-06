@@ -18,7 +18,7 @@ public class JwtUtil extends JwtUtilAbstract<Client, Integer>{
         Map<String,Object> claims = new HashMap<>();
         claims.put("name",client.getName());
         claims.put("email",client.getEmail());
-        claims.put("role",client.getRole().name());
+        claims.put("role",client.getRole());
         return this.createToken(claims, client.getId());
     }
 

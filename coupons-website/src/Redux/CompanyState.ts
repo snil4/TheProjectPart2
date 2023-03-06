@@ -11,7 +11,8 @@ export enum CompanyActionType{
     GetCompanies,
     AddCompany,
     UpdateCompany,
-    DeleteCompany
+    DeleteCompany,
+    RemoveState
 }
 
 // 3. Action - an interface describing a single command
@@ -37,6 +38,10 @@ export function deleteCompanyAction(id: number): CompanyAction {
     return {type: CompanyActionType.DeleteCompany, payload: id};
 }
 
+export function removeStateAction(): CompanyAction {
+    return {type: CompanyActionType.RemoveState, payload: null};
+}
+
 // 5. reducer - a single fuction performing any of the above actions
 export function companyReduce(currentState: CompaniesState = new CompaniesState(), action: CompanyAction): CompaniesState {
     const newState = {...currentState};
@@ -58,6 +63,9 @@ export function companyReduce(currentState: CompaniesState = new CompaniesState(
             if (indexToDelete >= 0) {
                 newState.companies.splice(indexToDelete, 1);
             }
+            break;
+        case CompanyActionType.RemoveState:
+            return new CompaniesState();
     }
     return newState;
 }

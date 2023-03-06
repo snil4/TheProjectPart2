@@ -2,9 +2,11 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import config from "../Utils/Config";
 import LoginModel from "../Models/LoginModel";
-import UserModel from "../Models/UserModel";
-import { useNavigate } from "react-router-dom";
+import UserModel, { Role } from "../Models/UserModel";
 import { AuthActionType, authStore } from "../Redux/AuthState";
+import { companiesStore, CompanyActionType } from "../Redux/CompanyState";
+import { CustomerActionType, customersStore } from "../Redux/CustomerState";
+import { CouponActionType, couponsStore } from "../Redux/CouponState";
 
 class AuthService {
     // service to handle all authorization type function
@@ -16,20 +18,29 @@ class AuthService {
     public async login(userModel: UserModel):Promise<UserModel>{
         console.log(userModel);
         
-        const url = `${config.baseUrl}${userModel.role}/login`;
+        const url = `${config.baseUrl}${userModel.role.toString().toLowerCase()}/login`;
         const loginModel = new LoginModel(userModel.email, userModel.password);
         const response = await axios.post(url, loginModel);
         const promise = response.data;
         if (promise === "") {
             throw new Error("Email or password are incorrect");
         }
-        const client = authService.getClient();
         sessionStorage.setItem("token", promise);
-        authStore.dispatch({type: AuthActionType.Login, payload:client})
+        const client = authService.getClient();
+        client.role = client.role as Role;
+        authStore.dispatch({type: AuthActionType.Login, payload:client});
+        console.log(client);
         return client;
     }
 
     public getClient(): UserModel{
+        if (authStore.getState().user !== null) {
+            const user = authStore.getState().user;
+            if (this.checkClientExpiration(user)) {
+                return user;
+            }
+            throw new Error("Token Expired");
+        }
         return(this.parseJwt(sessionStorage.getItem("token")));
     }
 
@@ -53,7 +64,10 @@ class AuthService {
 
     public logout(){
         sessionStorage.removeItem("token");
-        authStore.dispatch({type: AuthActionType.Logout, payload: null})
+        companiesStore.dispatch({type: CompanyActionType.RemoveState, payload:null});
+        customersStore.dispatch({type: CustomerActionType.RemoveState, payload:null});
+        couponsStore.dispatch({type: CouponActionType.RemoveState, payload:null});
+        authStore.dispatch({type: AuthActionType.Logout, payload: null});
     }
 
     // public hashPassword(password: string) {

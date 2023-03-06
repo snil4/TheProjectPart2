@@ -1,6 +1,6 @@
 import axios from "axios";
 import CompanyModel from "../Models/CompanyModel";
-import CouponModel from "../Models/CouponModel";
+import CouponModel, { Category } from "../Models/CouponModel";
 import { CouponActionType, couponsStore } from "../Redux/CouponState";
 import config from "../Utils/Config";
 import authService from "./AuthService";
@@ -21,19 +21,40 @@ class CompanyService {
         if (!authService.checkExpiration()) {
             throw new Error("Token Expired");
         }
-        const header = authService.setAuthHeader();
-        const response = await axios.get<CouponModel[]>(config.companyCouponsUrl, {headers: header});
-        const coupons = response.data;
-        couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
-        return coupons;
+        if (couponsStore.getState().coupons.length === 0) {
+            const header = authService.setAuthHeader();
+            const response = await axios.get<CouponModel[]>(config.companyCouponsUrl, {headers: header});
+            const coupons = response.data;
+            couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
+        }
+        return couponsStore.getState().coupons;
     }
 
+    // TODO
     public async getAllCouponsMaxPrice(maxPrice: number): Promise<CouponModel[]> {
         if (!authService.checkExpiration()) {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
-        const response = await axios.get<CouponModel[]>(config.companyCouponsUrl, {headers: header});
+        const response = await axios.get<CouponModel[]>(config.companyCouponsUrl + `?maxPrice=${maxPrice}`, {headers: header});
+        return response.data;
+    }
+
+    public async getAllCouponsCategory(category: Category): Promise<CouponModel[]> {
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
+        const header = authService.setAuthHeader();
+        const response = await axios.get<CouponModel[]>(config.companyCouponsUrl + `?category=${category}`,{headers: header});
+        return response.data;
+    }
+
+    public async getAllCouponsMaxPriceCategory(maxPrice: number, category: Category): Promise<CouponModel[]> {
+        if (!authService.checkExpiration()) {
+            throw new Error("Token Expired");
+        }
+        const header = authService.setAuthHeader();
+        const response = await axios.get<CouponModel[]>(config.companyCouponsUrl + `?maxPrice=${maxPrice}&category=${category}`, {headers: header});
         return response.data;
     }
 
@@ -51,6 +72,8 @@ class CompanyService {
             throw new Error("Token Expired");
         }
         const header = authService.setAuthHeader();
+
+        coupon.image = coupon.image as string;
         const response = await axios.post<CouponModel>(config.companyCouponsUrl,coupon, {headers: header});
         const addedCoupon = response.data;
         couponsStore.dispatch({type:CouponActionType.AddCoupon, payload:addedCoupon});

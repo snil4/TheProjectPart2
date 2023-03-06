@@ -28,9 +28,9 @@ function Login(props: LoginProps): JSX.Element {
             <form className="Form" onSubmit={handleSubmit(send)}>
                 <label htmlFor="role">Role: </label>
                 <select {...register("role")}>
-                    <option value="admin">Admin</option>
-                    <option value="company">Company</option>
-                    <option value="customer">Customer</option>
+                    <option value="ADMIN">Admin</option>
+                    <option value="COMPANY">Company</option>
+                    <option value="CUSTOMER">Customer</option>
                 </select><br/>
                 <label htmlFor="email">Email: </label>
                 <input type="email" placeholder="Email"{...register("email")}/><br/>

@@ -3,10 +3,14 @@ class UserModel{
     public id: number;
     public name: string;
     public email: string;
-    public role: string;
+    public role: string | Role;
     public iat: number;
     public exp: number;
     public password: string;
+}
+
+export enum Role {
+    ADMIN, COMPANY, CUSTOMER
 }
 
 export default UserModel;

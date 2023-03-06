@@ -1,28 +1,30 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CouponModel from "../../../../Models/CouponModel";
 import companyService from "../../../../Services/CompanyService";
 import notificationService from "../../../../Services/NotificationService";
-import "./CouponAdd.css";
+import "./CouponEdit.css";
 
-function CouponAdd(): JSX.Element {
+function CouponEdit(): JSX.Element {
 
-    const { register, handleSubmit } = useForm<CouponModel>();
+    const params = useParams();
+    const couponId = parseInt(params.couponId);
+
+    const {register, handleSubmit} = useForm<CouponModel>();
     const navigate = useNavigate();
 
-    async function send(coupon: CouponModel) {
+    async function send(coupon: CouponModel){
         try {
-            coupon.image = (coupon.image as FileList)[0];
-            await companyService.addCoupon(coupon);
-            notificationService.success("Coupon added");
-            navigate(`/main/company/coupon`);
+            await companyService.updateCoupon(coupon);
+            notificationService.success("Updated coupon");
+            navigate(`/main/company/coupon/${couponId}`);
         } catch (err:any) {
             notificationService.error(err);
         }
     }
 
     return (
-        <div className="AddCoupon">
+        <div className="EditCoupon Edit">
 			<form onSubmit={handleSubmit(send)}>
                 <label htmlFor="title">Title: </label>
                 <input placeholder="Title" {...register("title")}/>
@@ -42,4 +44,4 @@ function CouponAdd(): JSX.Element {
     );
 }
 
-export default CouponAdd;
+export default CouponEdit;

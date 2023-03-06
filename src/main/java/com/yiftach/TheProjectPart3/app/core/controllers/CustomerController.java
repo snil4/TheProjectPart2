@@ -15,6 +15,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/customer")
@@ -45,14 +46,14 @@ public class CustomerController extends ClientController {
     }
 
     @GetMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<List<Coupon>> getCustomerCoupons(double maxPrice, Category category, HttpServletRequest request){
+    public ResponseEntity<List<Coupon>> getCustomerCoupons(@PathVariable(required = false) Optional<Double> maxPrice, @PathVariable(required = false) Category category, HttpServletRequest request){
         try {
             Client client = (Client) request.getAttribute("client");
-            if (maxPrice > 0) {
+            if (maxPrice.isPresent() && maxPrice.get() > 0) {
                 if (category != null) {
-                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(category,maxPrice, client.getId()));
+                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(category,maxPrice.get(), client.getId()));
                 }
-                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice, client.getId()));
+                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice.get(), client.getId()));
             } else if (category != null) {
                 return ResponseEntity.ok().body(customerService.getCustomerCoupons(category, client.getId()));
             }

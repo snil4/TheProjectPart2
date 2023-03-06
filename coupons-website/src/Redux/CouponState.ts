@@ -11,7 +11,8 @@ export enum CouponActionType{
     GetCoupons,
     AddCoupon,
     UpdateCoupon,
-    DeleteCoupon
+    DeleteCoupon,
+    RemoveState
 }
 
 // 3. Action - an interface describing a single command
@@ -37,6 +38,10 @@ export function deleteCouponAction(id: number): CouponAction {
     return {type: CouponActionType.DeleteCoupon, payload: id};
 }
 
+export function removeStateAction(): CouponAction{
+    return {type: CouponActionType.RemoveState, payload: null};
+}
+
 // 5. reducer - a single fuction performing any of the above actions
 export function couponReduce(currentState: CouponState = new CouponState(), action: CouponAction): CouponState {
     const newState = {...currentState};
@@ -58,6 +63,9 @@ export function couponReduce(currentState: CouponState = new CouponState(), acti
             if (indexToDelete >= 0) {
                 newState.coupons.splice(indexToDelete, 1);
             }
+            break;
+        case CouponActionType.RemoveState:
+            return new CouponState();
     }
     return newState;
 }
