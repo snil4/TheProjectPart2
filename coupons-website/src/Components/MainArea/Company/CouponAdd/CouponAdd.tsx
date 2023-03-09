@@ -13,6 +13,7 @@ function CouponAdd(): JSX.Element {
     async function send(coupon: CouponModel) {
         try {
             coupon.image = (coupon.image as FileList)[0];
+            coupon.startDate = new Date(Date.now());
             await companyService.addCoupon(coupon);
             notificationService.success("Coupon added");
             navigate(`/main/company/coupon`);
@@ -34,6 +35,13 @@ function CouponAdd(): JSX.Element {
                 <input type="number" placeholder="Amount" {...register("amount")}/>
                 <label htmlFor="price">Price: </label>
                 <input type="number" placeholder="Price" {...register("price")} step="0.01"/>
+                <label htmlFor="category">Category: </label>
+                <select {...register("category")}>
+                    <option value="SPORT">Sport</option>
+                    <option value="CLOTHING">Clothing</option>
+                    <option value="ELECTRICITY">Electricity</option>
+                    <option value="CAMPING">Camping</option>
+                </select>
                 <label htmlFor="image">Image: </label>
                 <input type="file" placeholder="Image" {...register("image")}/>
                 <button>Add</button>

@@ -116,10 +116,7 @@ public class CompanyService extends ClientService {
     public List<Coupon> getCompanyCoupons(int companyId) throws CouponSystemException {
 
         try {
-            Company company = companyRepo.findById(companyId).orElseThrow(
-                    () -> new CouponSystemException("Can't find company with id " + companyId));
-            return company.getCoupons();
-
+            return couponRepo.findByCompanyId(companyId);
         } catch (Exception e) {
             throw new CouponSystemException("Can't get comapny coupons",e);
         }

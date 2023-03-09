@@ -21,12 +21,13 @@ class CompanyService {
         if (!authService.checkExpiration()) {
             throw new Error("Token Expired");
         }
-        if (couponsStore.getState().coupons.length === 0) {
+        // if (couponsStore.getState().coupons.length === 0) {
             const header = authService.setAuthHeader();
             const response = await axios.get<CouponModel[]>(config.companyCouponsUrl, {headers: header});
             const coupons = response.data;
+            console.log(coupons);
             couponsStore.dispatch({type: CouponActionType.GetCoupons, payload: coupons});
-        }
+        // }
         return couponsStore.getState().coupons;
     }
 
