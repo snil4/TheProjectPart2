@@ -13,7 +13,7 @@ function CouponsList(): JSX.Element {
     useEffect(() => {
         (async () => {
             try {
-                const list = await customerService.getAllCoupons();
+                const list = await customerService.getCustomerCoupons();
                 setCoupons(list);
             } catch (err: any) {
                 notificationService.error(err);

@@ -36,10 +36,10 @@ public class CustomerController extends ClientController {
     }
 
     @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Coupon> purchaseCoupon(Coupon coupon, HttpServletRequest request){
+    public ResponseEntity<Coupon> purchaseCoupon(int couponId, HttpServletRequest request){
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(customerService.purchaseCoupon(coupon, client.getId()));
+            return ResponseEntity.ok().body(customerService.purchaseCoupon(couponId, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -68,6 +68,15 @@ public class CustomerController extends ClientController {
         try {
             Client client = (Client) request.getAttribute("client");
             return ResponseEntity.ok().body(customerService.getCustomerDetails(client.getId()));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/coupon/all", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<List<Coupon>> getAllCoupons(HttpServletRequest request) {
+        try {
+            return ResponseEntity.ok().body(customerService.getAllCoupons());
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

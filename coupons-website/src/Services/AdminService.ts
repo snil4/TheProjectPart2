@@ -93,7 +93,7 @@ class AdminService {
         const header = authService.setAuthHeader();
         const response = await axios.post<CustomerModel>(config.customersUrl,customer, {headers: header});
         const addedCustomer = response.data;
-        customersStore.dispatch({type: CustomerActionType.AddCustomer, payload: customer});
+        customersStore.dispatch({type: CustomerActionType.AddCustomer, payload: addedCustomer});
         return addedCustomer;
     }
 

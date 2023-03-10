@@ -11,6 +11,7 @@ class DevelopmentConfig{
     public customerUri = this.baseUrl + "customer/";
     public customerCouponUrl = this.customerUri + "coupon";
     public secretKey = "aaaaaaaaa1aaaaaaaaa2aaaaaaaaa3aaaaaaaaa4aaaaaaaaa5"
+    public customerCouponAllUrl = this.customerCouponUrl + "/all"
 }
 
 class ProductionConfig{
@@ -22,6 +23,7 @@ class ProductionConfig{
     public customerUri = this.baseUrl + "customer";
     public customerCouponUrl = this.customerUri + "coupon";
     public secretKey = "aaaaaaaaa1aaaaaaaaa2aaaaaaaaa3aaaaaaaaa4aaaaaaaaa5"
+    public customerCouponAllUrl = this.customerCouponUrl + "/all"
 }
 
 const config = process.env.NODE_ENV === "development" ? new DevelopmentConfig() : new ProductionConfig() ;

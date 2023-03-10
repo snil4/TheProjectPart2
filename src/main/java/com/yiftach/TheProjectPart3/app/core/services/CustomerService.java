@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,12 +38,14 @@ public class CustomerService extends ClientService {
     }
 
     /**
-     * @param coupon Coupon to add to the customer
+     * @param couponId ID of the coupon to add to the customer
      */
-    public Coupon purchaseCoupon(Coupon coupon, int customerId) throws CouponSystemException {
+    public Coupon purchaseCoupon(int couponId, int customerId) throws CouponSystemException {
         try {
             Customer customer = customerRepo.findById(customerId).orElseThrow(
                     () -> new CouponSystemException("Can't find customer with id " + customerId));
+            Coupon coupon = couponRepo.findById(couponId).orElseThrow(
+                    () -> new CouponSystemException("Can't find coupon with id " + couponId));
             if (coupon.getAmount() <= 0) {
                 throw new CouponSystemException("This coupon's amount is empty ");
             } else if (coupon.getEndDate().isBefore(LocalDate.now())) {
@@ -50,7 +53,7 @@ public class CustomerService extends ClientService {
             }
 
             if (customer.getCoupons().size() > 0) {
-                if (couponRepo.findByIdInCustomer(coupon.getId(),customer.getId()).isPresent()){
+                if (couponRepo.findByIdInCustomer(couponId,customerId).isPresent()){
                     throw new CouponSystemException("This customer already has a coupon with the same ID");
                 }
             }
@@ -127,6 +130,14 @@ public class CustomerService extends ClientService {
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
         } catch (Exception e) {
             throw new CouponSystemException("Can't get customer details",e);
+        }
+    }
+
+    public List<Coupon> getAllCoupons() throws CouponSystemException{
+        try {
+            return couponRepo.findAll();
+        } catch (Exception e) {
+            throw new CouponSystemException("Can't get all coupons", e);
         }
     }
 }

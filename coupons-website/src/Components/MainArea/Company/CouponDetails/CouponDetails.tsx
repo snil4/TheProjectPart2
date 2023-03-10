@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import CouponModel from "../../../../Models/CouponModel";
 import companyService from "../../../../Services/CompanyService";
 import notificationService from "../../../../Services/NotificationService";
@@ -11,6 +11,7 @@ function CouponDetails(): JSX.Element {
     const couponId = parseInt(params.couponId);
 
     const [coupon, setCoupon] = useState<CouponModel>();
+    const navigate = useNavigate();
 
     useEffect(() => {
         (async () => {
@@ -22,6 +23,18 @@ function CouponDetails(): JSX.Element {
             }
     })();},[]);
 
+    async function deleteCoupon() {
+        if (window.confirm(`Are you sure you want to delete ${coupon.title}?`)) {
+            try {
+                await companyService.deleteCoupon(couponId);
+                notificationService.success("Coupon deleted");
+                navigate("/main/company/coupon");
+            } catch (err: any) {
+                notificationService.error(err.message);
+            }
+        }
+    }
+
     return (
         <div className="CouponDetails">
             {coupon &&
@@ -32,8 +45,9 @@ function CouponDetails(): JSX.Element {
                 <p>Price: {coupon.price}₪</p>
                 <p>Amount: {coupon.amount}</p>
                 <p>End Date: {coupon.endDate.toString()}</p>
+                <NavLink to={`/main/company/coupon/edit/${couponId}`}>Edit coupon</NavLink>
+                <button onClick={deleteCoupon}>Delete coupon</button>
             </div>}
-            <NavLink to={`/main/company/coupon/edit/${couponId}`}>Edit coupon</NavLink>
 			<NavLink to="/main/company/coupon">Back to coupons list</NavLink>
         </div>
     );

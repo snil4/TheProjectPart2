@@ -14,6 +14,7 @@ function CompanyList(): JSX.Element {
 
     function returnToLogin() {
         notificationService.error("Token expired, please login again");
+        authService.logout();
         navigate("/login");
     }
 

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { NavLink, useNavigate, useParams } from "react-router-dom";
 import CompanyModel from "../../../../Models/CompanyModel";
 import adminService from "../../../../Services/AdminService";
-import authService from "../../../../Services/AuthService";
 import notificationService from "../../../../Services/NotificationService";
 import "./CompanyDetails.css";
 
@@ -18,8 +17,6 @@ function CompanyDetails(): JSX.Element {
         notificationService.error("Token expired, please login again");
         navigate("/login");
     }
-
-
 
     useEffect(() => {
         // if (!authService.checkExpiration() || authService.getClient().role !== "admin") {
@@ -40,19 +37,31 @@ function CompanyDetails(): JSX.Element {
         })();
     },[]);
 
-    if (company) {
+    async function deleteCompany() {
+        if (window.confirm(`Are you sure you want to delete ${company.name}?`)) {
+            try {
+                await adminService.deleteCompany(companyId);
+                notificationService.success("Company deleted");
+                navigate("/main/admin/company");
+            } catch (err: any) {
+                notificationService.error(err.message);
+            }
+        }
+    }
+    
     return (
-        <div className="CompanyDetails Details">
-			<div>
+        <div className="CompanyDetails">
+            {company &&
+			<div className="Details">
                 <p>ID: {company.id}</p>
                 <p>Name: {company.name}</p>
                 <p>Email: {company.email}</p>
                 <NavLink to={`/main/admin/company/edit/${companyId}`}>Edit company</NavLink>
-            </div>
+                <button onClick={deleteCompany}>Delete company</button>
+            </div>}
             <NavLink to="/main/admin/company">Back to companies list</NavLink>
         </div>
     );
-    }
 }
 
 export default CompanyDetails;

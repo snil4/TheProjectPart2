@@ -128,7 +128,7 @@ public class AdminService extends ClientService {
         try {
             return companyRepo.findAll();
         } catch (Exception e) {
-            throw new CouponSystemException(e);
+            throw new CouponSystemException("Can't get all companies ",e);
         }
     }
 
