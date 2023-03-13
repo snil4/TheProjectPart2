@@ -1,15 +1,9 @@
 import { Route, Routes } from "react-router-dom";
 import Login from "../../AuthArea/Login/Login";
-import authService from "../../../Services/AuthService";
 import Home from "../../HomeArea/Home/Home";
 import Layout from "../../MainArea/Shared/Layout/Layout";
 
 function Routing(): JSX.Element {
-    function checkLogin(): boolean {
-        return sessionStorage.getItem("token") !== null 
-        && authService.checkExpiration();
-    }
-
     return (
         <div className="Routing">
 			<Routes>

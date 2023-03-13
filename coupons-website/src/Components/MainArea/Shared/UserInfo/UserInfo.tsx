@@ -1,4 +1,4 @@
-import authService from "../../../../Services/AuthService";
+import { authStore } from "../../../../Redux/AuthState";
 import "./UserInfo.css";
 
 interface UserInfoProps {
@@ -7,7 +7,7 @@ interface UserInfoProps {
 
 function UserInfo(props: UserInfoProps): JSX.Element {
 
-    const user = authService.getClient();
+    const user = authStore.getState().user;
 
     return (
         <div className="UserInfo">

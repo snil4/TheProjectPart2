@@ -4,18 +4,13 @@ import CustomerModel from "../Models/CustomerModel";
 import { companiesStore, CompanyActionType } from "../Redux/CompanyState";
 import { CustomerActionType, customersStore } from "../Redux/CustomerState";
 import config from "../Utils/Config";
-import authService from "./AuthService";
 
 class AdminService {
     // Method for each function on server-side to handle responses from the back-end
 
     public async getAllCompanies(): Promise<CompanyModel[]> {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
         if (companiesStore.getState().companies.length === 0) {
-            const header = authService.setAuthHeader();
-            const response = await axios.get<CompanyModel[]>(config.companiesUrl,{headers: header });
+            const response = await axios.get<CompanyModel[]>(config.companiesUrl);
             const companies = response.data;
             companiesStore.dispatch({type: CompanyActionType.GetCompanies, payload: companies});
         }
@@ -23,54 +18,34 @@ class AdminService {
     }
 
     public async getOneCompany(id: number): Promise<CompanyModel> {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.get<CompanyModel>(`${config.companiesUrl}/${id}`,{headers: header});
+        const response = await axios.get<CompanyModel>(`${config.companiesUrl}/${id}`);
         const company = response.data;
         return company;
     }
 
     public async addCompany(company: CompanyModel){
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.post<CompanyModel>(config.companiesUrl, company, {headers: header});
+        const response = await axios.post<CompanyModel>(config.companiesUrl, company);
         const newCompany = response.data;
         companiesStore.dispatch({type: CompanyActionType.AddCompany, payload: newCompany});
         return newCompany;
     }
 
     public async updateCompany(company: CompanyModel) {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.put<CompanyModel>(config.companiesUrl, company,{headers: header});
+        const response = await axios.put<CompanyModel>(config.companiesUrl, company);
         const updatedCompany = response.data;
         companiesStore.dispatch({type: CompanyActionType.UpdateCompany, payload: updatedCompany});
         return updatedCompany;
     }
 
     public async deleteCompany(id: number){
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const resposne = await axios.delete(`${config.companiesUrl}/${id}`,{headers: header});
+        const resposne = await axios.delete(`${config.companiesUrl}/${id}`);
         companiesStore.dispatch({type: CompanyActionType.DeleteCompany, payload: id});
         return resposne.data;
     }
 
     public async getAllCustomers(): Promise<CustomerModel[]> {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
         if (customersStore.getState().customers.length === 0) {
-            const header = authService.setAuthHeader();
-            const response = await axios.get<CustomerModel[]>(config.customersUrl,{headers: header });
+            const response = await axios.get<CustomerModel[]>(config.customersUrl);
             const customers = response.data;
             customersStore.dispatch({type: CustomerActionType.GetCustomers, payload: customers});
         }
@@ -78,42 +53,26 @@ class AdminService {
     }
 
     public async getOneCustomer(id: number): Promise<CustomerModel> {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.get<CustomerModel>(`${config.customersUrl}/${id}`,{headers: header});
+        const response = await axios.get<CustomerModel>(`${config.customersUrl}/${id}`);
         return response.data;
     }
 
     public async addCustomer(customer: CustomerModel){
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.post<CustomerModel>(config.customersUrl,customer, {headers: header});
+        const response = await axios.post<CustomerModel>(config.customersUrl,customer);
         const addedCustomer = response.data;
         customersStore.dispatch({type: CustomerActionType.AddCustomer, payload: addedCustomer});
         return addedCustomer;
     }
 
     public async updateCustomer(customer: CustomerModel) {
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.put<CustomerModel>(config.customersUrl,customer,{headers: header});
+        const response = await axios.put<CustomerModel>(config.customersUrl,customer);
         const updatedCustomer = response.data;
         customersStore.dispatch({type: CustomerActionType.UpdateCustomer, payload: updatedCustomer});
         return updatedCustomer;
     }
 
     public async deleteCustomer(id: number){
-        if (!authService.checkExpiration()) {
-            throw new Error("Token Expired");
-        }
-        const header = authService.setAuthHeader();
-        const response = await axios.delete(`${config.customersUrl}/${id}`,{headers: header});
+        const response = await axios.delete(`${config.customersUrl}/${id}`);
         customersStore.dispatch({type: CustomerActionType.DeleteCustomer, payload: id});
         return response.data;
     }

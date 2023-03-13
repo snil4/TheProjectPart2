@@ -11,12 +11,8 @@ import { CouponActionType, couponsStore } from "../Redux/CouponState";
 class AuthService {
     // service to handle all authorization type function
 
-    public setAuthHeader() {
-        return { Authorization: `bearer ${sessionStorage.getItem("token")}`};
-    }
 
     public async login(userModel: UserModel):Promise<UserModel>{
-        console.log(userModel);
         
         const url = `${config.baseUrl}${userModel.role.toString().toLowerCase()}/login`;
         const loginModel = new LoginModel(userModel.email, userModel.password);
@@ -26,40 +22,10 @@ class AuthService {
             throw new Error("Email or password are incorrect");
         }
         sessionStorage.setItem("token", promise);
-        const client = authService.getClient();
+        const client = jwtDecode<UserModel>(promise);
         client.role = client.role as Role;
         authStore.dispatch({type: AuthActionType.Login, payload:client});
-        console.log(client);
         return client;
-    }
-
-    public getClient(): UserModel{
-        if (authStore.getState().user !== null) {
-            const user = authStore.getState().user;
-            if (this.checkClientExpiration(user)) {
-                return user;
-            }
-            throw new Error("Token Expired");
-        }
-        return(this.parseJwt(sessionStorage.getItem("token")));
-    }
-
-    public parseJwt(token: string){
-        let client = jwtDecode(token) as UserModel;
-        if (!this.checkClientExpiration(client)) {
-            console.log("Client expiration" + client.exp + ", date now:" + Date.now());
-            throw new Error("Token Expired");
-        }
-        client.id = parseInt(client.sub);
-        return client;
-    }
-
-    public checkExpiration(): boolean{
-        return this.getClient().exp >= (Date.now() / 1000);
-    }
-
-    public checkClientExpiration(client: UserModel): boolean{
-        return client.exp >= (Date.now() / 1000);
     }
 
     public logout(){

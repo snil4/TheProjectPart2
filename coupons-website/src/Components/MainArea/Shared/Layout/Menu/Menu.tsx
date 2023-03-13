@@ -1,4 +1,4 @@
-import authService from "../../../../../Services/AuthService";
+import { authStore } from "../../../../../Redux/AuthState";
 import "./Menu.css";
 import Task from "./Task/Task";
 
@@ -7,7 +7,7 @@ interface MenuProps {
 }
 
 function Menu(props: MenuProps): JSX.Element {
-    const role = authService.getClient().role.toString();
+    const role = authStore.getState().user.role.toString();
 
     if (role === "ADMIN") {
         return (

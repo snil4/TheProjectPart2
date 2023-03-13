@@ -1,9 +1,9 @@
-import authService from "../../../../Services/AuthService";
+import { authStore } from "../../../../Redux/AuthState";
 import "./StartPage.css";
 
 function StartPage(): JSX.Element {
 
-    const user = authService.getClient();
+    const user = authStore.getState().user;
 
     return (        
     <div className="StartPage">

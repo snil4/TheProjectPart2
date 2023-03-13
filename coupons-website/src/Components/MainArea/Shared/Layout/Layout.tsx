@@ -1,9 +1,9 @@
-import authService from "../../../../Services/AuthService";
 import Footer from "./Footer/Footer";
 import Header from "./Header/Header";
 import Menu from "./Menu/Menu";
 import "./Layout.css";
 import MainRouting from "./MainRouting/MainRouting";
+import { authStore } from "../../../../Redux/AuthState";
 
 interface LayoutProps {
     
@@ -11,7 +11,7 @@ interface LayoutProps {
 
 function Layout(props: LayoutProps): JSX.Element {
 
-    const client = authService.parseJwt(sessionStorage.getItem("token"));
+    const client = authStore.getState().user;
 
     return (
         <div className="Layout">
