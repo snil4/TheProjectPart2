@@ -22,7 +22,7 @@ class CustomerService {
     }
 
     public async purchaseCoupon(couponId: number): Promise<CouponModel> {
-        const response = await axios.post<CouponModel>(config.customerCouponUrl,couponId);
+        const response = await axios.post<CouponModel>(`${config.customerCouponUrl}/${couponId}`);
         const addedCoupon = response.data;
         couponsStore.dispatch({type: CouponActionType.DeleteCoupon, payload: addedCoupon});
         return addedCoupon;

@@ -20,7 +20,7 @@ class ProductionConfig{
     public customersUrl = this.baseUrl + "admin/customer";
     public companyUri = this.baseUrl + "company/";
     public companyCouponsUrl = this.companyUri + "coupon";
-    public customerUri = this.baseUrl + "customer";
+    public customerUri = this.baseUrl + "customer/";
     public customerCouponUrl = this.customerUri + "coupon";
     public secretKey = "aaaaaaaaa1aaaaaaaaa2aaaaaaaaa3aaaaaaaaa4aaaaaaaaa5"
     public customerCouponAllUrl = this.customerCouponUrl + "/all"

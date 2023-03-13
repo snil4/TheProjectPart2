@@ -36,10 +36,12 @@ public class CustomerController extends ClientController {
     }
 
     @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<Coupon> purchaseCoupon(int couponId, HttpServletRequest request){
+    public ResponseEntity<Coupon> purchaseCoupon(@PathVariable String couponId, HttpServletRequest request){
+        System.out.println(couponId);
+        int id = Integer.parseInt(couponId);
         try {
             Client client = (Client) request.getAttribute("client");
-            return ResponseEntity.ok().body(customerService.purchaseCoupon(couponId, client.getId()));
+            return ResponseEntity.ok().body(customerService.purchaseCoupon(id, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

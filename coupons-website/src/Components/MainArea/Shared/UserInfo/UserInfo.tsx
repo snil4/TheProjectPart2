@@ -14,7 +14,7 @@ function UserInfo(props: UserInfoProps): JSX.Element {
         <p>Name: {user.name}</p>
         <p>Role: {user.role}</p>
         <p>Email: {user.email}</p>
-        <p>ID: {user.id}</p>
+        <p>ID: {user.sub}</p>
     </div>
     );
 }

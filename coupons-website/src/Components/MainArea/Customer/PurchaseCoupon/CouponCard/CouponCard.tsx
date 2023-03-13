@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import CouponModel from "../../../../../Models/CouponModel";
 import customerService from "../../../../../Services/CustomerService";
 import notificationService from "../../../../../Services/NotificationService";
@@ -9,14 +10,19 @@ interface CouponCardProps {
 
 function CouponCard(props: CouponCardProps): JSX.Element {
 
-    async function PurchaseCoupon() {
-        try {
-            await customerService.purchaseCoupon(props.coupon.id);
-            notificationService.success("coupon purhased");
+    const navigate = useNavigate();
+    console.log(props.coupon);
 
-        } catch (err: any) {
-            notificationService.error(err.message);
-        }
+    async function PurchaseCoupon() {
+        if (window.confirm(`Are you sure you want to purchase coupon ${props.coupon.id}?`)) {
+            try {
+                await customerService.purchaseCoupon(props.coupon.id);
+                notificationService.success("coupon purhased");
+                navigate("main/customer/coupon");
+            } catch (err: any) {
+                notificationService.error(err.message);
+            }
+        }  
     }
 
     return (
