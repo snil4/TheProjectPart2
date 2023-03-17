@@ -64,7 +64,7 @@ public class CustomerService extends ClientService {
             return coupon;
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't purchase coupon: ",e);
+            throw new CouponSystemException("Can't purchase coupon: " + e.getMessage(),e);
         }
 
     }
@@ -78,7 +78,7 @@ public class CustomerService extends ClientService {
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
             return customer.getCoupons();
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all customer coupons",e);
+            throw new CouponSystemException("Can't get all customer coupons: " + e.getMessage(),e);
         }
     }
 
@@ -88,7 +88,7 @@ public class CustomerService extends ClientService {
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
             return couponRepo.findByCategoryAndMaxPriceAndCustomerId(category.name(), maxPrice, customer.getId());
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all customer coupons",e);
+            throw new CouponSystemException("Can't get all customer coupons: " + e.getMessage(),e);
         }
     }
 
@@ -102,7 +102,7 @@ public class CustomerService extends ClientService {
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
             return couponRepo.findByCategoryAndCustomerId(category.name(), customer.getId());
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get customer coupons",e);
+            throw new CouponSystemException("Can't get customer coupons: " + e.getMessage(),e);
         }
     }
 
@@ -116,7 +116,7 @@ public class CustomerService extends ClientService {
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
             return couponRepo.findByMaxPriceAndCustomerId(maxPrice,customer.getId());
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get customer coupons",e);
+            throw new CouponSystemException("Can't get customer coupons: " + e.getMessage(),e);
         }
 
     }
@@ -129,15 +129,24 @@ public class CustomerService extends ClientService {
             return customerRepo.findById(customerId)
                     .orElseThrow(() -> new CouponSystemException("Can't find customer with id " + customerId));
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get customer details",e);
+            throw new CouponSystemException("Can't get customer details: " + e.getMessage(),e);
         }
     }
 
-    public List<Coupon> getAllCoupons() throws CouponSystemException{
+    public List<Coupon> getAllCoupons(int customerId) throws CouponSystemException{
         try {
             return couponRepo.findAll();
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all coupons", e);
+            throw new CouponSystemException("Can't get all coupons: " + e.getMessage(), e);
+        }
+    }
+
+    public Coupon getOneCoupon(int couponId, int customerId) throws CouponSystemException {
+        try {
+            return couponRepo.findByIdInCustomer(couponId, customerId)
+                    .orElseThrow(() -> new CouponSystemException("Can't find coupon with id " + couponId + " in customer " + customerId));
+        } catch (Exception e) {
+            throw new CouponSystemException("Can't get coupon: " + e.getMessage(),e);
         }
     }
 }

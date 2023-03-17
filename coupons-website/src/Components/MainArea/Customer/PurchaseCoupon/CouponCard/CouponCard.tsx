@@ -11,16 +11,15 @@ interface CouponCardProps {
 function CouponCard(props: CouponCardProps): JSX.Element {
 
     const navigate = useNavigate();
-    console.log(props.coupon);
 
     async function PurchaseCoupon() {
-        if (window.confirm(`Are you sure you want to purchase coupon ${props.coupon.id}?`)) {
+        if (window.confirm(`Are you sure you want to purchase ${props.coupon.title} coupon?`)) {
             try {
                 await customerService.purchaseCoupon(props.coupon.id);
                 notificationService.success("coupon purhased");
-                navigate("main/customer/coupon");
+                navigate("/main/customer/coupon");
             } catch (err: any) {
-                notificationService.error(err.message);
+                notificationService.error(err);
             }
         }  
     }

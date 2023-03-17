@@ -106,7 +106,7 @@ public class CompanyService extends ClientService {
                 }
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't delete coupon with ID " + couponID, e);
+            throw new CouponSystemException("Can't delete coupon with ID: " + e.getMessage(), e);
         }
     }
 
@@ -118,7 +118,7 @@ public class CompanyService extends ClientService {
         try {
             return couponRepo.findByCompanyId(companyId);
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get comapny coupons",e);
+            throw new CouponSystemException("Can't get comapny coupons: " + e.getMessage(),e);
         }
     }
 
@@ -132,7 +132,7 @@ public class CompanyService extends ClientService {
         try {
             return couponRepo.findByCategoryAndCompanyId(category, companyId);
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all company coupons by category " + category.name(),e);
+            throw new CouponSystemException("Can't get all company coupons by category: " + e.getMessage(),e);
         }
     }
 
@@ -146,7 +146,7 @@ public class CompanyService extends ClientService {
             return couponRepo.findByPriceLessThanEqualAndCompanyId(maxPrice, companyId);
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get company coupons ",e);
+            throw new CouponSystemException("Can't get company coupons: " + e.getMessage(),e);
         }
     }
 
@@ -156,7 +156,7 @@ public class CompanyService extends ClientService {
             return couponRepo.findByCategoryAndPriceLessThanEqualAndCompanyId(category, maxPrice, companyId);
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get company coupons ",e);
+            throw new CouponSystemException("Can't get company coupons: " + e.getMessage(),e);
         }
     }
 
@@ -165,7 +165,7 @@ public class CompanyService extends ClientService {
             return couponRepo.findByIdAndCompanyId(id,companyId).orElseThrow(() ->
                     new CouponSystemException("Can't find coupon with id " + id + " in company with id " + companyId));
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get coupon ", e);
+            throw new CouponSystemException("Can't get coupon: " + e.getMessage(), e);
         }
     }
 
@@ -177,7 +177,7 @@ public class CompanyService extends ClientService {
             return companyRepo.findById(companyId).orElseThrow(
                     () -> new CouponSystemException("Can't find company with id " + companyId));
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get company details",e);
+            throw new CouponSystemException("Can't get company details: " + e.getMessage(),e);
         }
     }
 }

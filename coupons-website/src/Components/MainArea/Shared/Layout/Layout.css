@@ -41,12 +41,13 @@ a {
 }
 
 .Add {
-    position: absolute;
-    width: 50%;
-    font-size: x-large;
-    text-decoration: underline;
+    position: fixed;
+    bottom: 100px;
+    right: 100px;
+    font-size: xx-large;
+    text-decoration:none;
     -webkit-text-stroke-width: 4px;
-    -webkit-text-stroke-color: bisque;
+    -webkit-text-stroke-color: green;
 }
 
 .Card {

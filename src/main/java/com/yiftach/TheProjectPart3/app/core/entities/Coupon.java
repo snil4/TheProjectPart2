@@ -16,7 +16,6 @@ public class Coupon {
     private int id;
     @ManyToOne
     @JoinColumn(name = "company_id")
-    @JsonIgnore
     private Company company;
     @Enumerated(EnumType.STRING)
     private Category category;
@@ -29,10 +28,13 @@ public class Coupon {
     private LocalDate endDate;
     private int amount;
     private double price;
-    private String image;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "image_id",referencedColumnName = "id")
+    private ImageData image;
     @ManyToMany
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "coupon_id")
     ,inverseJoinColumns = @JoinColumn(name = "customer_id"))
+    @JsonIgnore
     private List<Customer> customers;
 
     public Coupon() {
@@ -51,7 +53,7 @@ public class Coupon {
     }
 
     public Coupon(int id, Company company, Category category, String title, String description, LocalDate startDate,
-                  LocalDate endDate, int amount, double price, String image) {
+                  LocalDate endDate, int amount, double price, ImageData image) {
         setId(id);
         setCompany(company);
         setCategory(category);
@@ -152,11 +154,11 @@ public class Coupon {
         this.price = price;
     }
 
-    public String getImage() {
+    public ImageData getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(ImageData image) {
         this.image = image;
     }
 }

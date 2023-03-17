@@ -18,7 +18,8 @@ function CouponsList(): JSX.Element {
             } catch (err: any) {
                 notificationService.error(err);
             }
-    })();},[]);
+        })();
+    },[]);
 
     return (
     <div className="CouponsList">

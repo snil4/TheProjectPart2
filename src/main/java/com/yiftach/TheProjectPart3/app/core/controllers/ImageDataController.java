@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.io.IOException;
-
 @RestController
 @RequestMapping("/image")
 public class ImageDataController {
@@ -21,7 +19,7 @@ public class ImageDataController {
     private ImageDataService imageDataService;
 
     @PostMapping
-    public ResponseEntity<?> uploadImage(@RequestParam("image") MultipartFile file) {
+    public ResponseEntity<ImageData> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(imageDataService.uploadImage(file));
@@ -31,7 +29,7 @@ public class ImageDataController {
     }
 
     @GetMapping("/info/{name}")
-    public ResponseEntity<?>  getImageInfoByName(@PathVariable("name") String name){
+    public ResponseEntity<ImageData> getImageInfoByName(@PathVariable("name") String name){
         try {
             ImageData image = imageDataService.getInfoByImageByName(name);
 
@@ -43,12 +41,16 @@ public class ImageDataController {
     }
 
     @GetMapping("/{name}")
-    public ResponseEntity<?>  getImageByName(@PathVariable("name") String name){
-        byte[] image = imageDataService.getImage(name);
+    public ResponseEntity<byte[]>  getImageByName(@PathVariable("name") String name){
+        try {
+            byte[] image = imageDataService.getImage(name);
 
-        return ResponseEntity.status(HttpStatus.OK)
-                .contentType(MediaType.valueOf("image/png"))
-                .body(image);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .contentType(MediaType.valueOf("image/png"))
+                    .body(image);
+        } catch (CouponSystemException e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
     }
 
 

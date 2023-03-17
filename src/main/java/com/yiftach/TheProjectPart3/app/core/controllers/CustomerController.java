@@ -5,6 +5,7 @@ import com.yiftach.TheProjectPart3.app.core.data.Login;
 import com.yiftach.TheProjectPart3.app.core.entities.Client;
 import com.yiftach.TheProjectPart3.app.core.entities.Coupon;
 import com.yiftach.TheProjectPart3.app.core.entities.Customer;
+import com.yiftach.TheProjectPart3.app.core.repositories.CouponRepo;
 import com.yiftach.TheProjectPart3.app.core.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -24,6 +25,8 @@ public class CustomerController extends ClientController {
 
     @Autowired
     private CustomerService customerService;
+    @Autowired
+    private CouponRepo couponRepo;
 
     @Override
     @PostMapping("/login")
@@ -35,9 +38,8 @@ public class CustomerController extends ClientController {
         }
     }
 
-    @PostMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
+    @PostMapping(path = "/coupon/{couponId}", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<Coupon> purchaseCoupon(@PathVariable String couponId, HttpServletRequest request){
-        System.out.println(couponId);
         int id = Integer.parseInt(couponId);
         try {
             Client client = (Client) request.getAttribute("client");
@@ -78,7 +80,18 @@ public class CustomerController extends ClientController {
     @GetMapping(path = "/coupon/all", headers = { HttpHeaders.AUTHORIZATION })
     public ResponseEntity<List<Coupon>> getAllCoupons(HttpServletRequest request) {
         try {
-            return ResponseEntity.ok().body(customerService.getAllCoupons());
+            Client client = (Client) request.getAttribute("client");
+            return ResponseEntity.ok().body(customerService.getAllCoupons(client.getId()));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/coupon/{couponId}", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<Coupon> getOneCoupon(@PathVariable int couponId, HttpServletRequest request) {
+        try {
+            Client client = (Client) request.getAttribute("client");
+            return ResponseEntity.ok().body(customerService.getOneCoupon(couponId, client.getId()));
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }

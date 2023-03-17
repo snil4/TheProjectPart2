@@ -24,12 +24,17 @@ class CustomerService {
     public async purchaseCoupon(couponId: number): Promise<CouponModel> {
         const response = await axios.post<CouponModel>(`${config.customerCouponUrl}/${couponId}`);
         const addedCoupon = response.data;
-        couponsStore.dispatch({type: CouponActionType.DeleteCoupon, payload: addedCoupon});
+        couponsStore.dispatch({type: CouponActionType.AddCoupon, payload: addedCoupon});
         return addedCoupon;
     }
 
     public async getAllCoupons(): Promise<CouponModel[]> {
         const response = await axios.get<CouponModel[]>(config.customerCouponAllUrl);
+        return response.data;
+    }
+
+    public async getOneCoupon(couponId: number): Promise<CouponModel> {
+        const response = await axios.get<CouponModel>(`${config.customerCouponUrl}/${couponId}`);
         return response.data;
     }
 }

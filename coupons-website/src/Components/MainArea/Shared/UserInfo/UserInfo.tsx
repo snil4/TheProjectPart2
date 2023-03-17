@@ -12,8 +12,8 @@ function UserInfo(props: UserInfoProps): JSX.Element {
     return (
         <div className="UserInfo">
         <p>Name: {user.name}</p>
-        <p>Role: {user.role}</p>
         <p>Email: {user.email}</p>
+        <p>Role: {user.role}</p>
         <p>ID: {user.sub}</p>
     </div>
     );

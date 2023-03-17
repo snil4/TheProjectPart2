@@ -18,6 +18,8 @@ function CouponDetails(): JSX.Element {
             try {
                 const newCoupon = await companyService.getOneCoupon(couponId);
                 setCoupon(newCoupon);
+                console.log(newCoupon);
+                
             } catch (err: any) {
                 notificationService.error(err);
             }
@@ -39,12 +41,12 @@ function CouponDetails(): JSX.Element {
         <div className="CouponDetails">
             {coupon &&
             <div className="Details">
-                <p>ID: {coupon.id}</p>
                 <p>Title: {coupon.title}</p>
                 <p>Category: {coupon.category}</p>
                 <p>Price: {coupon.price}₪</p>
                 <p>Amount: {coupon.amount}</p>
-                <p>End Date: {coupon.endDate.toString()}</p>
+                <p>Expiration Date: {coupon.endDate.toString()}</p>
+                <p>ID: {coupon.id}</p>
                 <NavLink to={`/main/company/coupon/edit/${couponId}`}>Edit coupon</NavLink>
                 <button onClick={deleteCoupon}>Delete coupon</button>
             </div>}

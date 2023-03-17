@@ -44,7 +44,6 @@ class CompanyService {
     }
 
     public async addCoupon(coupon: CouponModel) {
-        coupon.image = coupon.image as string;
         const response = await axios.post<CouponModel>(config.companyCouponsUrl,coupon);
         const addedCoupon = response.data;
         couponsStore.dispatch({type:CouponActionType.AddCoupon, payload:addedCoupon});

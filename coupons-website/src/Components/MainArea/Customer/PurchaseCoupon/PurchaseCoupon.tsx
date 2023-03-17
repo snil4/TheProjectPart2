@@ -15,7 +15,7 @@ function PurchaseCoupon(): JSX.Element {
                 const newCoupons = await customerService.getAllCoupons();
                 setCoupons(newCoupons);
             } catch (err: any) {
-                notificationService.error(err.message);
+                notificationService.error(err);
             }
         }
     )();},[]);

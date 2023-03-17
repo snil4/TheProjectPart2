@@ -76,7 +76,7 @@ public class TheProjectPart3Application {
 						.allowedMethods(CorsConfiguration.ALL)
 						.allowedHeaders(CorsConfiguration.ALL)
 						.allowCredentials(true)
-						.allowedOrigins("http://localhost:3000/*");
+						.allowedOrigins("http://localhost:3000");
 			}
 		};
 	}

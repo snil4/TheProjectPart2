@@ -43,7 +43,7 @@ public class AdminService extends ClientService {
                 return null;
             }
         } catch (Exception e) {
-            throw new CouponSystemException("Can't login as admin");
+            throw new CouponSystemException("Can't login as admin: " + e.getMessage());
         }
     }
 
@@ -63,7 +63,7 @@ public class AdminService extends ClientService {
 
             return companyRepo.save(company);
         } catch (Exception e) {
-            throw new CouponSystemException("Can't add company " + company.getId(),e);
+            throw new CouponSystemException("Can't add company: " + e.getMessage(),e);
         }
 
     }
@@ -91,7 +91,7 @@ public class AdminService extends ClientService {
             return companyRepo.save(company);
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't update company",e);
+            throw new CouponSystemException("Can't update company: " + e.getMessage(),e);
         }
 
     }
@@ -116,7 +116,7 @@ public class AdminService extends ClientService {
             }
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't delete company ",e);
+            throw new CouponSystemException("Can't delete company: " + e.getMessage(),e);
         }
 
     }
@@ -128,7 +128,7 @@ public class AdminService extends ClientService {
         try {
             return companyRepo.findAll();
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all companies ",e);
+            throw new CouponSystemException("Can't get all companies: " + e.getMessage(),e);
         }
     }
 
@@ -147,7 +147,7 @@ public class AdminService extends ClientService {
             }
 
         } catch (Exception e) {
-            throw new CouponSystemException(e);
+            throw new CouponSystemException("Can't get company: " + e.getMessage());
         }
     }
 
@@ -162,7 +162,7 @@ public class AdminService extends ClientService {
             }
             return customerRepo.save(customer);
         } catch (Exception e){
-            throw new CouponSystemException("Can't add customer " + customer.getId(),e);
+            throw new CouponSystemException("Can't add customer: " + e.getMessage(),e);
         }
     }
 
@@ -173,7 +173,7 @@ public class AdminService extends ClientService {
         try {
             return customerRepo.save(customer);
         } catch (Exception e) {
-            throw new CouponSystemException("Can't update customer " + customer.getId(),e);
+            throw new CouponSystemException("Can't update customer: " + e.getMessage(),e);
         }
     }
 
@@ -194,7 +194,7 @@ public class AdminService extends ClientService {
 
             }
         } catch (Exception e) {
-            throw new CouponSystemException("Can't delete customer " + customerID,e);
+            throw new CouponSystemException("Can't delete customer: " + e.getMessage(),e);
 
         }
     }
@@ -208,7 +208,7 @@ public class AdminService extends ClientService {
             return customerRepo.findAll();
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all customers",e);
+            throw new CouponSystemException("Can't get all customers: " + e.getMessage(),e);
 
         }
     }
@@ -231,7 +231,7 @@ public class AdminService extends ClientService {
             }
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get cutsomer " + customerID,e);
+            throw new CouponSystemException("Can't get cutsomer: " + e.getMessage(),e);
         }
     }
 
@@ -241,7 +241,7 @@ public class AdminService extends ClientService {
             return couponRepo.findAll();
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get all coupons",e);
+            throw new CouponSystemException("Can't get all coupons: " + e.getMessage(),e);
         }
     }
 }
