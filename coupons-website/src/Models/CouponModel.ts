@@ -1,5 +1,6 @@
 import CompanyModel from "./CompanyModel";
 import CustomerModel from "./CustomerModel";
+import ImageModel from "./ImageModel";
 
 class CouponModel{
     public id: number;
@@ -11,7 +12,8 @@ class CouponModel{
     public endDate: Date;
     public amount: number;
     public price: number;
-    public image: ImageData;
+    public image: File | FileList;
+    public imageName: string;
     public customers: CustomerModel[];
 }
 

@@ -1,5 +1,6 @@
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate, useParams } from "react-router-dom";
+import { NavLink, useNavigate, useParams } from "react-router-dom";
 import CouponModel from "../../../../Models/CouponModel";
 import companyService from "../../../../Services/CompanyService";
 import notificationService from "../../../../Services/NotificationService";
@@ -10,8 +11,27 @@ function CouponEdit(): JSX.Element {
     const params = useParams();
     const couponId = parseInt(params.couponId);
 
-    const {register, handleSubmit} = useForm<CouponModel>();
+    const {register, handleSubmit, setValue} = useForm<CouponModel>();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        (async () => {
+            const coupon = await companyService.getOneCoupon(couponId);
+            if (coupon) {
+                setValue("id", coupon.id);
+                setValue("title", coupon.title);
+                setValue("description", coupon.description);
+                setValue("amount", coupon.amount);
+                setValue("category", coupon.category);
+                setValue("company", coupon.company);
+                setValue("customers", coupon.customers);
+                setValue("endDate", coupon.endDate);
+                setValue("startDate", coupon.startDate);
+                setValue("price", coupon.price);
+                setValue("image", coupon.image);
+            }
+        })();
+    },[]);
 
     async function send(coupon: CouponModel){
         try {
@@ -40,6 +60,7 @@ function CouponEdit(): JSX.Element {
                 <input type="file" placeholder="Image" {...register("image")}/>
                 <button>Add</button>
             </form>
+            <NavLink to={`/main/company/coupon/${couponId}`}>Back to coupon details</NavLink>
         </div>
     );
 }

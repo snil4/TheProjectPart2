@@ -3,13 +3,15 @@ import { NavLink, useParams } from "react-router-dom";
 import CouponModel from "../../../../Models/CouponModel";
 import customerService from "../../../../Services/CustomerService";
 import notificationService from "../../../../Services/NotificationService";
+import config from "../../../../Utils/Config";
 import "./CouponDetails.css";
 
 function CouponDetails(): JSX.Element {
 
     const params = useParams();
     const couponId = parseInt(params.couponId);
-
+    
+    const [imageUrl, setImageUrl] = useState<string>();
     const [coupon, setCoupon] = useState<CouponModel>();
 
     useEffect(() => {
@@ -23,6 +25,10 @@ function CouponDetails(): JSX.Element {
         })();
     },[]);
 
+    if (coupon && coupon.image) {
+        setImageUrl(config.imageUrl + (coupon.image as File).name);
+    }
+
     return (
         <div className="CouponDetails">
             {coupon && <div className="Card">
@@ -31,6 +37,7 @@ function CouponDetails(): JSX.Element {
                 <p>Description: {coupon.description}</p>
                 <p>Price: {coupon.price}</p>
                 <p>Company: {coupon.company.name}</p>
+                {coupon.image && <img src={imageUrl}/>}
             </div>}
 			<NavLink to="/main/customer/coupon">Back to coupons list</NavLink>
         </div>

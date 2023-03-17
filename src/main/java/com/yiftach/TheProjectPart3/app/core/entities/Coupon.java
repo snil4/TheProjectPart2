@@ -28,9 +28,7 @@ public class Coupon {
     private LocalDate endDate;
     private int amount;
     private double price;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "image_id",referencedColumnName = "id")
-    private ImageData image;
+    private String imageName;
     @ManyToMany
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "coupon_id")
     ,inverseJoinColumns = @JoinColumn(name = "customer_id"))
@@ -53,7 +51,7 @@ public class Coupon {
     }
 
     public Coupon(int id, Company company, Category category, String title, String description, LocalDate startDate,
-                  LocalDate endDate, int amount, double price, ImageData image) {
+                  LocalDate endDate, int amount, double price, String imageName) {
         setId(id);
         setCompany(company);
         setCategory(category);
@@ -63,7 +61,7 @@ public class Coupon {
         setEndDate(endDate);
         setAmount(amount);
         setPrice(price);
-        setImage(image);
+        setImage(imageName);
     }
 
     @Override
@@ -78,7 +76,7 @@ public class Coupon {
                 ", endDate=" + endDate +
                 ", amount=" + amount +
                 ", price=" + price +
-                ", image='" + image + '\'' +
+                ", image='" + imageName + '\'' +
                 '}';
     }
 
@@ -154,11 +152,11 @@ public class Coupon {
         this.price = price;
     }
 
-    public ImageData getImage() {
-        return image;
+    public String getImageName() {
+        return imageName;
     }
 
-    public void setImage(ImageData image) {
-        this.image = image;
+    public void setImage(String imageName) {
+        this.imageName = imageName;
     }
 }

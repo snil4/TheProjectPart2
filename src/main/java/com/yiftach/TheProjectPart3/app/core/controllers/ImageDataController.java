@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.transaction.Transactional;
+
 @RestController
 @RequestMapping("/image")
+@Transactional
 public class ImageDataController {
 
     @Autowired
@@ -52,6 +55,4 @@ public class ImageDataController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
-
-
 }

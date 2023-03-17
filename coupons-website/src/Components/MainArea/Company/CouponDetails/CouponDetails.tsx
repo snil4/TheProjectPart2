@@ -3,6 +3,7 @@ import { NavLink, useNavigate, useParams } from "react-router-dom";
 import CouponModel from "../../../../Models/CouponModel";
 import companyService from "../../../../Services/CompanyService";
 import notificationService from "../../../../Services/NotificationService";
+import config from "../../../../Utils/Config";
 import "./CouponDetails.css";
 
 function CouponDetails(): JSX.Element {
@@ -11,6 +12,7 @@ function CouponDetails(): JSX.Element {
     const couponId = parseInt(params.couponId);
 
     const [coupon, setCoupon] = useState<CouponModel>();
+    const [imageUrl, setImageUrl] = useState<string>();
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,8 +20,10 @@ function CouponDetails(): JSX.Element {
             try {
                 const newCoupon = await companyService.getOneCoupon(couponId);
                 setCoupon(newCoupon);
+                if (newCoupon.image) {
+                    setImageUrl(config.imageUrl+(newCoupon.image as File).name);
+                }
                 console.log(newCoupon);
-                
             } catch (err: any) {
                 notificationService.error(err);
             }
@@ -46,6 +50,8 @@ function CouponDetails(): JSX.Element {
                 <p>Price: {coupon.price}₪</p>
                 <p>Amount: {coupon.amount}</p>
                 <p>Expiration Date: {coupon.endDate.toString()}</p>
+                <p>Description: {coupon.description}</p>
+                {coupon.image && <img src={imageUrl}/>}
                 <p>ID: {coupon.id}</p>
                 <NavLink to={`/main/company/coupon/edit/${couponId}`}>Edit coupon</NavLink>
                 <button onClick={deleteCoupon}>Delete coupon</button>

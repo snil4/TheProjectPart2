@@ -34,15 +34,18 @@ public class ImageDataService {
 
     }
 
-    @Transactional
     public ImageData getInfoByImageByName(String name) throws CouponSystemException {
         try {
             Optional<ImageData> dbImage = imageDataRepository.findByName(name);
 
-            return new ImageData(
-                    dbImage.get().getId(), dbImage.get().getName(),
-                    dbImage.get().getType(),
-                    ImageUtil.decompressImage(dbImage.get().getImageData()));
+            if (dbImage.isPresent()) {
+                ImageData imageData = dbImage.get();
+
+                return new ImageData(imageData.getId(), imageData.getName(), imageData.getType(),
+                        ImageUtil.decompressImage(imageData.getImageData()));
+            } else {
+                return null;
+            }
         } catch (Exception e) {
             throw new CouponSystemException("Can't get info: " + e.getMessage(),e);
         }
