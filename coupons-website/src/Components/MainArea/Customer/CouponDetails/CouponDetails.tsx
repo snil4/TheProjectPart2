@@ -19,7 +19,7 @@ function CouponDetails(): JSX.Element {
             try {
                 const newCoupon = await customerService.getOneCoupon(couponId);
                 setCoupon(newCoupon);
-                setImageUrl(config.imageUrl + coupon.imageName);
+                setImageUrl(config.imageUrl + newCoupon.imageName);
             } catch (err: any) {
                 notificationService.error(err.message);
             }
@@ -28,7 +28,7 @@ function CouponDetails(): JSX.Element {
 
     return (
         <div className="CouponDetails">
-            {coupon && <div className="Card">
+            {coupon && <div className="Details">
                 <p>Name: {coupon.title}</p>
                 <p>Category: {coupon.category}</p>
                 <p>Description: {coupon.description}</p>

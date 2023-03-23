@@ -15,8 +15,12 @@ class NotificationService{
 
     private extractErrorMessage(error: any): string {
 
+        if (typeof error.response?.data?.message === "string") return error.response.data.message.toString();
+
+        if (typeof error.response?.data === "string") return error.response.data.toString();
+
         // back throws an error as a message
-        if (typeof error.response?.message === "string") return error.response.message.toString;
+        if (typeof error.response?.message === "string") return error.response.message.toString();
 
         // front threw Error
         if(typeof error.message === "string") return error.message;

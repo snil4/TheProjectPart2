@@ -3,6 +3,7 @@ import "./Login.css";
 import { useForm } from "react-hook-form";
 import authService from "../../../Services/AuthService";
 import UserModel from "../../../Models/UserModel";
+import notificationService from "../../../Services/NotificationService";
 
 interface LoginProps {
 
@@ -18,7 +19,7 @@ function Login(props: LoginProps): JSX.Element {
             await authService.login(user);
             navigate("/main/start");
         } catch (error) {
-            alert(error + ", please try again");
+            notificationService.error(error + ", please try again");
         }
     }
 

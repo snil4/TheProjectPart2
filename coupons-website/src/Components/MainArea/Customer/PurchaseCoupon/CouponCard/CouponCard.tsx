@@ -27,7 +27,6 @@ function CouponCard(props: CouponCardProps): JSX.Element {
     return (
         <button onClick={PurchaseCoupon}>
             <div className="CouponCard Card">
-                <p>ID: {props.coupon.id}</p>
                 <p>Title: {props.coupon.title}</p>
                 <p>Category: {props.coupon.category}</p>
                 <p>Price: {props.coupon.price}₪</p>

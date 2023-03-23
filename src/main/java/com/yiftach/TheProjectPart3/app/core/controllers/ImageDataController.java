@@ -23,7 +23,7 @@ public class ImageDataController {
     private ImageDataService imageDataService;
 
     @PostMapping
-    public ResponseEntity<ImageData> uploadImage(@RequestParam("image") MultipartFile file) {
+    public ResponseEntity<String> uploadImage(@RequestParam("image") MultipartFile file) {
         try {
             return ResponseEntity.status(HttpStatus.OK)
                     .body(imageDataService.uploadImage(file));

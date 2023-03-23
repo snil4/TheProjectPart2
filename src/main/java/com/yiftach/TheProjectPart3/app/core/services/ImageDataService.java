@@ -19,14 +19,23 @@ public class ImageDataService {
     @Autowired
     private ImageDataRepo imageDataRepository;
 
-    public ImageData uploadImage(MultipartFile file) throws CouponSystemException {
-        System.out.println(file);
+    /**
+     * @param file The image to upload
+     * @return The file's final name
+     */
+    public String uploadImage(MultipartFile file) throws CouponSystemException {
+        String fileName;
         try {
-            ImageData imageData = new ImageData(0L,file.getOriginalFilename(), file.getContentType(),
+            if (imageDataRepository.findByName(file.getOriginalFilename()).isPresent()) {
+                fileName = "_" + file.getOriginalFilename();
+            } else {
+                fileName = file.getOriginalFilename();
+            }
+            ImageData imageData = new ImageData(0L, fileName, file.getContentType(),
                     ImageUtil.compressImage(file.getBytes()));
 
             imageDataRepository.save(imageData);
-            return imageData;
+            return imageData.getName();
         } catch (Exception e) {
             throw new CouponSystemException("Can't upload image: " + e.getMessage(), e);
         }
