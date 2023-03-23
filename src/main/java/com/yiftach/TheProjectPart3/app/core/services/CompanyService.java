@@ -88,25 +88,18 @@ public class CompanyService extends ClientService {
     public void deleteCoupon(int couponID, int companyId) throws CouponSystemException {
         try {
             Company company = companyRepo.findById(companyId).orElseThrow(
-                    () -> new CouponSystemException("Can't find coupon with id " + companyId));
-            Optional<Coupon> optional = couponRepo.findById(couponID);
+                    () -> new CouponSystemException("Can't find company with id " + companyId));
+            Optional<Coupon> optional = couponRepo.findByIdAndCompanyId(couponID,companyId);
 
                 if (optional.isPresent()) {
                     Coupon coupon = optional.get();
-
-                    if (coupon.getCompany().equals(company)) {
-                        company.removeCoupon(couponID);
-
-                        companyRepo.save(company);
                         couponRepo.delete(coupon);
-
                     } else {
                         throw new CouponSystemException("Coupon with ID " + couponID + " is not in this company");
                     }
-                }
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't delete coupon with ID: " + e.getMessage(), e);
+            throw new CouponSystemException("Can't delete coupon with ID " + couponID +  ": " + e.getMessage(), e);
         }
     }
 

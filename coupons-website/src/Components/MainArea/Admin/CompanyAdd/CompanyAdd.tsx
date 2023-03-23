@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 function CompanyAdd(): JSX.Element {
 
-    const {register, handleSubmit} = useForm<CompanyModel>();
+    const {register, handleSubmit, formState} = useForm<CompanyModel>();
     const navigate = useNavigate();
     
     function returnToLogin() {
@@ -39,12 +39,23 @@ function CompanyAdd(): JSX.Element {
 
     return (<div className="CompanyAdd">
     <form onSubmit={handleSubmit(send)}>
-        <label htmlFor="name">Name:</label>
-        <input placeholder="name" {...register("name")}/>
-        <label htmlFor="name">Email:</label>
-        <input type="email" placeholder="email" {...register("email")}/>
-        <label htmlFor="name">Password:</label>
-        <input type="password" placeholder="password" {...register("password")}/>
+        <label htmlFor="name">Name:</label><span>{formState.errors?.name?.message}</span>
+        <input placeholder="name" {...register("name",{
+            required: {value: true, message: "Company must have a name"}
+        })}/>
+
+        <label htmlFor="name">Email:</label><span>{formState.errors?.email?.message}</span>
+        <input type="email" placeholder="email" {...register("email",{
+            required: {value: true, message: "Company must have an email to register"},
+            minLength: {value: 5, message: "Email must be longer than 5 characters"}
+        })}/>
+
+        <label htmlFor="name">Password:</label><span>{formState.errors?.password?.message}</span>
+        <input type="password" placeholder="password" {...register("password", {
+            required: {value: true, message:"Must enter a password"},
+            minLength: {value: 8, message: "Password must be longer than 8 characters"}
+        })}/>
+
         <button>Add Company</button>
     </form>
 </div>);

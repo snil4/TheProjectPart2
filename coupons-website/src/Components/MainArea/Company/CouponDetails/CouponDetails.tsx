@@ -20,10 +20,7 @@ function CouponDetails(): JSX.Element {
             try {
                 const newCoupon = await companyService.getOneCoupon(couponId);
                 setCoupon(newCoupon);
-                if (newCoupon.image) {
-                    setImageUrl(config.imageUrl+(newCoupon.image as File).name);
-                }
-                console.log(newCoupon);
+                setImageUrl(config.imageUrl+newCoupon.imageName);
             } catch (err: any) {
                 notificationService.error(err);
             }
@@ -51,7 +48,7 @@ function CouponDetails(): JSX.Element {
                 <p>Amount: {coupon.amount}</p>
                 <p>Expiration Date: {coupon.endDate.toString()}</p>
                 <p>Description: {coupon.description}</p>
-                {coupon.image && <img src={imageUrl}/>}
+                {coupon.imageName && <img src={imageUrl}/>}
                 <p>ID: {coupon.id}</p>
                 <NavLink to={`/main/company/coupon/edit/${couponId}`}>Edit coupon</NavLink>
                 <button onClick={deleteCoupon}>Delete coupon</button>

@@ -12,7 +12,7 @@ class CouponModel{
     public endDate: Date;
     public amount: number;
     public price: number;
-    public image: File | FileList;
+    public image: FileList;
     public imageName: string;
     public customers: CustomerModel[];
 }

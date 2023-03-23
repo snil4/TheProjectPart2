@@ -12,7 +12,7 @@ function CompanyEdit(): JSX.Element {
     const companyId = parseInt(params.companyId);
     const navigate = useNavigate();
 
-    const { register, handleSubmit, setValue, getValues } = useForm<CompanyModel>();
+    const { register, handleSubmit, setValue, getValues, formState } = useForm<CompanyModel>();
     const [password, setPassword] = useState<string>();
 
     function returnToLogin() {
@@ -53,11 +53,24 @@ function CompanyEdit(): JSX.Element {
             <form onSubmit={handleSubmit(send)}>
                 <p>Id: {companyId} </p>
                 <p>Name: {getValues().name} </p>
-                <label htmlFor="email">Email:</label>
-                <input type="email" placeholder="email" {...register("email")}/>
-                <label htmlFor="password">Password:</label>
-                <input type="password" placeholder="password" {...register("password")}/>
-                <button>Edit Company</button>
+                <label htmlFor="name">Name:</label><span>{formState.errors?.name?.message}</span>
+                <input placeholder="name" {...register("name",{
+                    required: {value: true, message: "Company must have a name"}
+                })}/>
+
+                <label htmlFor="name">Email:</label><span>{formState.errors?.email?.message}</span>
+                <input type="email" placeholder="email" {...register("email",{
+                    required: {value: true, message: "Company must have an email to register"},
+                    minLength: {value: 5, message: "Email must be longer than 5 characters"}
+                })}/>
+
+                <label htmlFor="name">Password:</label><span>{formState.errors?.password?.message}</span>
+                <input type="password" placeholder="password" {...register("password", {
+                    required: {value: true, message:"Must enter a password"},
+                    minLength: {value: 8, message: "Password must be longer than 8 characters"}
+                })}/>
+
+                <button>Update Company</button>
             </form>
             <NavLink to={`/main/admin/company/${companyId}`}>Back to company details</NavLink>
         </div>

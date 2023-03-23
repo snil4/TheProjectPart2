@@ -19,15 +19,12 @@ function CouponDetails(): JSX.Element {
             try {
                 const newCoupon = await customerService.getOneCoupon(couponId);
                 setCoupon(newCoupon);
+                setImageUrl(config.imageUrl + coupon.imageName);
             } catch (err: any) {
                 notificationService.error(err.message);
             }
         })();
     },[]);
-
-    if (coupon && coupon.image) {
-        setImageUrl(config.imageUrl + (coupon.image as File).name);
-    }
 
     return (
         <div className="CouponDetails">
@@ -37,7 +34,7 @@ function CouponDetails(): JSX.Element {
                 <p>Description: {coupon.description}</p>
                 <p>Price: {coupon.price}</p>
                 <p>Company: {coupon.company.name}</p>
-                {coupon.image && <img src={imageUrl}/>}
+                {coupon.imageName && <img src={imageUrl}/>}
             </div>}
 			<NavLink to="/main/customer/coupon">Back to coupons list</NavLink>
         </div>

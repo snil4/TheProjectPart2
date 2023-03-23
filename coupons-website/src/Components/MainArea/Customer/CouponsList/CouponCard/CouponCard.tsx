@@ -13,7 +13,7 @@ function CouponCard(props: CouponCardProps): JSX.Element {
     const [imageUrl, setImageUrl] = useState<string>();
 
     if (props.coupon.image) {
-        setImageUrl(config.imageUrl + (props.coupon.image as File).name);
+        setImageUrl(config.imageUrl + (props.coupon.image[0] as File).name);
     }
 
     return (

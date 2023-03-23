@@ -16,6 +16,7 @@ import javax.transaction.Transactional;
 @RestController
 @RequestMapping("/image")
 @Transactional
+@CrossOrigin
 public class ImageDataController {
 
     @Autowired
@@ -49,7 +50,7 @@ public class ImageDataController {
             byte[] image = imageDataService.getImage(name);
 
             return ResponseEntity.status(HttpStatus.OK)
-                    .contentType(MediaType.valueOf("image/png"))
+                    .contentType(MediaType.valueOf(imageDataService.getInfoByImageByName(name).getType()))
                     .body(image);
         } catch (CouponSystemException e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

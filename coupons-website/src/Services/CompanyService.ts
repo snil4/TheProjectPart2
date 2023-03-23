@@ -50,8 +50,10 @@ class CompanyService {
         return addedCoupon;
     }
 
-    public async uploadImage(image: File) {
-        const response = await axios.post(config.imageUrl,image);
+    public async uploadImage(image: FileList) {
+        const formData = new FormData();
+        formData.append("image", image[0]);
+        const response = await axios.post(config.imageUrl,formData);
         return response.data;
     }
 

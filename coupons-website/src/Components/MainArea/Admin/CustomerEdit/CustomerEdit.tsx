@@ -11,7 +11,7 @@ function CustomerEdit(): JSX.Element {
     const customerId = parseInt(params.customerId);
     const navigate = useNavigate();
 
-    const { register, handleSubmit, setValue } = useForm<CustomerModel>();
+    const { register, handleSubmit, setValue, formState } = useForm<CustomerModel>();
     const [password, setPassword] = useState<string>();
 
     function returnToLogin() {
@@ -51,14 +51,28 @@ function CustomerEdit(): JSX.Element {
         <div className="CustomerEdit Edit">
             <form onSubmit={handleSubmit(send)}>
                 <p>Id: {customerId} </p>
-                <label htmlFor="firstName">First Name:</label>
-                <input placeholder="firstName" {...register("firstName")}/>
-                <label htmlFor="lastName">Last Name:</label>
-                <input placeholder="lastName" {...register("lastName")}/>
-                <label htmlFor="email">Email:</label>
-                <input type="email" placeholder="email" {...register("email")}/>
-                <label htmlFor="password">Password:</label>
-                <input type="password" placeholder="password" {...register("password")}/>
+                <label htmlFor="FirstName" >First Name:</label><span>{formState.errors?.firstName?.message}</span>
+                <input placeholder="First Name" {...register("firstName",{
+                    required: {value: true, message: "Customer must have a first name"}
+                })}/>
+
+                <label htmlFor="LastName" >Last Name:</label><span>{formState.errors?.lastName?.message}</span>
+                <input placeholder="Last Name" {...register("lastName", {
+                    required: {value: true, message: "Customer must have a last name"}
+                })}/>
+
+                <label htmlFor="Email" >Email:</label><span>{formState.errors?.email?.message}</span>
+                <input type="email" placeholder="Email" {...register("email",{
+                    required: {value: true, message: "Customer must have an email"},
+                    minLength: {value: 5, message: "Email must be at least 5 characters long"}
+                })}/>
+
+                <label htmlFor="Password" >Password:</label><span>{formState.errors?.password?.message}</span>
+                <input type="password" placeholder="Password" {...register("password", {
+                    required: {value: true, message: "Customer must have a password"},
+                    minLength: {value: 4, message: "Password must be at least 4 characters"}
+                })}/>
+
                 <button>Edit Customer</button>
             </form>
             <NavLink to={`/main/admin/customer/${customerId}`}>Back to customer details</NavLink>

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.IOException;
 import java.util.Optional;
 
 @Service
@@ -21,7 +20,7 @@ public class ImageDataService {
     private ImageDataRepo imageDataRepository;
 
     public ImageData uploadImage(MultipartFile file) throws CouponSystemException {
-
+        System.out.println(file);
         try {
             ImageData imageData = new ImageData(0L,file.getOriginalFilename(), file.getContentType(),
                     ImageUtil.compressImage(file.getBytes()));

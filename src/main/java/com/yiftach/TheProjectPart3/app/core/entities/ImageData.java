@@ -11,8 +11,6 @@ public class ImageData {
     private Long id;
     private String name;
     private String type;
-    @OneToOne(mappedBy = "image")
-    private Coupon coupon;
 
     @Lob
     @Column(name = "imagedata", length = 1000)
