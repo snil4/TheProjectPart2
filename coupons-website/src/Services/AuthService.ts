@@ -7,6 +7,7 @@ import { AuthActionType, authStore } from "../Redux/AuthState";
 import { companiesStore, CompanyActionType } from "../Redux/CompanyState";
 import { CustomerActionType, customersStore } from "../Redux/CustomerState";
 import { CouponActionType, couponsStore } from "../Redux/CouponState";
+import { redirect } from "react-router-dom";
 
 class AuthService {
     // service to handle all authorization type function
@@ -34,6 +35,21 @@ class AuthService {
         customersStore.dispatch({type: CustomerActionType.RemoveState, payload:null});
         couponsStore.dispatch({type: CouponActionType.RemoveState, payload:null});
         authStore.dispatch({type: AuthActionType.Logout, payload: null});
+    }
+
+    public isLoggedIn(): boolean {
+        if (sessionStorage.getItem("token")) {
+            console.log(authStore.getState().user);
+            if (authStore.getState().user.exp < Date.now()) {
+                console.log(Date.now);
+                return false;
+            } else {
+                return true;
+            }
+        }
+        else {
+            return false;
+        }
     }
 
     // public hashPassword(password: string) {

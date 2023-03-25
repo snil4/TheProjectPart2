@@ -1,11 +1,12 @@
 .Header {
-	height: 100%;
-    width: 100%;
     font-size: x-large;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
 }
 
 .Header > a {
-    font-size: large;
+    width: 85%;
 }
 
 .Clock {
@@ -13,8 +14,5 @@
 }
 
 .Header > button {
-    margin-left: 100px;
-    color: blue;
-    text-decoration: underline;
-    width: 100px;
+    width: 15%;
 }
