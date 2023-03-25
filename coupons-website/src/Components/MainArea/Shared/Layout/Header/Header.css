@@ -1,28 +1,20 @@
 .Header {
 	height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    width: 100%;
     font-size: x-large;
 }
 
 .Header > a {
     font-size: large;
-    align-self: flex-start;
-    margin-left: 20%;
 }
 
 .Clock {
     font-size: small;
-    align-self: flex-end;
 }
 
 .Header > button {
-    align-self: flex-start;
     margin-left: 100px;
     color: blue;
     text-decoration: underline;
     width: 100px;
-    background: none;
-    border: none;
 }

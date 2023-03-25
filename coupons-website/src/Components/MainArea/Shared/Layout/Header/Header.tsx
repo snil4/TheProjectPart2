@@ -16,9 +16,9 @@ function Header(props: HeaderProps): JSX.Element {
     }
 
     return (
-        <div className="Header">
-			Hello {props.name}
-            <button onClick={logOut}>Log out</button>
+        <div className="Header grid grid-flow-col">
+            <button onClick={logOut} className="py-10">Log out</button>
+			<span>Hello {props.name}</span>
             <Clock/>
         </div>
     );

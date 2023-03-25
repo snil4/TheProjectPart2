@@ -8,7 +8,7 @@ interface TaskProps {
 
 function Task(props: TaskProps): JSX.Element {
     return (
-        <NavLink to={props.path}>{props.name}</NavLink>
+        <NavLink to={props.path} className="underline hover:text-fuchsia-700">{props.name}</NavLink>
     );
 }
 

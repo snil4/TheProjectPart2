@@ -14,7 +14,7 @@ function Layout(props: LayoutProps): JSX.Element {
     const client = authStore.getState().user;
 
     return (
-        <div className="Layout">
+        <div className="Layout bg-teal-300 dark:bg-amber-400">
 			<header><Header name={client.name}/></header>
             <aside><Menu/></aside>
             <main><MainRouting/></main>

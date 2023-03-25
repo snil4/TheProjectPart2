@@ -11,7 +11,7 @@ function Clock(): JSX.Element {
     },[])
 
     return (
-        <div className="Clock">
+        <div className="Clock text-xl py-12">
 			<span>Time: {time}</span>
         </div>
     );
