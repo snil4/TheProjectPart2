@@ -17,8 +17,6 @@ import CustomerEdit from "../../../Admin/CustomerEdit/CustomerEdit";
 import CompanyCouponDetails from "../../../Company/CouponDetails/CouponDetails";
 import CompanyCouponEdit from "../../../Company/CouponEdit/CouponEdit";
 import CustomerCouponDetails from "../../../Customer/CouponDetails/CouponDetails";
-import { useEffect, useState } from "react";
-import UserModel from "../../../../../Models/UserModel";
 
 function MainRouting(): JSX.Element {
 

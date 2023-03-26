@@ -1,4 +1,7 @@
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { authStore } from "../../../../../Redux/AuthState";
+import authService from "../../../../../Services/AuthService";
 import "./Menu.css";
 import Task from "./Task/Task";
 
@@ -7,7 +10,17 @@ interface MenuProps {
 }
 
 function Menu(props: MenuProps): JSX.Element {
-    const role = authStore.getState().user.role.toString();
+    const [role, setRole] = useState<String>();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (authService.isUserLoggedIn) {
+            setRole(authStore.getState().user.role.toString());
+        } else {
+            authService.logout();
+            navigate("/home");
+        }
+    });
 
     if (role === "ADMIN") {
         return (

@@ -18,8 +18,6 @@ function CompanyList(): JSX.Element {
         navigate("/login");
     }
 
-
-
     useEffect(() => {
         // if ((!authService.checkExpiration()) || authService.getClient().role !== "admin") {
         //     returnToLogin();

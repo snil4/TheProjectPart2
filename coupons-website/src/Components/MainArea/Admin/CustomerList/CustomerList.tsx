@@ -5,7 +5,6 @@ import notificationService from "../../../../Services/NotificationService";
 import CustomerCard from "./CustomerCard/CustomerCard";
 import "./CustomerList.css";
 import {useState, useEffect} from "react";
-import authService from "../../../../Services/AuthService";
 
 function CustomerList(): JSX.Element {
 
