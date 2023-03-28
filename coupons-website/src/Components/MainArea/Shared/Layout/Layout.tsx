@@ -16,7 +16,7 @@ interface LayoutProps {
 
 function Layout(props: LayoutProps): JSX.Element {
 
-    const client = authStore.getState().user;
+    const [client, setClient] = useState<UserModel>();
     const navigate = useNavigate();
 
     function Logout(){
@@ -35,7 +35,12 @@ function Layout(props: LayoutProps): JSX.Element {
             <footer><Footer id={client.sub}/></footer>
         </div>
     )} else {
-        Logout();
+        const newClient = authService.parseJWT();
+        if (newClient) {
+            setClient(newClient);
+        } else {
+            Logout();
+        }
     }
 }
 

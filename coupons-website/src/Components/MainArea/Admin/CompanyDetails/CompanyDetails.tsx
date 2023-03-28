@@ -56,10 +56,10 @@ function CompanyDetails(): JSX.Element {
                 <p>ID: {company.id}</p>
                 <p>Name: {company.name}</p>
                 <p>Email: {company.email}</p>
-                <NavLink to={`/main/admin/company/edit/${companyId}`} className="border border-green-400 rounded-lg bg-gray-100">Edit company</NavLink>
-                <button onClick={deleteCompany} className="border border-green-400 rounded-lg bg-gray-100 size-small">Delete company</button>
+                <NavLink to={`/main/admin/company/edit/${companyId}`} className="border border-green-400 rounded-lg bg-gray-100 py-1.5 mx-1">Edit company</NavLink>
+                <button onClick={deleteCompany} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete company</button>
             </div>}
-            <NavLink to="/main/admin/company">Back to companies list</NavLink>
+            <br/><NavLink to="/main/admin/company" className="">Back to companies list</NavLink>
         </div>
     );
 }

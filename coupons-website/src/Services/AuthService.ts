@@ -22,10 +22,7 @@ class AuthService {
             throw new Error("Email or password are incorrect");
         }
         sessionStorage.setItem("token", promise);
-        const client = jwtDecode<UserModel>(promise);
-        client.role = client.role as Role;
-        authStore.dispatch({type: AuthActionType.Login, payload:client});
-        return client;
+        return this.parseJWT();
     }
 
     public logout(){
@@ -38,6 +35,16 @@ class AuthService {
 
     public isUserLoggedIn(): boolean {
         return (authStore.getState().user !== undefined);
+    }
+
+    public parseJWT(): UserModel {
+        if (sessionStorage.getItem("token")) {
+            const client = jwtDecode<UserModel>(sessionStorage.getItem("token"));
+            client.role = client.role as Role;
+            authStore.dispatch({type: AuthActionType.Login, payload:client});
+            return client;
+        }
+        return null;
     }
 
     // public hashPassword(password: string) {
