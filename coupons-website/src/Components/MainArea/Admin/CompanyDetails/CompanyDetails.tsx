@@ -50,7 +50,7 @@ function CompanyDetails(): JSX.Element {
     }
     
     return (
-        <div className="CompanyDetails">
+        <div className="CompanyDetails flex flex-col justify-center items-center">
             {company &&
 			<div className="Details">
                 <p>ID: {company.id}</p>

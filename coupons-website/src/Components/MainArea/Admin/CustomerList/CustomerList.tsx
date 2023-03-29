@@ -37,7 +37,7 @@ function CustomerList(): JSX.Element {
     return (        
     <div className="CustomerList List" id="customer-list-top">
         {customers.map((c) => <CustomerCard key={c.id} customer={c}/>)}
-        <NavLink className="Add" to="/main/admin/customer/add">+</NavLink>
+        <NavLink className="AddButton" to="/main/admin/customer/add">+</NavLink>
         <a href="#customer-list-top">top</a>
     </div>);
 }

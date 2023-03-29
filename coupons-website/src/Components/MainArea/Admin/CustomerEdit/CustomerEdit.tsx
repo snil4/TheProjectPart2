@@ -48,7 +48,7 @@ function CustomerEdit(): JSX.Element {
     },[]);
 
     return (
-        <div className="CustomerEdit Edit">
+        <div className="CustomerEdit Edit flex flex-col justify-center items-center">
             <form onSubmit={handleSubmit(send)}>
                 <p>Id: {customerId} </p>
                 <label htmlFor="FirstName" >First Name:</label><span>{formState.errors?.firstName?.message}</span>

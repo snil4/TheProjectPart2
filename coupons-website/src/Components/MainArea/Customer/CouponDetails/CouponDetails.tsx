@@ -27,7 +27,7 @@ function CouponDetails(): JSX.Element {
     },[]);
 
     return (
-        <div className="CouponDetails">
+        <div className="CouponDetails flex flex-col justify-center items-center">
             {coupon && <div className="Details">
                 <p>Name: {coupon.title}</p>
                 <p>Category: {coupon.category}</p>

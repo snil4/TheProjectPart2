@@ -48,6 +48,8 @@ class CompanyService {
             coupon.imageName = await this.uploadImage(coupon.image);
         }
         delete coupon.image;
+        
+        coupon.startDate = new Date(Date.now());
         const response = await axios.post(config.companyCouponsUrl,coupon);
         const addedCoupon = response.data;
         couponsStore.dispatch({type:CouponActionType.AddCoupon, payload:addedCoupon});

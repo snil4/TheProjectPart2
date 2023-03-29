@@ -9,7 +9,6 @@ function CouponCard(props: CouponCardProps): JSX.Element {
     return (
         <NavLink to={`${props.coupon.id}`}>
             <div className="CouponCard Card bg-violet-200 shadow-lg">
-                <p>ID: {props.coupon.id}</p>
                 <p>Title: {props.coupon.title}</p>
                 <p>Category: {props.coupon.category}</p>
                 <p>Price: {props.coupon.price}₪</p>

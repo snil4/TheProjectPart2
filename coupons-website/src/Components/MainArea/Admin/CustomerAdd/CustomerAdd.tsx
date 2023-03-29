@@ -36,8 +36,8 @@ function CustomerAdd(): JSX.Element {
     // }
 
     return (
-    <div className="CustomerAdd">
-        <form onSubmit={handleSubmit(send)}>
+    <div className="CustomerAdd flex flex-col justify-center items-center">
+        <form onSubmit={handleSubmit(send)} className="AddMenu">
             <label htmlFor="FirstName" >First Name:</label><span>{formState.errors?.firstName?.message}</span>
 			<input placeholder="First Name" {...register("firstName",{
                 required: {value: true, message: "Customer must have a first name"}

@@ -49,15 +49,15 @@ function CustomerDetails(): JSX.Element {
     }
 
     return (
-        <div className="CustomerDetails">
+        <div className="CustomerDetails flex flex-col justify-center items-center">
             {customer &&
             <div className="Details">
                 <p>ID: {customer.id}</p>
                 <p>First Name: {customer.firstName}</p>
                 <p>Last Name: {customer.lastName}</p>
                 <p>Email: {customer.email}</p>
-                <NavLink to={`/main/admin/customer/edit/${customerId}`}>Edit customer</NavLink>
-                <button onClick={deleteCustomer}>Delete customer</button>
+                <NavLink to={`/main/admin/customer/edit/${customerId}`} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Edit customer</NavLink>
+                <button onClick={deleteCustomer} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete customer</button>
             </div>}
             <NavLink to="/main/admin/customer">Back to customers list</NavLink>
         </div>

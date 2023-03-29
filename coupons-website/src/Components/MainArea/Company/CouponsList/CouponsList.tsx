@@ -27,7 +27,7 @@ function CouponsList(props: CouponsListProps): JSX.Element {
     return (
     <div className="CouponsList List">
         {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
-        <NavLink className="Add" to={`/main/company/coupon/add/`}>+</NavLink>
+        <NavLink className="AddButton" to={`/main/company/coupon/add/`}>+</NavLink>
     </div>);
 }
 

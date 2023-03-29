@@ -12,7 +12,6 @@ function CouponAdd(): JSX.Element {
 
     async function send(coupon: CouponModel) {
         try {
-            coupon.startDate = new Date(Date.now());
             await companyService.addCoupon(coupon);
             notificationService.success("Coupon added");
             navigate(`/main/company/coupon`);
@@ -22,8 +21,8 @@ function CouponAdd(): JSX.Element {
     }
 
     return (
-        <div className="AddCoupon">
-			<form onSubmit={handleSubmit(send)}>
+        <div className="AddCoupon flex flex-col justify-center items-center">
+			<form onSubmit={handleSubmit(send)} className="AddMenu">
                 <label htmlFor="title">Title: </label><span>{formState.errors?.title?.message}</span>
                 <input placeholder="Title" {...register("title",{
                     required: {value: true, message: "Coupon must have a title"},
@@ -62,7 +61,7 @@ function CouponAdd(): JSX.Element {
                 <label htmlFor="image">Image: </label>
                 <input type="file" placeholder="Image" {...register("image")} accept="image/*"/>
 
-                <button>Add</button>
+                <button className="border border-green-400 rounded-lg bg-gray-100 mx-1 px-5">Add</button>
             </form>
         </div>
     );

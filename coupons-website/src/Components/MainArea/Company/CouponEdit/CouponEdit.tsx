@@ -43,8 +43,8 @@ function CouponEdit(): JSX.Element {
     }
 
     return (
-        <div className="EditCoupon Edit">
-			<form onSubmit={handleSubmit(send)}>
+        <div className="EditCoupon Edit flex flex-col justify-center items-center">
+			<form onSubmit={handleSubmit(send)} className="AddMenu">
             <label htmlFor="title">Title: </label><span>{formState.errors?.title?.message}</span>
                 <input placeholder="Title" {...register("title",{
                     required: {value: true, message: "Coupon must have a title"},

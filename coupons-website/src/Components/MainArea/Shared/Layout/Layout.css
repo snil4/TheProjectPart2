@@ -11,6 +11,10 @@
     grid-template-columns: repeat(3,1fr);
 }
 
+.List > * {
+    font-size: larger;
+}
+
 a {
     color: blue;
     text-decoration: underline;
@@ -44,7 +48,7 @@ a {
     border: 1px solid black;
 }
 
-.Add {
+.AddButton {
     position: fixed;
     bottom: 100px;
     right: 100px;
@@ -52,6 +56,23 @@ a {
     text-decoration:none;
     -webkit-text-stroke-width: 4px;
     -webkit-text-stroke-color: green;
+}
+
+.AddMenu {
+    margin-top: 15px;
+    width: 50%;
+    display: grid;
+    grid-template-columns: repeat(1,1fr);
+    border: 1px solid black;
+}
+
+.AddMenu > * {
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-bottom: 2%;
+    font-size: larger;
+    border-radius: 3px;
+    text-align: center;
 }
 
 .Card {
@@ -65,11 +86,12 @@ a {
     border: 1px solid black;
     border-radius: 5px;
     margin: 10px;
-    text-align: center;
+    align-content: center;
 }
 
 .Details > * {
     padding-bottom: 5px;
+    align-self: center;
 }
 
 .Details > img {

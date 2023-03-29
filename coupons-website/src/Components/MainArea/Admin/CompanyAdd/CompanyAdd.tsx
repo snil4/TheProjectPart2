@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import CompanyModel from "../../../../Models/CompanyModel";
 import notificationService from "../../../../Services/NotificationService";
 import adminService from "../../../../Services/AdminService";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 function CompanyAdd(): JSX.Element {
 
@@ -37,8 +37,8 @@ function CompanyAdd(): JSX.Element {
     //     }
     // }, []);
 
-    return (<div className="CompanyAdd">
-    <form onSubmit={handleSubmit(send)}>
+    return (<div className="CompanyAdd flex flex-col justify-center items-center">
+    <form onSubmit={handleSubmit(send)} className="AddMenu">
         <label htmlFor="name">Name:</label><span>{formState.errors?.name?.message}</span>
         <input placeholder="name" {...register("name",{
             required: {value: true, message: "Company must have a name"}
@@ -58,6 +58,7 @@ function CompanyAdd(): JSX.Element {
 
         <button>Add Company</button>
     </form>
+    <NavLink to="/main/admin/company">Back to companies list</NavLink>
 </div>);
 }
 

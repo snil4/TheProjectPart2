@@ -49,8 +49,8 @@ function CompanyEdit(): JSX.Element {
     },[]);
 
     return (
-        <div className="CompanyEdit Edit">
-            <form onSubmit={handleSubmit(send)}>
+        <div className="CompanyEdit Edit flex flex-col justify-center items-center">
+            <form onSubmit={handleSubmit(send)} className="AddMenu">
                 <p>Id: {companyId} </p>
                 <p>Name: {getValues().name} </p>
                 <label htmlFor="name">Name:</label><span>{formState.errors?.name?.message}</span>
