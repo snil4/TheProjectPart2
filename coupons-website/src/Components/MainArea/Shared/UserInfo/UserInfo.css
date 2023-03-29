@@ -1,3 +1,4 @@
-.UserInfo {
-	
+.UserInfo > * {
+	margin-top: 20px;
+    font-size: x-large;
 }

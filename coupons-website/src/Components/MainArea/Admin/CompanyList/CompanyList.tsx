@@ -35,9 +35,11 @@ function CompanyList(): JSX.Element {
         })();
     },[]);
 
-    return (<div className="CompanyList">
-    {companies.map((c) => <CompanyCard key={c.id} company={c}/>)}
-    <NavLink className="Add" to="/main/admin/company/add">+</NavLink>
+    return (
+        <div className="CompanyList" id="company-list-top">
+            {companies.map((c) => <CompanyCard key={c.id} company={c}/>)}
+            <NavLink className="Add" to="/main/admin/company/add">+</NavLink>
+            <a href="#company-list-top">top</a>
 </div>);
 }
 
