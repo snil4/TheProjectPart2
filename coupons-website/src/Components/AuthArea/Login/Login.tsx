@@ -24,8 +24,8 @@ function Login(props: LoginProps): JSX.Element {
     }
 
     return (
-        <div className="Login bg-slate-300 dark:bg-slate-500">
-            <NavLink to="/" className="border rounded-md p-3 px-12 no-underline text-gray-100 bg-yellow-600 hover:bg-yellow-700 border-transparent">Back to Home Page</NavLink>
+        <div className="Login bg-amber-200 dark:bg-slate-500">
+            <NavLink to="/" className="border rounded-md p-3 px-12 no-underline text-gray-100 bg-lime-600 hover:bg-lime-700 border-transparent">Back to Home Page</NavLink>
             <form className="Form bg-white dark:bg-slate-400" onSubmit={handleSubmit(send)}>
 
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="role">Role: </label>
@@ -45,7 +45,7 @@ function Login(props: LoginProps): JSX.Element {
                     required: {value: true, message: "Please enter a password to login"}
                 })}/><br/>
 
-                <button className="rounded-lg text-xl bg-yellow-500 hover:bg-yellow-400">Login</button>
+                <button className="rounded-lg text-xl bg-amber-500 hover:bg-amber-400">Login</button>
             </form>
         </div>
     );

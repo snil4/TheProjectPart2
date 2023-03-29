@@ -21,7 +21,7 @@ function PurchaseCoupon(): JSX.Element {
     )();},[]);
 
     return (
-        <div className="PurchaseCoupon List">
+        <div className="PurchaseCoupon">
             {coupons && coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
         </div>
     );

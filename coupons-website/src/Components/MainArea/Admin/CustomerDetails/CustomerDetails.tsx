@@ -53,9 +53,13 @@ function CustomerDetails(): JSX.Element {
             {customer &&
             <div className="Details">
                 <p>ID: {customer.id}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>First Name: {customer.firstName}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Last Name: {customer.lastName}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Email: {customer.email}</p>
+                <p className=" text-amber-600">-----</p>
                 <NavLink to={`/main/admin/customer/edit/${customerId}`} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Edit customer</NavLink>
                 <button onClick={deleteCustomer} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete customer</button>
             </div>}

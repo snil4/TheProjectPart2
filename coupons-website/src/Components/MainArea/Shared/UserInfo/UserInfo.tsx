@@ -6,13 +6,13 @@ function UserInfo(): JSX.Element {
     const user = authStore.getState().user;
 
     return (
-        <div className="UserInfo [&>span]:text-amber-700">
+        <div className="UserInfo">
             <p>Name: {user.name}</p>
-            <span>------</span>
+            <p className=" text-amber-600">-----</p>
             <p>Email: {user.email}</p>
-            <span>------</span>
+            <p className=" text-amber-600">-----</p>
             <p>Role: {user.role}</p>
-            <span>------</span>
+            <p className=" text-amber-600">-----</p>
             <p>ID: {user.sub}</p>
         </div>
     );

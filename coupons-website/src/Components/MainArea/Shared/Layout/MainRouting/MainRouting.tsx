@@ -43,7 +43,7 @@ function MainRouting(): JSX.Element {
                 <Route path="/company/coupon/edit/:couponId" element={<CompanyCouponEdit/>}/>
                 {/* Customer paths */}
                 <Route path="/customer/coupon" element={<CustomerCouponsList/>}/>
-                <Route path="/customer/coupon/purchase" element={<PurchaseCoupon/>}/>
+                <Route path="/customer/coupon/add" element={<PurchaseCoupon/>}/>
                 <Route path="/customer/coupon/:couponId" element={<CustomerCouponDetails/>}/>
             </Routes>
         </div>

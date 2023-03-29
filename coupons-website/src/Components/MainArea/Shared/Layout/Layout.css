@@ -87,11 +87,19 @@ a {
     border-radius: 5px;
     margin: 10px;
     align-content: center;
+    box-shadow: 0.5px 1px 2px black;
+    width: 50%;
+    font-size: larger;
 }
 
 .Details > * {
-    padding-bottom: 5px;
+    padding-bottom: 30px;
     align-self: center;
+}
+
+.Details > a, button {
+    padding-bottom: 0px;
+    height: 20px;
 }
 
 .Details > img {

@@ -54,8 +54,11 @@ function CompanyDetails(): JSX.Element {
             {company &&
 			<div className="Details">
                 <p>ID: {company.id}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Name: {company.name}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Email: {company.email}</p>
+                <p className=" text-amber-600">-----</p>
                 <NavLink to={`/main/admin/company/edit/${companyId}`} className="border border-green-400 rounded-lg bg-gray-100 py-1.5 mx-1">Edit company</NavLink>
                 <button onClick={deleteCompany} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete company</button>
             </div>}

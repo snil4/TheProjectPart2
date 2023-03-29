@@ -22,9 +22,9 @@ function CouponsList(): JSX.Element {
     },[]);
 
     return (
-    <div className="CouponsList">
+    <div className="CouponsList" id="customer-coupons-list-top">
         {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
-        <NavLink className="AddButton" to="/main/customer/coupon/purchase">+</NavLink>
+        <a href="#customer-coupons-list-top">top</a>
     </div>);
 }
 

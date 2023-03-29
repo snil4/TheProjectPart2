@@ -1,3 +1,9 @@
-.Task {
-	
+.AddTask {
+	visibility: collapse;
 }
+
+.active > .AddTask {
+    visibility: visible;
+}
+
+

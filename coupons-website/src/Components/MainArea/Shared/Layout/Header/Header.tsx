@@ -16,8 +16,8 @@ function Header(props: HeaderProps): JSX.Element {
     }
 
     return (
-        <div className="Header">
-            <button onClick={logOut} className="border border-solid bg-emerald-600 text-blue-700 hover:text-purple-600 hover:bg-emerald-700 rounded-md shadow-md mx-5">Log out</button>
+        <div className="Header bg-amber-400">
+            <button onClick={logOut} className="border border-solid bg-lime-600 text-blue-600 hover:text-purple-600 hover:bg-lime-700 rounded-md shadow-md mx-5">Log out</button>
 			<span className="">Hello {props.name}</span>
             <Clock/>
         </div>

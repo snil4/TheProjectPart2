@@ -26,8 +26,8 @@ function Menu(props: MenuProps): JSX.Element {
         return (
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>
-                <Task path="/main/admin/company" name="Companies List"/>
-                <Task path="/main/admin/customer" name="Customers List"/>
+                <Task path="/main/admin/company" name="Companies List" addTask="Add Company"/>
+                <Task path="/main/admin/customer" name="Customers List" addTask="Add Customer"/>
                 <Task path="/main/info" name="User Info"/>
             </div>
         );
@@ -35,7 +35,7 @@ function Menu(props: MenuProps): JSX.Element {
         return(
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>
-                <Task path="/main/company/coupon" name="Coupons List"/>
+                <Task path="/main/company/coupon" name="Coupons List" addTask="Add Coupon"/>
                 <Task path="/main/info" name="User Info"/>
             </div>
         );
@@ -43,7 +43,7 @@ function Menu(props: MenuProps): JSX.Element {
         return(
             <div className="Menu">
                 <Task path="/main/start" name="Start Page"/>
-                <Task path="/main/customer/coupon" name="Coupons List"/>
+                <Task path="/main/customer/coupon" name="Coupons List" addTask="Purchase Coupon"/>
                 <Task path="/main/info" name="User Info"/>
             </div>
         );
