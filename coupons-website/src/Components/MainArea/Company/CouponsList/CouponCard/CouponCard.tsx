@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import CouponModel from "../../../../../Models/CouponModel";
-import "./CouponCard.css";
 
 interface CouponCardProps {
 	coupon: CouponModel;
@@ -9,7 +8,7 @@ interface CouponCardProps {
 function CouponCard(props: CouponCardProps): JSX.Element {
     return (
         <NavLink to={`${props.coupon.id}`}>
-            <div className="CouponCard Card">
+            <div className="CouponCard Card bg-violet-200 shadow-lg">
                 <p>ID: {props.coupon.id}</p>
                 <p>Title: {props.coupon.title}</p>
                 <p>Category: {props.coupon.category}</p>

@@ -12,10 +12,6 @@ function CouponAdd(): JSX.Element {
 
     async function send(coupon: CouponModel) {
         try {
-            if (coupon.image) {
-                coupon.imageName = await companyService.uploadImage(coupon.image);
-                coupon.image = null;
-            }
             coupon.startDate = new Date(Date.now());
             await companyService.addCoupon(coupon);
             notificationService.success("Coupon added");

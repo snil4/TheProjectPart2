@@ -44,7 +44,11 @@ class CompanyService {
     }
 
     public async addCoupon(coupon: CouponModel) {
-        const response = await axios.post<CouponModel>(config.companyCouponsUrl,coupon);
+        if (coupon.image[0]) {
+            coupon.imageName = await this.uploadImage(coupon.image);
+        }
+        delete coupon.image;
+        const response = await axios.post(config.companyCouponsUrl,coupon);
         const addedCoupon = response.data;
         couponsStore.dispatch({type:CouponActionType.AddCoupon, payload:addedCoupon});
         return addedCoupon;
@@ -58,6 +62,10 @@ class CompanyService {
     }
 
     public async updateCoupon(coupon: CouponModel) {
+        if (coupon.image[0]) {
+            coupon.imageName = await companyService.uploadImage(coupon.image);
+        }
+        delete coupon.image;
         const response = await axios.put(config.companyCouponsUrl,coupon);
         const updatedCoupon = response.data;
         couponsStore.dispatch({type:CouponActionType.UpdateCoupon, payload:updatedCoupon});

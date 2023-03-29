@@ -28,6 +28,7 @@ public class Coupon {
     private LocalDate endDate;
     private int amount;
     private double price;
+    @Column(name = "image_name")
     private String imageName;
     @ManyToMany
     @JoinTable(name = "customers_vs_coupons",joinColumns = @JoinColumn(name = "coupon_id")

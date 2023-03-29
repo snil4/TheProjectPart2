@@ -18,7 +18,7 @@ function CouponCard(props: CouponCardProps): JSX.Element {
 
     return (
         <NavLink to={props.coupon.id.toString()} className="CouponCard">
-            <div className="Card">
+            <div className="Card bg-violet-200 shadow-lg">
                 <p>Name: {props.coupon.title}</p>
                 <p>Category: {props.coupon.category}</p>
                 {props.coupon.image && <img src={imageUrl}/>}

@@ -6,6 +6,11 @@
     text-align: center;
 }
 
+.List {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
 a {
     color: blue;
     text-decoration: underline;
