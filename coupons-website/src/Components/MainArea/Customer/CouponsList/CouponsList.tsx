@@ -23,7 +23,9 @@ function CouponsList(): JSX.Element {
 
     return (
     <div className="CouponsList" id="customer-coupons-list-top">
-        {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
+        <div className="List">
+            {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
+        </div>
         <a href="#customer-coupons-list-top">top</a>
     </div>);
 }

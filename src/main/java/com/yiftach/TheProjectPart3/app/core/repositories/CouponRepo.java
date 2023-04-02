@@ -46,4 +46,9 @@ public interface CouponRepo extends JpaRepository<Coupon,Integer>{
 
     @Query(value = "SELECT * FROM coupon WHERE category = ?1 AND price < ?2 AND id IN (SELECT coupon_id FROM customers_vs_coupons WHERE customer_id = ?3)",nativeQuery = true)
     List<Coupon> findByCategoryAndMaxPriceAndCustomerId(String category,double maxPrice, int customerId);
+
+    @Query(value = "SELECT * FROM coupon WHERE id NOT IN (SELECT coupon_id FROM customers_vs_coupons WHERE customer_id = ?1)",nativeQuery = true)
+    List<Coupon> findByIdNotInCustomer(int customerId);
+
+
 }

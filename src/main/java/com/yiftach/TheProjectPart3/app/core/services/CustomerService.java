@@ -135,7 +135,7 @@ public class CustomerService extends ClientService {
 
     public List<Coupon> getAllCoupons(int customerId) throws CouponSystemException{
         try {
-            return couponRepo.findAll();
+            return couponRepo.findByIdNotInCustomer(customerId);
         } catch (Exception e) {
             throw new CouponSystemException("Can't get all coupons: " + e.getMessage(), e);
         }

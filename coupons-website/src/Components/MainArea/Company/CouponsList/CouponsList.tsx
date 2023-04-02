@@ -25,8 +25,10 @@ function CouponsList(props: CouponsListProps): JSX.Element {
     })();},[]);
 
     return (
-    <div className="CouponsList List" id="company-coupons-list-top">
-        {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
+    <div className="CouponsList" id="company-coupons-list-top">
+        <div className="List">
+            {coupons.map((c) => <CouponCard key={c.id} coupon={c}/>)}
+        </div>
         <a href="#company-coupons-list-top">top</a>
     </div>);
 }
