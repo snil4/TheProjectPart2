@@ -51,7 +51,7 @@ function CustomerDetails(): JSX.Element {
     return (
         <div className="CustomerDetails flex flex-col justify-center items-center">
             {customer &&
-            <div className="Details">
+            <div className="Details bg-teal-200">
                 <p>ID: {customer.id}</p>
                 <p className=" text-amber-600">-----</p>
                 <p>First Name: {customer.firstName}</p>

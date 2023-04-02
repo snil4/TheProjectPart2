@@ -50,29 +50,29 @@ function CompanyEdit(): JSX.Element {
 
     return (
         <div className="CompanyEdit Edit flex flex-col justify-center items-center">
-            <form onSubmit={handleSubmit(send)} className="AddMenu">
+            <form onSubmit={handleSubmit(send)} className="AddMenu bg-teal-400">
                 <p>Id: {companyId} </p>
+                <p className=" text-amber-600">-----</p>
                 <p>Name: {getValues().name} </p>
-                <label htmlFor="name">Name:</label><span>{formState.errors?.name?.message}</span>
-                <input placeholder="name" {...register("name",{
-                    required: {value: true, message: "Company must have a name"}
-                })}/>
+                <p className=" text-amber-600">-----</p>
 
-                <label htmlFor="name">Email:</label><span>{formState.errors?.email?.message}</span>
+                <label htmlFor="email">Email:</label><span>{formState.errors?.email?.message}</span>
                 <input type="email" placeholder="email" {...register("email",{
                     required: {value: true, message: "Company must have an email to register"},
                     minLength: {value: 5, message: "Email must be longer than 5 characters"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
-                <label htmlFor="name">Password:</label><span>{formState.errors?.password?.message}</span>
+                <label htmlFor="password">Password:</label><span>{formState.errors?.password?.message}</span>
                 <input type="password" placeholder="password" {...register("password", {
                     required: {value: true, message:"Must enter a password"},
                     minLength: {value: 8, message: "Password must be longer than 8 characters"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
-                <button>Update Company</button>
+                <button className="border border-teal-100 bg-lime-400 hover:bg-lime-300 h-12 rounded-lg text-blue-600 hover:text-purple-600">Update Company</button>
             </form>
-            <NavLink to={`/main/admin/company/${companyId}`}>Back to company details</NavLink>
+            <NavLink to={`/main/admin/company/${companyId}`} className="border border-teal-100 bg-lime-500 hover:bg-lime-600 h-12 rounded-lg text-blue-600 hover:text-purple-600">Back to company details</NavLink>
         </div>
     );
 }

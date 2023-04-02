@@ -41,14 +41,20 @@ function CouponDetails(): JSX.Element {
     return (
         <div className="CouponDetails flex flex-col justify-center items-center">
             {coupon &&
-            <div className="Details">
+            <div className="Details bg-teal-200">
                 <p>Title: {coupon.title}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Category: {coupon.category}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Price: {coupon.price}₪</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Amount: {coupon.amount}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Expiration Date: {coupon.endDate.toString()}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Description: {coupon.description}</p>
                 {coupon.imageName && <img src={imageUrl} className="center"/>}
+                <p className=" text-amber-600">-----</p>
                 <p>ID: {coupon.id}</p>
                 <NavLink to={`/main/company/coupon/edit/${couponId}`} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Edit coupon</NavLink>
                 <button onClick={deleteCoupon} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete coupon</button>

@@ -25,7 +25,7 @@ function CouponCard(props: CouponCardProps): JSX.Element {
     }
 
     return (
-        <button onClick={PurchaseCoupon}>
+        <button onClick={PurchaseCoupon} className="h-fit">
             <div className="CouponCard Card shadow-md bg-lime-100">
                 <p>Title: {props.coupon.title}</p>
                 <p>Category: {props.coupon.category}</p>

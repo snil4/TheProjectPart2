@@ -28,11 +28,15 @@ function CouponDetails(): JSX.Element {
 
     return (
         <div className="CouponDetails flex flex-col justify-center items-center">
-            {coupon && <div className="Details">
+            {coupon && <div className="Details bg-teal-200">
                 <p>Name: {coupon.title}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Category: {coupon.category}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Description: {coupon.description}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Price: {coupon.price}</p>
+                <p className=" text-amber-600">-----</p>
                 <p>Company: {coupon.company.name}</p>
                 {coupon.imageName && <img src={imageUrl}/>}
             </div>}

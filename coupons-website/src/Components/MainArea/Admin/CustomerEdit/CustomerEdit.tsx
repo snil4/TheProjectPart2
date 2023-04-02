@@ -49,33 +49,39 @@ function CustomerEdit(): JSX.Element {
 
     return (
         <div className="CustomerEdit Edit flex flex-col justify-center items-center">
-            <form onSubmit={handleSubmit(send)}>
+            <form onSubmit={handleSubmit(send)} className="AddMenu bg-teal-400">
                 <p>Id: {customerId} </p>
+                <p className=" text-amber-600">-----</p>
+
                 <label htmlFor="FirstName" >First Name:</label><span>{formState.errors?.firstName?.message}</span>
                 <input placeholder="First Name" {...register("firstName",{
                     required: {value: true, message: "Customer must have a first name"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
                 <label htmlFor="LastName" >Last Name:</label><span>{formState.errors?.lastName?.message}</span>
                 <input placeholder="Last Name" {...register("lastName", {
                     required: {value: true, message: "Customer must have a last name"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
                 <label htmlFor="Email" >Email:</label><span>{formState.errors?.email?.message}</span>
                 <input type="email" placeholder="Email" {...register("email",{
                     required: {value: true, message: "Customer must have an email"},
                     minLength: {value: 5, message: "Email must be at least 5 characters long"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
                 <label htmlFor="Password" >Password:</label><span>{formState.errors?.password?.message}</span>
                 <input type="password" placeholder="Password" {...register("password", {
-                    required: {value: true, message: "Customer must have a password"},
+                    required: {value: false, message: "Customer must have a password"},
                     minLength: {value: 4, message: "Password must be at least 4 characters"}
                 })}/>
+                <p className=" text-amber-600">-----</p>
 
-                <button>Edit Customer</button>
+                <button className="border border-teal-100 bg-lime-400 hover:bg-lime-300 h-12 rounded-lg text-blue-600 hover:text-purple-600">Update Customer</button>
             </form>
-            <NavLink to={`/main/admin/customer/${customerId}`}>Back to customer details</NavLink>
+            <NavLink to={`/main/admin/company/${customerId}`} className="border border-teal-100 bg-lime-500 hover:bg-lime-600 h-12 rounded-lg text-blue-600 hover:text-purple-600">Back to customer details</NavLink>
         </div>
     );
 }

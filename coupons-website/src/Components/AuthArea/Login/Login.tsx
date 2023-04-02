@@ -25,7 +25,7 @@ function Login(props: LoginProps): JSX.Element {
 
     return (
         <div className="Login bg-amber-200 dark:bg-slate-500">
-            <NavLink to="/" className="border rounded-md p-3 px-12 no-underline text-gray-100 bg-lime-600 hover:bg-lime-700 border-transparent">Back to Home Page</NavLink>
+            <NavLink to="/" className="border rounded-md p-3 px-12 no-underline text-gray-100 bg-lime-600 hover:bg-lime-700 border-transparent border-cyan-600">Back to Home Page</NavLink>
             <form className="Form bg-white dark:bg-slate-400" onSubmit={handleSubmit(send)}>
 
                 <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white" htmlFor="role">Role: </label>

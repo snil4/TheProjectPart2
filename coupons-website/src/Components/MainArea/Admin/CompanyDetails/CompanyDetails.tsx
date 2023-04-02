@@ -52,7 +52,7 @@ function CompanyDetails(): JSX.Element {
     return (
         <div className="CompanyDetails flex flex-col justify-center items-center">
             {company &&
-			<div className="Details">
+			<div className="Details bg-teal-200">
                 <p>ID: {company.id}</p>
                 <p className=" text-amber-600">-----</p>
                 <p>Name: {company.name}</p>
@@ -62,7 +62,7 @@ function CompanyDetails(): JSX.Element {
                 <NavLink to={`/main/admin/company/edit/${companyId}`} className="border border-green-400 rounded-lg bg-gray-100 py-1.5 mx-1">Edit company</NavLink>
                 <button onClick={deleteCompany} className="border border-green-400 rounded-lg bg-gray-100 mx-1">Delete company</button>
             </div>}
-            <br/><NavLink to="/main/admin/company" className="">Back to companies list</NavLink>
+            <br/><NavLink to="/main/admin/company">Back to companies list</NavLink>
         </div>
     );
 }
