@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.websocket.server.PathParam;
 import java.util.List;
 import java.util.Optional;
 
@@ -50,16 +51,32 @@ public class CustomerController extends ClientController {
     }
 
     @GetMapping(path = "/coupon", headers = { HttpHeaders.AUTHORIZATION })
-    public ResponseEntity<List<Coupon>> getCustomerCoupons(@PathVariable(required = false) Optional<Double> maxPrice, @PathVariable(required = false) Category category, HttpServletRequest request){
+    public ResponseEntity<List<Coupon>> getCustomerCoupons(HttpServletRequest request) {
         try {
             Client client = (Client) request.getAttribute("client");
-            if (maxPrice.isPresent() && maxPrice.get() > 0) {
-                if (category != null) {
-                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(category,maxPrice.get(), client.getId()));
+            return ResponseEntity.ok().body(customerService.getCustomerCoupons(client.getId()));
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
+    @GetMapping(path = "/coupon/sorted", headers = { HttpHeaders.AUTHORIZATION })
+    public ResponseEntity<List<Coupon>> getCustomerCouponsSorted(@PathParam("category") String category, @PathParam("maxPrice") Double maxPrice, HttpServletRequest request) {
+        Category cat;
+        try {
+            cat = Category.valueOf(category);
+        } catch (IllegalArgumentException e) {
+            cat = null;
+        }
+        try {
+            Client client = (Client) request.getAttribute("client");
+            if (maxPrice > 0) {
+                if (cat != null) {
+                    return ResponseEntity.ok().body(customerService.getCustomerCoupons(cat, maxPrice, client.getId()));
                 }
-                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice.get(), client.getId()));
-            } else if (category != null) {
-                return ResponseEntity.ok().body(customerService.getCustomerCoupons(category, client.getId()));
+                return ResponseEntity.ok().body(customerService.getCustomerCoupons(maxPrice, client.getId()));
+            } else if (cat != null) {
+                return ResponseEntity.ok().body(customerService.getCustomerCoupons(cat, client.getId()));
             }
             return ResponseEntity.ok().body(customerService.getCustomerCoupons(client.getId()));
         } catch (Exception e) {

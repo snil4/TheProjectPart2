@@ -1,6 +1,5 @@
 import CompanyModel from "./CompanyModel";
 import CustomerModel from "./CustomerModel";
-import ImageModel from "./ImageModel";
 
 class CouponModel{
     public id: number;
