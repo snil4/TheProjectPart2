@@ -10,8 +10,8 @@ interface TaskProps {
 function Task(props: TaskProps): JSX.Element {
 
     return (
-            <NavLink to={props.path} className="underline hover:text-fuchsia-700">{props.name}
-            <br/>{props.addTask && <NavLink to={props.path + "/add"} className="AddTask underline hover:text-fuchsia-700">{"- " + props.addTask}</NavLink>}</NavLink>
+                <NavLink to={props.path} className="underline hover:text-fuchsia-700">{props.name}
+                <br/>{props.addTask && <NavLink to={props.path + "/add"} className="AddTask underline hover:text-fuchsia-700">{"- " + props.addTask}</NavLink>}</NavLink>
     );
 }
 
