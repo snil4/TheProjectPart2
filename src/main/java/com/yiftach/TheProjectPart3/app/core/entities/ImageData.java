@@ -1,19 +1,10 @@
 package com.yiftach.TheProjectPart3.app.core.entities;
 
-import javax.persistence.*;
-
-@Entity
-@Table(name = "imageData")
 public class ImageData {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String type;
-
-    @Lob
-    @Column(name = "imagedata", length = 1000)
     private byte[] imageData;
 
     public ImageData() {
