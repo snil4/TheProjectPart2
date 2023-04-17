@@ -102,19 +102,6 @@ public class Company {
         throw new CouponSystemException("Can't find coupon with ID " + coupon.getId() + " in the company");
     }
 
-    public void removeCoupon(int couponId) throws CouponSystemException {
-
-        //Coupon check = coupons.get(coupons.indexOf(coupon));
-        for (Coupon check:coupons) {
-            if (check.getId() == couponId) {
-                coupons.remove(check);
-                return;
-            }
-        }
-
-        throw new CouponSystemException("Can't find coupon with ID " + couponId + " in the company");
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o)

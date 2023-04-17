@@ -15,11 +15,7 @@ public interface CouponRepo extends JpaRepository<Coupon, Integer> {
 
     Optional<Coupon> findByIdAndCompanyId(int Id, int CompanyId);
 
-    List<Coupon> findByCategory(Category category);
-
     List<Coupon> findByCategoryAndCompanyId(Category category, int companyId);
-
-    List<Coupon> findByPriceLessThanEqual(double maxPrice);
 
     List<Coupon> findByPriceLessThanEqualAndCompanyId(double maxPrice, int companyId);
 
@@ -29,13 +25,9 @@ public interface CouponRepo extends JpaRepository<Coupon, Integer> {
             "WHERE customer_id = ?2)", nativeQuery = true)
     List<Coupon> findByMaxPriceAndCustomerId(double maxPrice, int customerId);
 
-    List<Coupon> findByEndDateBefore(LocalDate endDate);
-
     long deleteByEndDateBefore(LocalDate endDate);
 
     void deleteByCompanyId(int companyId);
-
-    boolean existsByTitle(String title);
 
     @Query(value = "SELECT * FROM coupon WHERE id IN (SELECT coupon_id FROM customers_vs_coupons WHERE coupon_id = ?1" +
             " AND customer_id = ?2)", nativeQuery = true)
@@ -54,6 +46,5 @@ public interface CouponRepo extends JpaRepository<Coupon, Integer> {
     List<Coupon> findByIdNotInCustomer(int customerId);
 
     boolean existsByImageName(String imageName);
-
 
 }

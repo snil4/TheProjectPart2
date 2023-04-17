@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,7 +37,9 @@ public class CustomerService extends ClientService {
     }
 
     /**
-     * @param couponId ID of the coupon to add to the customer
+     * @param couponId The ID of the coupon to add to the customer
+     * @param customerId The ID of the buying customer
+     * @return The purchased coupon
      */
     public Coupon purchaseCoupon(int couponId, int customerId) throws CouponSystemException {
         try {
@@ -70,6 +71,7 @@ public class CustomerService extends ClientService {
     }
 
     /**
+     * @param customerId The ID of the customer to get the coupons by
      * @return A list of all the coupons the customer bought
      */
     public List<Coupon> getCustomerCoupons(int customerId) throws CouponSystemException{
@@ -82,6 +84,13 @@ public class CustomerService extends ClientService {
         }
     }
 
+    /**
+     * Returns coupons of a customers filtered by category and a maximum price
+     * @param category The category of the coupons
+     * @param maxPrice The maximum price of the coupons
+     * @param customerId The customer's ID
+     * @return A list of filtered coupons
+     */
     public List<Coupon> getCustomerCoupons(Category category, double maxPrice, int customerId) throws CouponSystemException{
         try {
             Customer customer = customerRepo.findById(customerId)
@@ -133,6 +142,10 @@ public class CustomerService extends ClientService {
         }
     }
 
+    /**
+     * @param customerId The ID of the customer to get his coupons
+     * @return List of all the customer's coupons
+     */
     public List<Coupon> getAllCoupons(int customerId) throws CouponSystemException{
         try {
             return couponRepo.findByIdNotInCustomer(customerId);
@@ -141,6 +154,11 @@ public class CustomerService extends ClientService {
         }
     }
 
+    /**
+     * @param couponId The ID of the coupon to return
+     * @param customerId The ID of the coupon's owner
+     * @return The coupon's object
+     */
     public Coupon getOneCoupon(int couponId, int customerId) throws CouponSystemException {
         try {
             return couponRepo.findByIdInCustomer(couponId, customerId)

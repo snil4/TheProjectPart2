@@ -63,6 +63,10 @@ public class ImageDataService {
         }
     }
 
+    /**
+     * @param name - The name of the image file
+     * @return - The image file's bytes array
+     */
     public byte[] getImage(String name) throws CouponSystemException {
         try {
             if (!name.equals("")) {

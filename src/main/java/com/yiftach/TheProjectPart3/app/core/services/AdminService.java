@@ -223,18 +223,20 @@ public class AdminService extends ClientService {
             Optional<Customer> optional = customerRepo.findById(customerID);
 
             if (optional.isPresent()) {
-                Customer customer = optional.get();
-                return  customer;
+                return optional.get();
 
             } else {
                 throw new CouponSystemException("Can't find customer with ID " + customerID);
             }
 
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get cutsomer: " + e.getMessage(),e);
+            throw new CouponSystemException("Can't get customer: " + e.getMessage(),e);
         }
     }
 
+    /**
+     * @return A list of all the coupons in the database
+     */
     public List<Coupon> getAllCoupons() throws CouponSystemException {
 
         try {

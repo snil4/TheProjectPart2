@@ -38,6 +38,8 @@ public class CompanyService extends ClientService {
 
     /** Add a new coupon to the company and the database
      * @param coupon Coupon to add
+     * @param companyId The ID of the company that adds a coupon
+     * @return The added coupon
      */
     public Coupon addCoupon(Coupon coupon, int companyId) throws CouponSystemException {
         try {
@@ -64,6 +66,8 @@ public class CompanyService extends ClientService {
 
     /** Update an existing coupon in the database
      * @param coupon Coupon to update
+     * @param companyId The ID of the coupon's owning company
+     * @return The updated coupon
      */
     public Coupon updateCoupon(Coupon coupon, int companyId) throws CouponSystemException {
         try {
@@ -71,7 +75,7 @@ public class CompanyService extends ClientService {
                     () -> new CouponSystemException("Can't find company with id " + companyId));
                 if (couponRepo.existsById(coupon.getId())) {
                     company.updateCoupon(coupon);
-                    company = companyRepo.save(company);
+                    companyRepo.save(company);
                     return couponRepo.save(coupon);
                 }
 
@@ -84,11 +88,10 @@ public class CompanyService extends ClientService {
 
     /** Delete a coupon from the database based on ID
      * @param couponID The ID of the coupon to delete
+     * @param companyId The ID of the coupon's owning company
      */
     public void deleteCoupon(int couponID, int companyId) throws CouponSystemException {
         try {
-            Company company = companyRepo.findById(companyId).orElseThrow(
-                    () -> new CouponSystemException("Can't find company with id " + companyId));
             Optional<Coupon> optional = couponRepo.findByIdAndCompanyId(couponID,companyId);
 
                 if (optional.isPresent()) {
@@ -104,6 +107,7 @@ public class CompanyService extends ClientService {
     }
 
     /**
+     * @param companyId The ID of the company to get coupons by
      * @return A list of coupons of this company in the database
      */
     public List<Coupon> getCompanyCoupons(int companyId) throws CouponSystemException {
@@ -111,14 +115,15 @@ public class CompanyService extends ClientService {
         try {
             return couponRepo.findByCompanyId(companyId);
         } catch (Exception e) {
-            throw new CouponSystemException("Can't get comapny coupons: " + e.getMessage(),e);
+            throw new CouponSystemException("Can't get company coupons: " + e.getMessage(),e);
         }
     }
 
     /**
+     * Returns a list of coupons from a specific company filtered by category
      * @param category The category of the coupons
+     * @param companyId The ID of the company to get coupons by
      * @return A list of coupons from this company filtered by category
-     *
      */
     public List<Coupon> getCompanyCoupons(Category category, int companyId) throws CouponSystemException {
 
@@ -130,8 +135,10 @@ public class CompanyService extends ClientService {
     }
 
     /**
+     * Returns a list of coupons from a specific company filtered by max price
      * @param maxPrice The maximum price of the coupons
-     * @return A list of coupons from this company that do not exceed the maximum price
+     * @param companyId The ID of the company to get coupons by
+     * @return A list of coupons
      */
     public List<Coupon> getCompanyCoupons(double maxPrice, int companyId) throws CouponSystemException {
 
@@ -143,6 +150,13 @@ public class CompanyService extends ClientService {
         }
     }
 
+    /**
+     * Returns a list of coupons from a specific company filtered by category and max price
+     * @param category The category of the coupons
+     * @param maxPrice The maximum price of the coupons
+     * @param companyId The ID of the company to get coupons by
+     * @return A list of coupons
+     */
     public List<Coupon> getCompanyCoupons(Category category, double maxPrice, int companyId) throws CouponSystemException {
 
         try {
@@ -153,16 +167,23 @@ public class CompanyService extends ClientService {
         }
     }
 
-    public Coupon getOneCoupon(int id, int companyId) throws CouponSystemException{
+    /**
+     * Get the details of a coupon owned by the company
+     * @param couponId The ID of the coupon to get
+     * @param companyId The ID of the owning company
+     * @return The object of the coupon
+     */
+    public Coupon getOneCoupon(int couponId, int companyId) throws CouponSystemException{
         try {
-            return couponRepo.findByIdAndCompanyId(id,companyId).orElseThrow(() ->
-                    new CouponSystemException("Can't find coupon with id " + id + " in company with id " + companyId));
+            return couponRepo.findByIdAndCompanyId(couponId,companyId).orElseThrow(() ->
+                    new CouponSystemException("Can't find coupon with id " + couponId + " in company with id " + companyId));
         } catch (Exception e) {
             throw new CouponSystemException("Can't get coupon: " + e.getMessage(), e);
         }
     }
 
     /**
+     * @param companyId The ID of the company to get details of
      * @return The object of the company
      */
     public Company getCompanyDetails(int companyId) throws CouponSystemException {

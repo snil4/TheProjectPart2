@@ -56,7 +56,7 @@ function CompanyAdd(): JSX.Element {
             minLength: {value: 8, message: "Password must be longer than 8 characters"}
         })}/>
 
-        <button>Add Company</button>
+        <button className="border border-green-400 rounded-lg bg-gray-100 mx-1 px-5">Add Company</button>
     </form>
     <NavLink to="/main/admin/company">Back to companies list</NavLink>
 </div>);

@@ -60,7 +60,7 @@ function CustomerAdd(): JSX.Element {
                 minLength: {value: 4, message: "Password must be at least 4 characters"}
             })}/>
 
-            <button>Add Customer</button>
+            <button className="border border-green-400 rounded-lg bg-gray-100 mx-1 px-5">Add Customer</button>
         </form>
     </div>);
 }

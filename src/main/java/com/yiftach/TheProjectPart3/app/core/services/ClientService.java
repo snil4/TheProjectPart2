@@ -11,6 +11,8 @@ public abstract class ClientService {
     private JwtUtil jwtUtil;
 
     /**
+     * @param email The email of the client
+     * @param password The password of the client
      * @return True if the login went successfully
      * @throws CouponSystemException In case of a connection error
      */

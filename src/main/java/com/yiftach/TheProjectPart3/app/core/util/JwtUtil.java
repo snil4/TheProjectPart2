@@ -2,11 +2,9 @@ package com.yiftach.TheProjectPart3.app.core.util;
 
 import com.yiftach.TheProjectPart3.app.core.data.Role;
 import com.yiftach.TheProjectPart3.app.core.entities.Client;
-import com.yiftach.TheProjectPart3.app.core.exceptions.CouponSystemException;
 import io.jsonwebtoken.Claims;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,7 +12,7 @@ import java.util.Map;
 public class JwtUtil extends JwtUtilAbstract<Client, Integer>{
 
     @Override
-    public String generateToken(Client client) throws CouponSystemException {
+    public String generateToken(Client client) {
         Map<String,Object> claims = new HashMap<>();
         claims.put("name",client.getName());
         claims.put("email",client.getEmail());
@@ -23,7 +21,7 @@ public class JwtUtil extends JwtUtilAbstract<Client, Integer>{
     }
 
     @Override
-    public Client extractClient(String token) throws CouponSystemException {
+    public Client extractClient(String token) {
         Claims claims = this.extractAllClaims(token);
         return new Client(Integer.parseInt(claims.getSubject()),
                 claims.get("name",String.class), claims.get("email", String.class),
