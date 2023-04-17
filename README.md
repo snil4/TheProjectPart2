@@ -1,3 +1,8 @@
 # TheProjectPart3
-Implementation of the thirs part of the project in spring boot and jpa hibernate, now with Rest API controllers and a React website.
+Implementation of the third part of the project in spring boot and jpa hibernate, now with Rest API controllers and a React website.
+
+To start the project follow a few steps:
+1. Start the maven project at the root folder
+2. Execute "npm install" in the "coupons-website" folder to install node.js dependencies
+3. Start the development server with "npm start" inside the "coupons-website" folder
 

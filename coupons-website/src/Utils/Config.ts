@@ -25,7 +25,7 @@ class ProductionConfig{
     public customerCouponUrl = this.customerUri + "coupon";
     public secretKey = "aaaaaaaaa1aaaaaaaaa2aaaaaaaaa3aaaaaaaaa4aaaaaaaaa5";
     public customerCouponAllUrl = this.customerCouponUrl + "/all";
-    public imageUrl = "http://localhost:8080/image/";
+    public imageUrl = "http://www.couponswebsite.com/image/";
 }
 
 const config = process.env.NODE_ENV === "development" ? new DevelopmentConfig() : new ProductionConfig() ;
